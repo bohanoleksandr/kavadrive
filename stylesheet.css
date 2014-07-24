@@ -16,6 +16,8 @@ html { height: 100% }
 	margin-bottom:1%;
 }
 .left{
+	font-family: Sylfaen;
+	color: #FFF;
 	float:left;
 	width:25%;
 	height:66%;
