@@ -9,6 +9,13 @@
 	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
 	<script type="text/javascript" src="scripts.js"></script>
+		
+	<link rel="shortcut icon" href="../favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/default.css" />
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<script src="js/modernizr.custom.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="js/jquery.cbpFWSlider.min.js"></script>
 </head>
 
 <body>
@@ -20,17 +27,16 @@
 	</a>
 </div>
 
-<div class = "left">
-	<ol>
-		<p>Інструкція:</p>
+<div class="container">	
+	<div id="cbp-fwslider" class="cbp-fwslider">
+		<ul>
+			<li><div class = "action">За допомогою навігатора<br> визначте своє місцезнаходження<br> на карті.</div></li>
+			<li><div class = "action">Ви побачите точку<br> місцезнаходження найближчого<br> кавового продажу.</div></li>
+			<li><div class = "action">Дізнайтесь <br>оптимальний <br>маршрут.</div></li>
+			<li><div class = "action">Вирушайте до цілі<br> та випийте найкращої <br>кави у місті.</div></li>
 			
-			<li>За допомогою навігатора<br> визначте своє місцезнаходження<br> на карті.</li>
-			<li>Ви побачите точку<br> місцезнаходження найближчого<br> кавового продажу.</li>
-			<li>Дізнайтесь оптимальний <br>маршрут.</li>
-			<li>Вирушайте до цілі.</li>
-			<li>Покупка.</li>
-			<li>Випийте найкращої <br>кави у місті.</li>
-	</ol>
+		</ul>
+	</div>
 </div>
 
 <div class = "for-map">
@@ -47,6 +53,18 @@
 			hidden=other;redirect_uri=http%3A%2F%2F">
 		</div>
 </div>
+
+
+
+
+<script>
+	$( function() {
+
+		$( '#cbp-fwslider' ).cbpFWSlider();
+
+	} );
+</script>
+
 
 </div>
 

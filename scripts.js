@@ -207,3 +207,4 @@ $(document).ready(function(){
 		$('.panel').slideToggle('slow');
 	});
 })
+

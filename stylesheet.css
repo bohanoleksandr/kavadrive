@@ -13,71 +13,45 @@ html { height: 100% }
 }
 .header{
 	width:100%;
-	margin-bottom:1%;
-}
-.left{
-	font-family: Sylfaen;
-	color: #FFF;
-	float:left;
-	width:25%;
-	height:66%;
-}
-li{
-	padding:3px;
 }
 .for-map{
 	float:left;
 	height:66%;
-	width:46%;
+	width:100%;
+	padding-top:0.5%;
 }
 #map_canvas { 
 	height: 100%; 
 	width:100%;
+	border-radius:10px;
+	padding-top:1%;
 }
-.right{
-	float:left;
-	width:25%;
-	height:66%;
-}
+
 .bottom{
 	float:left;
 	margin-top:1%;
 	width:100%;
 	height:13%;
 }
+
+
 @media screen and (max-width: 881px){
-	.right{
- 		display:none;
-	}
-	.left{
-	float:left;
-	width:27%;
-	height:66%;
-	}
+
 	.for-map{
-	float:right;
 	height:66%;
-	width:70%;
+	width:100%;
+}
+
 }
 @media screen and (max-width: 665px){
-	.left{
-	float:left;
-	width:37%;
+	.for-map{	
 	height:66%;
-	}
-	.for-map{
-	float:right;
-	height:66%;
-	width:55%;
+	width:100%;
+}
+
 }
 @media screen and (max-width:540px){
-	.left{
-	float:none;
-	width:100%;
-	height:100%;
-	}
 	.for-map{
-	float:none;
 	height:66%;
 	width:100%;
 }
