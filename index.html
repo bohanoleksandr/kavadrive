@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>KavaDrive</title>
+	<link rel = "stylesheet"  href = "stylesheet.css">
+	<script src="//ulogin.ru/js/ulogin.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+	<script type="text/javascript" src="scripts.js"></script>
+</head>
+
+<body>
+<div class = "main">
+
+<div class = "header">
+	<a href = "index.html">
+		<img src = "images/logo.jpg""/>
+	</a>
+</div>
+
+<div class = "left">
+	<ol>
+		<p>Інструкція:</p>
+			
+			<li>За допомогою навігатора<br> визначте своє місцезнаходження<br> на карті.</li>
+			<li>Ви побачите точку<br> місцезнаходження найближчого<br> кавового продажу.</li>
+			<li>Дізнайтесь оптимальний <br>маршрут.</li>
+			<li>Вирушайте до цілі.</li>
+			<li>Покупка.</li>
+			<li>Випийте найкращої <br>кави у місті.</li>
+	</ol>
+</div>
+
+<div class = "for-map">
+	<div id="map_canvas"></div>
+</div>
+<div class = "right">
+
+</div>
+<div class = "bottom">
+<a href=#>Контакти</a></div>
+		<div id="uLogin" data-ulogin="display=panel;fields=first_name,last_name;
+			providers=vkontakte,odnoklassniki,twitter,facebook,google,yandex,livejournal,openid,lastfm,mailru,
+			linkedin,liveid,soundcloud,steam,flickr,uid,youtube,webmoney,foursquare,tumblr,googleplus,dudu,vimeo,instagram;
+			hidden=other;redirect_uri=http%3A%2F%2F">
+		</div>
+</div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+
+	.left{
+border:2px solid blue;
+	  height:75%;
+	  width:68%;
+	  float:left;
+	}
+	
+	.right{
+border:2px solid yellow;
+	   float:right;
+	   height:75%;
+	   width:30%;
+	}
+	
+	#kindsOfCoffee ul li {
+    background-clip: padding-box;
+    border: 10px solid rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    list-style-type: none;
+    height: 80px;
+    width: 160px;
+    margin-left: 13px;
+    margin-bottom: 15px;
+    float: left;
+    font-family: "LubalGraphBdBTBold",Tahoma;
+    font-size: 2em;
+    overflow: hidden;
+}
+
+#left_bar 
+{
+	top:45px; 
+	left:600px;
+	height:350px;
+	width:250px;
+	position:absolute;
+	padding:10px;
+}
+em{ font-style:normal; }
+button {
+	
+	background:none repeat scroll 0 0 #AD7B05; color:#FFFFFF;
+	border:medium none;
+	font-family:"LubalGraphBdBTBold",Tahoma;
+	font-size:1.1em;
+	margin-right:-14px;
+	padding:10px;
+	cursor:pointer;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px; 
+}
+
+.cart-total{ background:#E8E8E8}
+
+.shopp,.cart-total{ 
+	border:solid #ccc 1px; padding:8px; 
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px; font-size:12px;
+	background:url(remove.png) center right no-repeat 5px;
+	border-radius: 8px; 
+	font-family:"LubalGraphBdBTBold",Tahoma; 
+	margin-bottom:3px;
+	width:300px;
+        height: 30px;
+        
+	}
+    .shopp{
+         color: #FFFFFF;
+    }
+	
+div.shopp span{  float:left;}	
+div.shopp div.label{ width:130px; float:left; }		
+div.shopp div.shopp-price{ width:100px; float:left;}
+div.shopp div.shopp-price .sum-item-price{margin-left: 10px;}
+.quantity{ float:left; margin-top:-3px; width:20px;}
+img.remove{float:right;cursor:pointer;}
+.cart-total b{width:130px;}
+
+.error{
+    color:  darkgoldenrod;
+}
+	
