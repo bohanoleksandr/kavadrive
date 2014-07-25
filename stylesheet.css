@@ -6,6 +6,7 @@ body{
 	background:#792A26;
 }
 html { height: 100% }
+
 .main{
 	max-width: 1280px;
 	margin: 0 auto;
@@ -18,13 +19,12 @@ html { height: 100% }
 	float:left;
 	height:66%;
 	width:100%;
-	padding-top:0.5%;
+	
 }
 #map_canvas { 
 	height: 100%; 
 	width:100%;
-	border-radius:10px;
-	padding-top:1%;
+	border-radius:10px;	
 }
 
 .bottom{

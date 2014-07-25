@@ -40,16 +40,16 @@
 	position: absolute;
 	top: 50%;
 	width: 6.7%;
-	/* height: 92%; */
+	height: 92%;
 	border-radius:5px;
 	background: #7C8185;
 	color: #fff;
 	font-size: 60px;
 	text-align: center;
 	margin-top: -3.7%;
-	/* line-height:130%; */
-	/* cursor: pointer; */
-	/* font-weight: normal; */
+	line-height:130%;
+	cursor: pointer;
+	font-weight: normal;
 }
 
 .cbp-fwslider nav span:hover {
@@ -94,7 +94,9 @@
 .cbp-fwdots span.cbp-fwcurrent {
 	background: #47a3da;
 	box-shadow: 0 0 0 2px #47a3da;
-
+	-webkit-transition: box-shadow 0.2s ease-in-out;
+	-moz-transition: box-shadow 0.2s ease-in-out;
+	transition: box-shadow 0.2s ease-in-out;
 }
 @media screen and (max-width: 900px){
 
@@ -118,35 +120,24 @@
   font-size:40px;
 }
 }
-@media screen and (max-width: 540px){
+@media screen and (max-width:540px){
 .cbp-fwdots span {
 	width: 6px;
 	height: 6px;
 	margin: 13px;
 }
-.cbp-fwslider nav span {
+.cbp-fwsl3ider nav span {
   top: 30%;
   font-size:30px;
 }
-.cbp-fwdots span.cbp-fwcurrent {
-	box-shadow: none;
 }
-}
-@media screen and (max-width: 470px){
+@media screen and (max-width:400px){
 .cbp-fwdots span {
-	display:none;
-}
-.cbp-fwslider nav span {
-   width: 12%;
-  top: 32%;
-  font-size:30px;
-}
-}
-@media screen and (max-width: 350px){
 
-.cbp-fwslider nav span {
-  width: 12%;	
-  top: 32%;
-  font-size:25px;
+}
+.cbp-fwsl3ider nav span {
+  top: 20%;
+  font-size:15px;
 }
 }
+

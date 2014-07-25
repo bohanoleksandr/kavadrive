@@ -2,9 +2,11 @@ body {
     font-family: 'Lato', Calibri, Arial, sans-serif;
     color: #47a3da;
 }
+
 .main,
 .container > header {
 	width: 100%;
+	max-width: 80em;
 	margin: 0 auto;
 }
 
