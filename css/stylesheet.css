@@ -54,22 +54,13 @@ a{
 
 @media screen and (max-width: 881px){
 
-	.for-map{
-		height:66%;
-		width:100%;
-	}
 
 }
 @media screen and (max-width: 665px){
 	.for-map{	
-		height:66%;
-		width:100%;
-	}
+
 
 }
 @media screen and (max-width:540px){
-	.for-map{
-		height:66%;
-		width:100%;
-	}
+
 }

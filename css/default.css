@@ -16,7 +16,7 @@
 
 @media screen and (max-width:1000px){
 	.container{
-		float:none;
+		float:right;
 		max-width:100%;
 	}	
 	
