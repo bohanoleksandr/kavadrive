@@ -9,30 +9,22 @@ body {
 
 
 
-.container {
-	
+.container {	
 	float:right;
-	
-
+	max-width:78%;
+	margin-top:2.5%;
 }
 
 
 
-.action{
-	
+.action{	
 	background:#7C8185;
-	
 	border-radius:2px;
-	
 	text-align: center;
-	
 	color:white;
-	
-	max-width:85%;
-	
+	max-width:80%;
 	margin:0 auto;
-	
-
+	font-size:18pt;
 }
 
 
