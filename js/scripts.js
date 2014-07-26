@@ -207,4 +207,11 @@ $(document).ready(function(){
 		$('.panel').slideToggle('slow');
 	});
 })
+	
+	$( function() {
+
+			$( '#cbp-fwslider' ).cbpFWSlider();
+
+	} );
+
 
