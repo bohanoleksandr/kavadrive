@@ -57,12 +57,12 @@
 }
 
 .cbp-fwslider nav span.cbp-fwnext {
-	right: 0px;
+	right: 4%;
 	border:1px solid white;
 }
 
 .cbp-fwslider nav span.cbp-fwprev {
-	left: 0px;
+	left: 4%;
 	border:1px solid white;
 }
 
@@ -143,17 +143,9 @@
 .cbp-fwdots span {
 	display:none;
 }
-.cbp-fwslider nav span {
-   width: 12%;
-  top: 32%;
-  font-size:30px;
-}
+
 }
 @media screen and (max-width: 350px){
 
-.cbp-fwslider nav span {
-  width: 12%;	
-  top: 32%;
-  font-size:25px;
-}
+
 }
