@@ -2,7 +2,7 @@
 	position: relative;
 	/* margin: 0 0 10px; */
 	overflow: hidden;
-	padding: 0 0 3%;
+	padding: 0 0 5.5%;
 }
 
 .cbp-fwslider ul {
@@ -24,9 +24,9 @@
 
 .cbp-fwslider ul li ,
 .cbp-fwslider ul li > div {
-	display: block;
+	display: inline;
 	text-align: center;
-	outline: none;
+	outline: none;	
 }
 
 .cbp-fwslider ul li  {
@@ -102,7 +102,9 @@
 }
 
 @media screen and (max-width: 900px){
-
+.cbp-fwslider ul li  {
+	max-width: 100%;
+}
 .cbp-fwslider nav span {
   top: 40%;	
   font-size:50px;
