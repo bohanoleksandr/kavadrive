@@ -1,6 +1,7 @@
 *{
  	margin:0;
 }
+
 body{
 	height: 100%;
 	background:#792A26;
@@ -8,19 +9,26 @@ body{
 html { height: 100% }
 
 .main{
-	max-width: 1280px;
+
+	max-width: 1024px;
 	margin: 0 auto;
 	height:100%;
 }
 .header{
 	width:100%;
 }
+#logo{
+		float:left;
+		margin-left:3%;
+}
 .for-map{
 	float:left;
 	height:66%;
-	width:100%;
-	
+	width:94%;
+	margin-left:3%;
+	margin-right:3%;	
 }
+
 #map_canvas { 
 	height: 100%; 
 	width:100%;

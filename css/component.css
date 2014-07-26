@@ -74,7 +74,6 @@
 	width: 50%;
 	height:30%;
     margin-left:25%;
-
 }
 
 .cbp-fwdots span {
@@ -96,6 +95,12 @@
 	box-shadow: 0 0 0 2px #47a3da;
 
 }
+@media screen and (max-width: 2000px){
+.cbp-fwslider nav span {
+  top: 43%;	
+}
+}
+
 @media screen and (max-width: 900px){
 
 .cbp-fwslider nav span {
