@@ -1,5 +1,5 @@
 body{
-    font-size: 18px;
+
 }
 
 .content {
@@ -7,8 +7,14 @@ body{
 }
 
 table {
+    font-size: 18px;
     text-align: left;
     margin-top: 20px;
+}
+
+table a {
+    color: #3A0000;
+    text-decoration: none;
 }
 
 tr {
@@ -18,16 +24,30 @@ tr {
 th {
     font-size: 20px;
     font-weight: normal;
-    width: 250px;
+    /*width: 250px;*/
     padding-bottom: 20px;
+}
+
+#th1 {
+    width: 170px;
+}
+#th2 {
+    width: 240px;
+}
+#th3 {
+    width: 200px;
 }
 
 td {
     border-bottom: 1px solid #622;
 }
 
-th.title {
+th{
     color: #FFF;
-
 }
 
+@media screen and (max-height:570px){
+    .content {
+        height: auto;
+    }
+}
