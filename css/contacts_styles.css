@@ -1,0 +1,33 @@
+body{
+    font-size: 18px;
+}
+
+.content {
+    height: 66%;
+}
+
+table {
+    text-align: left;
+    margin-top: 20px;
+}
+
+tr {
+    height: 35px;
+}
+
+th {
+    font-size: 20px;
+    font-weight: normal;
+    width: 250px;
+    padding-bottom: 20px;
+}
+
+td {
+    border-bottom: 1px solid #622;
+}
+
+th.title {
+    color: #FFF;
+
+}
+
