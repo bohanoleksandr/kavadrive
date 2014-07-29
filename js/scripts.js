@@ -35,6 +35,10 @@ function initialize() {
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 
+    var windowWidth = $(window).width();
+
+    if (windowWidth<700) mapOptions.zoom = 11;
+
     var rendererOptions = {
         map: map,
         suppressMarkers: true,
@@ -54,8 +58,11 @@ function initialize() {
     directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
     directionsDisplay.setMap (map);
 
+
     if(navigator.geolocation)
     {
+        console.log('kkkk');
+
         navigator.geolocation.getCurrentPosition(function(pos)
             {
                 autoGeo=1;
@@ -65,20 +72,19 @@ function initialize() {
             },
             function() {handleNoGeolocation(true);}
         );
-
-        if(autoGeo===undefined){
+        if(autoGeo==null){
             position = new google.maps.LatLng(49.234637,28.469639);
             createMyMarker(position);
             map.setCenter(position);
         }
     } else {
+
         position = new google.maps.LatLng(49.234637,28.469639);
         createMyMarker(position);
         map.setCenter(position);
         handleNoGeolocation(false);
     }
-
-	for (var i=0; i<markers_info.length; i++)
+    for (var i=0; i<markers_info.length; i++)
     {
         marker = new google.maps.Marker
         ({
