@@ -61,8 +61,6 @@ function initialize() {
 
     if(navigator.geolocation)
     {
-        console.log('kkkk');
-
         navigator.geolocation.getCurrentPosition(function(pos)
             {
                 autoGeo=1;
@@ -180,6 +178,7 @@ function initialize() {
             newOriginLng = myMarker.getPosition().lng();
             newOrigin = new google.maps.LatLng(newOriginLat,newOriginLng);
             getRoute (newOrigin,destination);
+            $('.cbp-fwnext').trigger('click');
         });
 
         google.maps.event.addListener(myMarker, 'click', function() {
@@ -214,10 +213,9 @@ $(document).ready(function(){
 	});
 })
 	
-	$( function() {
+$( function() {
 
-			$( '#cbp-fwslider' ).cbpFWSlider();
+    $( '#cbp-fwslider' ).cbpFWSlider();
 
-	} );
-
+} );
 
