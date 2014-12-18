@@ -1,52 +1,124 @@
-﻿<!doctype html>
+<!DOCTYPE html>
+
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>KavaDrive</title>
-	<link rel = "stylesheet"  href = "css/stylesheet.css">
-	<script src="//ulogin.ru/js/ulogin.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
-		
-	<link rel="shortcut icon" href="../favicon.ico">
-	<link rel="stylesheet" type="text/css" href="css/default.css" />
-	<link rel="stylesheet" type="text/css" href="css/component.css" />
-	<script src="js/modernizr.custom.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="js/jquery.cbpFWSlider.min.js"></script>
-</head>
+    <head>
+        <title>KavaDrive</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body>
-<div class = "main">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/stylesheet.css" rel="stylesheet" type="text/css"/>
+        <link href="css/time.css" rel="stylesheet" type="text/css"/>
 
-	<div class = "header">
-		<a href = "index.html">
-			<img id="logo" src = "images/logo.jpg"/>
-		</a>
-	
-		<div class="container">	
-			<div id="cbp-fwslider" class="cbp-fwslider">
-				<ul>
-					<li><div class = "action">Вкажіть своє місцезнаходження за допомогою маркера</div></li>
-					<li><div class = "action">Оберіть кав'ярню, в якій заберете замовлення</div></li>
-					<li><div class = "action">Зробіть замовлення</div></li>					
-				</ul>
-			</div>
-		</div>
-	
-	</div>
+        <script type="text/javascript" src="http://ulogin.ru/js/ulogin.js"></script>
+        <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/scripts.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/time.js"></script>
+        <script type="text/javascript" src="js/inputmask.js" ></script>
+								
+    </head>
+    <body>
+        <div class="main"> 
+            <div class = "header">
+                <div id="logo">
+                    <a href = "index.html">
+                        <img src = "images/logo.jpg"/>
+                    </a>
+                </div>
 
-	<div class = "for-map">
-		<div id="map_canvas"></div>
-	</div>
+                <div id = "linksRow">
+                    <a id="authenticationLink">Авторизація</a>
+                    <a id="contactsLink">Контакти</a>
+                </div>
 
-	<div class = "bottom">
-	    <a href="contacts.html">Контакти</a></div>
+                <div id="customerInfo">
+                    <span id="customerId"></span>
+                    <span id="customerExit">(вийти)</span>
+                </div>
+            </div>
 
-	</div>
+            <div id="tips">
+                <div id="left_pointer">&lsaquo;</div>
+                <div id="tip_line">Вкажіть своє розташування та оберіть кав’ярню на карті</div>
+                <div id="right_pointer" title="Перейти до меню">&rsaquo;</div>
+            </div>
+			
+            <div id="map_canvas"></div>
 
-</body>
+            <div id="order">
+                <div id="wrap" align="left">
+                    <ul id="menulist"></ul>
+                </div>
+                <div id="left_bar">
+                    <div id = "POS" class="tips">Ви не обрали кав’ярню (<span id="changePos">обрати</span>)</div>
+                    <div id = "time" class="tips">
+                        Вкажіть час Вашого візиту до кав’ярні:
 
+                        <div id="order_time_menu">
+                            <div id="hours"></div>
+                            <div class="button_block">
+                                <div id="hoursUp" class="button_time_reg_up"></div>
+                                <div id="hoursDown" class="button_time_reg_down"></div>
+                            </div>
+                            <div><b id="double_dot">:</b></div>
+                            <div id="minutes"></div>
+                            <div class="button_block">
+                                <div id="minutesUp" class="button_time_reg_up"></div>
+                                <div id="minutesDown" class="button_time_reg_down"></div>
+                            </div>
+                        </div>
+                        <div id="order_date_menu">
+                            <div id="order_date"></div>
+                            <div class="button_block">
+                                <div id="dayUp" class="button_time_reg_up"></div>
+                                <div id="dayDown" class="button_time_reg_down"></div>
+                            </div>
+                            <div id="order_month"></div>
+                            <div id="order_day"></div>
+                        </div>
+                    </div>
+                    <div class = "tips" id = "orderList">
+                        Зміст замовлення:
+                        <div id = "rows"></div>
+                        <div id = "sum">Всього до сплати:<span id="hrivnas">0 грн</span></div>
+                    </div>
+                    <div id="thanks" class="tips"></div>
+                    <div id = "magicButton">
+                        <button id="saveOrder1" class="saveOrder">Замовити</button>
+                        <button id="ok">Зробити нове замовлення</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="authentication">
+                <div class="auth-title">Авторизація</div>
+                <div class="auth-text">Телефон:</div>
+                <div id="inputPhoneBlock">
+                    <input class="input-block-level" id ="phoneNumber" type="text" name = "number">
+                    <button id="savePhone" type="button">Увійти</button>
+                </div>
+                <div class="auth-text">Або авторизуйтеся через соціальну мережу:</div>
+                <div id="uLogin" class = "uLogin" data-ulogin=	"display=panel;fields=first_name,last_name;
+                    providers=vkontakte,facebook,google,yandex,mailru;
+                    hidden=other;callback=preview;redirect_uri=">
+                </div>
+            </div>
+
+            <div id = "contacts">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th id="th1">Назва кав’ярні</th>
+                            <th id="th2">Адреса</th>
+                            <th id="th3">Телефон</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
 </html>

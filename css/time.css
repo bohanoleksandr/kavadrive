@@ -1,60 +1,93 @@
 
-#time_block {
-	width: 300px;
-	height: 50px;
-	border: solid 1px #E8E8E8;
-	float: left;
-}
+/*#time_block {*/
+	/*width: 300px;*/
+	/*height: 50px;*/
+	/*border: solid 1px #E8E8E8;*/
+	/*float: left;*/
+/*}*/
 #order_time_menu {
-
 	background: #843B37;
-	border-radius: 6px;
-	border: solid 1px #E8E8E8;
-	width: 120px;
+	width: 100px;
 	height: 30px;
-	margin-top: 5px;
-	margin-bottom: 5px;
+    margin: 10px 5px;
+    -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    display: inline-block;
+    float: left;
+}
 
+#order_date_menu {
+    background: #843B37;
+    /*width: 130px;*/
+    height: 30px;
+    display: inline-block;
+    margin: 10px 0;
+    -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    padding: 0 7px 0 5px;
 }
-#order_time_submit {
-	width: 130px;
-	height: 50px;
-	float: left;
-	margin-left: 10px;
+
+#order_date {
+    width: 30px;
+    height: 22px;
+    font-size: 24px;
+    margin-top: 5px;
+    float: left;
+    display: inline-block;
 }
+
+#order_month {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    float: left;
+    margin: 8px 0 0 5px;
+    height: 15px;
+}
+
+#order_day {
+    display: inline-block;
+    font-size: 22px;
+    width: 30px;
+    height: 22px;
+    margin-top: 6px;
+    margin-left: 3px;
+}
+
+/*#order_time_submit {*/
+	/*width: 130px;*/
+	/*height: 50px;*/
+	/*float: left;*/
+	/*margin-left: 10px;*/
+/*}*/
 
 #hours {
 	width: 30px;
 	height: 22px;
-	background: #843B37;
-	border-radius: 4px;
+	/*background: #843B37;*/
 	font-size: 24px;
-	color:#E8E8E8;
-	margin-left: 8px;
-	margin-top: 0px;
-	top: 0px;
+	/*color:#CCC;*/
+	margin-left: 6px;
+	margin-top: 5px;
 	float: left;
-	padding-left:5px;
-	padding-top:5px;
-
 }
+
 #minutes {
 	width: 30px;
 	height: 22px;
-	background: #843B37;
-	border-radius: 4px;
+	/*background: #843B37;*/
+	/*border-radius: 4px;*/
 	font-size: 24px;
-	color:#E8E8E8;
-	margin-left: 0px;
-	margin-top: 0px;
-	top: 2px;
+	/*color:#CCC;*/
+	margin-top: 5px;
+	/*top: 2px;*/
 	float: left;
 	vertical-align: bottom;
 	display:table-cell;
-	padding-left:5px;
-	padding-top:5px
-
 }
+
 #msg_time {
 	height: 20px;
 	width: 120px;
@@ -69,13 +102,13 @@
 	width: 10px;
 	height: 28px;
 	font-size: 24px;
-	color:#E8E8E8;
+	color:#CCC;
 	margin-left: 4px;
 	top: 0px;
 	float: left;
 	padding-top:3px;
 }
-#button_block {
+.button_block {
 	width: 7px;
 	height: 26px;	
 	float:left;

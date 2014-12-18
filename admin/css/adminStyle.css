@@ -1,0 +1,22 @@
+
+.nav-tabs>li>a, .nav-pills>li>a {
+	color: #08c;
+}
+.tabbable{
+	margin-left:1%;
+	width:98%;
+}
+.well{
+	 max-width: 480px;
+	 margin: 0 auto 10px;"
+}
+hr{	
+	/* margin-left:25%;
+	width:50%; */
+	border-width: 2px 0;
+}
+.addItem{
+	/* float:left; */
+	/* display:inline; */
+}
+

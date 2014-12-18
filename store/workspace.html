@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Workspace</title>
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/storeStyle.css" rel="stylesheet" type="text/css"/>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="../js/bootstrap.js" type="text/javascript"></script>
+		<script src="../js/storeScripts.js" type="text/javascript"></script>
+    </head>
+    <body>
+		<div class="navbar">
+		  <div class="navbar-inner">
+		  <ul class ="nav">
+				<a class="brand" href="#">KavaDrive</a>
+				<li class="divider-vertical">
+				</li>
+				<li>
+					<p class="navbar-text"><strong>Продавець:</strong><span id="seller"></span></p>
+				</li>
+				<li class="divider-vertical">
+				</li>
+				<li>
+					<p class="navbar-text"><strong>Kав’ярня:</strong><span id="shop"></span></p>
+				</li>
+				<li class="divider-vertical">
+				</li>
+			</ul>
+			<ul class="nav pull-right">
+				<li>
+					<p class="navbar-text"><strong>Сортування:</strong> </p>
+				</li>
+				<li class="divider-vertical">
+				</li>
+				<li>
+					<select class = "input-block-level sort">
+						<option value="1">Всі замовлення</option>
+						<option value="2">Відкриті</option>
+						<option value="3">Продані</option>
+						<option value="4">Відхилені</option>
+					</select>
+				</li>
+				<li class="divider-vertical">
+				</li>
+				<li>					
+					<div class="btn btn-primary exit">Вихід</div>
+				</li>
+			</ul>			
+		  </div>
+		</div>
+
+		<table class="table table-bordered table-hover">
+			<thead>
+                <tr>
+                    <th>Номер замовлення</th>
+                    <th>Замовник</th>
+                    <th>Номер телефону</th>
+                    <th>Час візиту</th>
+                    <th>Час замовлення</th>
+                    <th>Сума</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody class="tabRow">
+                <tr>
+                    <td><input id='td_id' class='search'/></td>
+                    <td><input id='td_customer' class='search'/></td>
+                    <td><input id='td_phone' class='search'/></td>
+                    <td><input id='td_time' class='search'/></td>
+                    <td><input id='td_date' class='search'/></td>
+                    <td><input id='td_sum' class='search'/></td>
+                    <td><input id='td_status' class='search'/></td>
+                </tr>
+            </tbody>
+		</table>
+
+        <div id="unsuccessful_search">Співпадінь не знайдено</div>
+
+		<div id="modalWindow" class="modal hide fade">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
+				<h3>Замовлення №<span id="orderNum"></span></h3>
+			</div>
+			<div class="modal-body">
+				<table class="table table-bordered table-condensed"> 
+					<thead>
+						<tr>
+						  <th>Назва</th>
+						  <th>Об’єм</th>
+						  <th>Кількість</th>
+						  <th>Ціна</th>
+						</tr>
+					</thead>
+					<tbody class="list" id="forPrint">
+					
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<select class = "input-block-level status">
+                    <option value="1">відкрито</option>
+					<option value="2">підготовлено</option>
+					<option value="3">відхилено</option>
+					<option value="4">скасовано</option>
+					<option value="5">продано</option>
+				</select>
+				<div class="btn-group modalButtons">
+					<div type="button" class="btn btn-primary accept">Провести</div>
+					<div type="button" class="btn btn-default disabled print"id="printDoc">Друк накладної</div> 
+					<div type="button" class="btn btn-default closeWindow">Закрити</div>
+				</div>				
+			</div>			
+		</div>
+		
+
+	</body>	
+</html>
