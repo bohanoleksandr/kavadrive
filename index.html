@@ -58,26 +58,35 @@
                         Вкажіть час Вашого візиту до кав’ярні:
 
                         <div id="order_time_menu">
-                            <div id="hours"></div>
-                            <div class="button_block">
+                            <div class="timeButtonsDiv">
                                 <div id="hoursUp" class="button_time_reg_up"></div>
-                                <div id="hoursDown" class="button_time_reg_down"></div>
-                            </div>
-                            <div><b id="double_dot">:</b></div>
-                            <div id="minutes"></div>
-                            <div class="button_block">
                                 <div id="minutesUp" class="button_time_reg_up"></div>
+                            </div>
+                            <div id="clockDigits">
+                                <span id="hours"></span>
+                                <span id="double_dot">:</span>
+                                <span id="minutes"></span>
+                            </div>
+                            <div class="timeButtonsDiv">
+                                <div id="hoursDown" class="button_time_reg_down"></div>
                                 <div id="minutesDown" class="button_time_reg_down"></div>
                             </div>
                         </div>
+
                         <div id="order_date_menu">
-                            <div id="order_date"></div>
-                            <div class="button_block">
+                            <div class="timeButtonsDiv">
                                 <div id="dayUp" class="button_time_reg_up"></div>
+                            </div>
+                            <div>
+                                <div id="order_date"></div>
+                                <div id="monthAndDay">
+                                    <div id="order_day"></div>
+                                    <div id="order_month"></div>
+                                </div>
+                            </div>
+                            <div class="timeButtonsDiv">
                                 <div id="dayDown" class="button_time_reg_down"></div>
                             </div>
-                            <div id="order_month"></div>
-                            <div id="order_day"></div>
                         </div>
                     </div>
                     <div class = "tips" id = "orderList">

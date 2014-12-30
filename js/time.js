@@ -27,13 +27,13 @@ var month_array = {
 };
 
 var day_array = {
-    0: 'НД',
-    1: 'ПН',
-    2: 'ВТ',
-    3: 'СР',
-    4: 'ЧТ',
-    5: 'ПТ',
-    6: 'СБ'
+    0: 'неділя',
+    1: 'понеділок',
+    2: 'вівторок',
+    3: 'середа',
+    4: 'четвер',
+    5: 'п’ятниця',
+    6: 'субота'
 };
 
 function addZero(n) {
@@ -116,7 +116,7 @@ function buttonActivator () {
     switch (state) {
         case 1:
             $("#dayUp").css('visibility', 'visible');
-            $("#dayDown").hide();
+            $("#dayDown").css('visibility', 'hidden');
 
             $("#hoursUp").css('visibility', 'visible');
             $("#minutesUp").css('visibility', 'visible');
@@ -127,7 +127,7 @@ function buttonActivator () {
 
         case 2:
             $("#dayUp").css('visibility', 'visible');
-            $("#dayDown").hide();
+            $("#dayDown").css('visibility', 'hidden');
 
             openingClosingCheck();
 
@@ -135,15 +135,15 @@ function buttonActivator () {
 
         case 3:
             $("#dayUp").css('visibility', 'visible');
-            $("#dayDown").hide();
+            $("#dayDown").css('visibility', 'hidden');
 
             nowClosingCheck();
 
             break;
 
         case 4:
-            $("#hoursDown").show();
-            $("#minutesDown").show();
+            $("#hoursDown").css('visibility', 'visible');
+            $("#minutesDown").css('visibility', 'visible');
             $("#hoursUp").css('visibility', 'visible');
             $("#minutesUp").css('visibility', 'visible');
 
@@ -166,56 +166,56 @@ function nowCheck () {
     if (visitTime - now < (9 * 60 * 1000)) {
         visitTime.setTime(now.getTime());
         visitTime.setMinutes(visitTime.getMinutes() + 20);
-        $("#hoursDown").hide();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'hidden');
+        $("#minutesDown").css('visibility', 'visible');
     } else if (visitTime - now < (14 * 60 * 1000)) {
-        $("#hoursDown").hide();
-        $("#minutesDown").hide();
+        $("#hoursDown").css('visibility', 'hidden');
+        $("#minutesDown").css('visibility', 'hidden');
     } else if (visitTime - now < (70 * 60 * 1000)) {
-        $("#hoursDown").hide();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'hidden');
+        $("#minutesDown").css('visibility', 'visible');
     } else {
-        $("#hoursDown").show();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'visible');
+        $("#minutesDown").css('visibility', 'visible');
     }
 }
 
 function openingClosingCheck () {
     if (visitTime < openingTime) {
         visitTime = new Date(openingTime);
-        $("#hoursDown").hide();
-        $("#minutesDown").hide();
+        $("#hoursDown").css('visibility', 'hidden');
+        $("#minutesDown").css('visibility', 'hidden');
         $("#hoursUp").css('visibility', 'visible');
         $("#minutesUp").css('visibility', 'visible');
     } else if (visitTime - openingTime < (5*60*1000)) {
-        $("#hoursDown").hide();
-        $("#minutesDown").hide();
+        $("#hoursDown").css('visibility', 'hidden');
+        $("#minutesDown").css('visibility', 'hidden');
         $("#hoursUp").css('visibility', 'visible');
         $("#minutesUp").css('visibility', 'visible');
     } else if (visitTime - openingTime < (60*60*1000)) {
-        $("#hoursDown").hide();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'hidden');
+        $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'visible');
         $("#minutesUp").css('visibility', 'visible');
     } else if (closingTime - visitTime < (5*60*1000)){
         visitTime.setMinutes(closingTime.getMinutes() - 5);
-        $("#hoursDown").show();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'visible');
+        $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'hidden');
         $("#minutesUp").css('visibility', 'hidden');
     } else if (closingTime - visitTime < (10*60*1000)){
-        $("#hoursDown").show();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'visible');
+        $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'hidden');
         $("#minutesUp").css('visibility', 'hidden');
     } else if (closingTime - visitTime < (65*60*1000)){
-        $("#hoursDown").show();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'visible');
+        $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'hidden');
         $("#minutesUp").css('visibility', 'visible');
     } else {
-        $("#hoursDown").show();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'visible');
+        $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'visible');
         $("#minutesUp").css('visibility', 'visible');
     }
@@ -225,39 +225,39 @@ function nowClosingCheck () {
     var now = new Date();
     if (visitTime - now < (10 * 60 * 1000)) {
         visitTime.setMinutes(now.getMinutes() + 10);
-        $("#hoursDown").hide();
-        $("#minutesDown").hide();
+        $("#hoursDown").css('visibility', 'hidden');
+        $("#minutesDown").css('visibility', 'hidden');
         $("#hoursUp").css('visibility', 'visible');
         $("#minutesUp").css('visibility', 'visible');
     } else if (visitTime - now < (14 * 60 * 1000)) {
-        $("#hoursDown").hide();
-        $("#minutesDown").hide();
+        $("#hoursDown").css('visibility', 'hidden');
+        $("#minutesDown").css('visibility', 'hidden');
         $("#hoursUp").css('visibility', 'visible');
         $("#minutesUp").css('visibility', 'visible');
     } else if (visitTime - now < (70 * 60 * 1000)) {
-        $("#hoursDown").hide();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'hidden');
+        $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'visible');
         $("#minutesUp").css('visibility', 'visible');
     } else if (closingTime - visitTime < (5*60*1000)){
         visitTime.setMinutes(closingTime.getMinutes() - 5);
-        $("#hoursDown").show();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'visible');
+        $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'hidden');
         $("#minutesUp").css('visibility', 'hidden');
     } else if (closingTime - visitTime < (10*60*1000)){
-        $("#hoursDown").show();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'visible');
+        $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'hidden');
         $("#minutesUp").css('visibility', 'hidden');
     } else if (closingTime - visitTime < (65*60*1000)) {
-        $("#hoursDown").show();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'visible');
+        $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'hidden');
         $("#minutesUp").css('visibility', 'visible');
     } else {
-        $("#hoursDown").show();
-        $("#minutesDown").show();
+        $("#hoursDown").css('visibility', 'visible');
+        $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'visible');
         $("#minutesUp").css('visibility', 'visible');
     }
@@ -278,9 +278,9 @@ function delayCheck () {
     }
 
     if (visitTime - now < (24 * 60 * 60 * 1000)) {
-        $("#dayDown").hide();
+        $("#dayDown").css('visibility', 'hidden');
     } else {
-        $("#dayDown").show();
+        $("#dayDown").css('visibility', 'visible');
     }
 }
 
