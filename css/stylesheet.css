@@ -73,7 +73,7 @@ html { height: 100% }
     line-height: 47px;
     width: 100%;
     font-size: 18px;
-    text-align: left;
+    text-align: right;
 }
 
 .text{
@@ -103,6 +103,7 @@ html { height: 100% }
     display:none;
     width: 94%;
     margin-left:3%;
+    height: auto;
     /*margin-right:3%;*/
 }
 
@@ -196,7 +197,7 @@ h5{
 #contactsLink {
     font-size: 18px;
     color: #CCC;
-    margin: 0 20px;
+    margin-left: 20px;
     cursor: pointer;
 }
 
@@ -282,18 +283,26 @@ h5{
     -moz-background-clip: padding;     /* Firefox 3.6 */
     -webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
     background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
-    border: 10px solid rgba(0,0,0,0.3);
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
+    /*border: 10px solid rgba(0,0,0,0.3);*/
+    /*-webkit-border-radius: 8px;*/
+    /*-moz-border-radius: 8px;*/
+    /*border-radius: 8px;*/
+    -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     list-style-type:none;
     height: 80px;
     width: 160px;
-    margin-right: 13px;
-    margin-bottom: 15px;
+    margin-right: 22px;
+    margin-bottom: 25px;
     float: left;
     font-size:2em;
     overflow:hidden;
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 }
 
 .box {
@@ -303,13 +312,20 @@ h5{
     position:relative;
     /*padding-top:12px;
     padding-bottom:4px;*/
-    background:#87403C;
-    font: 14px Tahoma, Helvetica, Arial, Sans-Serif;
-    opacity:0.8;
+    font: 15px Calibri, Helvetica, Arial, Sans-Serif;
+    opacity: 0.8;
     color: #ccc;
     text-shadow: 0 2px 3px #555;
     padding: 7px;
     height: inherit;
+}
+
+.box.click {
+    background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+    background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+    background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+    background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+    background-image: linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
 
 .box p {
@@ -317,7 +333,7 @@ h5{
 }
 
 .box p.amount {
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .box p.price {
@@ -494,6 +510,7 @@ h5{
 #contacts {
     display: none;
     text-align: center;
+    margin-bottom: 160px;
 }
 
 table {
@@ -532,6 +549,11 @@ td {
 
 th{
     color: #808080;
+}
+
+#adminData {
+    clear: both;
+    margin-left: 3%;
 }
 
 

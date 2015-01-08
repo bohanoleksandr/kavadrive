@@ -298,7 +298,7 @@ function showInfoMessage (id) {
 
 function divForItem (id, name, amount, price){
     menuElems [id] = create("li",{Class:'goods'},create("div", {Class:'box',id:'box-'
-    +id},create("p",{},name),create("p", {class:'amount'},amount),
+    +id, title:"Додати \"" + name + "\" до замовлення"},create("p",{},name),create("p", {class:'amount'},amount),
     create("p",{class:'price'},parseInt(price)+' грн')));
 }
 
@@ -671,7 +671,7 @@ $(document).on ('click', '#authenticationLink', function() {
 });
 
 $(document).on ('click', '#contactsLink', function() {
-   page = 4;
+    page = 4;
     rebuild();
 });
 
@@ -683,5 +683,9 @@ $(document).on ('click', '#right_pointer', function() {
 $(document).on ('click', '#left_pointer', function() {
     page -= 1;
     rebuild();
+});
+
+$(document).on ('mousedown mouseup', 'div.box', function() {
+    $(this).toggleClass ('click');
 });
 

@@ -3,11 +3,11 @@ var openingTime = null;
 var closingTime = null;
 
 var state = null;
-    // Options, where date can't be decreased:
+    // Visit time is today:
     //  1 - comparison with "now" only
     //  2 - comparison with "opening" and "closing" time
     //  3 - comparison with "now" and "closing" time
-    // Options, where date can be decreased:
+    // Visit time isn't today:
     //  4 - delay check only
     //  5 - comparison with "opening" and "closing" time + delay check
 
@@ -44,62 +44,114 @@ function updateClock() {
 
     var now = new Date ();
 
-    if (visitTime){
-        if (order.pos) {
-            if (shops[order.pos].round_the_clock){
-                if (visitTime.getDate() == now.getDate()) {
-                    state = 1;
-                } else {
-                    state = 4;
-                }
-            } else {
-                var opening_hour = shops[order['pos']].opening_time.substr(0, 2);
-                var opening_minute = shops[order['pos']].opening_time.substr(3, 2);
+    if (order.pos && !shops[order.pos].round_the_clock) {
 
-                var closing_hour = shops[order['pos']].closing_time.substr (0, 2);
-                var closing_minute = shops[order['pos']].closing_time.substr(3, 2);
+        var opening_hour = shops[order['pos']].opening_time.substr(0, 2);
+        var opening_minute = shops[order['pos']].opening_time.substr(3, 2);
 
-                openingTime = new Date ();
-                openingTime.setDate (visitTime.getDate());
-                openingTime.setMonth (visitTime.getMonth());
-                openingTime.setHours (opening_hour, opening_minute, "00", "000");
+        var closing_hour = shops[order['pos']].closing_time.substr (0, 2);
+        var closing_minute = shops[order['pos']].closing_time.substr(3, 2);
 
-                closingTime = new Date();
-                closingTime.setDate (visitTime.getDate());
-                closingTime.setMonth (visitTime.getMonth());
-                closingTime.setHours (closing_hour, closing_minute, "00", "000");
+        if (visitTime) {
 
-                if (visitTime.getDate() == now.getDate()) {
+            openingTime = new Date ();
+            openingTime.setDate (visitTime.getDate());
+            openingTime.setMonth (visitTime.getMonth());
+            openingTime.setHours (opening_hour, opening_minute, "00", "000");
 
-                    if (now < openingTime) {
+            closingTime = new Date();
+            closingTime.setDate (visitTime.getDate());
+            closingTime.setMonth (visitTime.getMonth());
+            closingTime.setHours (closing_hour, closing_minute, "00", "000");
+
+            if (visitTime.getDate() == now.getDate()) {
+                if (visitTime - now < (10 * 60 * 1000)) {
+                    if (openingTime - now < (10 * 60 * 1000)) {
+                        if (closingTime - now < (15 * 60 * 1000)) {
+                            visitTime.setTime(openingTime.getTime());
+                            visitTime.setDate(now.getDate() + 1);
+                            openingTime.setDate(visitTime.getDate());
+                            closingTime.setDate(visitTime.getDate());
+                            state = 5;
+                        } else {
+                            visitTime.setMinutes(now.getMinutes() + 10);
+                            state = 3;
+                        }
+                    } else {
+                        visitTime.setTime (openingTime.getTime());
                         state = 2;
-                    } else if (now < closingTime) {
-                        state = 3;
+                    }
+                } else {
+                    if (openingTime - visitTime < 0) {
+                        if (closingTime - visitTime < (5 * 60 * 1000)) {
+                            visitTime.setTime(openingTime.getTime());
+                            visitTime.setDate(now.getDate() + 1);
+                            openingTime.setDate(visitTime.getDate());
+                            closingTime.setDate(visitTime.getDate());
+                            state = 5;
+                        } else {
+                            if (openingTime - now < (10 * 60 * 1000)) {
+                                state = 3;
+                            } else {
+                                state = 2;
+                            }
+                        }
                     } else {
                         visitTime.setTime(openingTime.getTime());
-                        visitTime.setDate(openingTime.getDate() + 1);
-
-                        updateClock();
-                        return 0;
+                        state = 2;
                     }
-
-                } else {
-                    state = 5;
                 }
+            } else {
+                if (openingTime - visitTime < 0) {
+                    if (closingTime - visitTime < (5 * 60 * 1000)) {
+                        visitTime.setTime(openingTime.getTime());
+                        visitTime.setDate(now.getDate() + 1);
+                        openingTime.setDate(visitTime.getDate());
+                        closingTime.setDate(visitTime.getDate());
+                    }
+                } else {
+                    visitTime.setTime(openingTime.getTime());
+                }
+                state = 5;
             }
-
         } else {
+            openingTime = new Date ();/**/
+            openingTime.setHours (opening_hour, opening_minute, "00", "000");
+
+            closingTime = new Date();
+            closingTime.setHours (closing_hour, closing_minute, "00", "000");
+
+            if (openingTime - now < (10 * 60 * 1000)) {
+                if (closingTime - now < (15 * 60 * 1000)) {
+                    visitTime.setTime(openingTime.getTime());
+                    visitTime.setDate(now.getDate() + 1);
+                    state = 5;
+                } else {
+                    visitTime.setMinutes(now.getMinutes() + 10);
+                    state = 3;
+                }
+            } else {
+                visitTime.setTime (openingTime.getTime());
+                state = 2;
+            }/**/
+        }
+    } else {
+        if (visitTime) {
             if (visitTime.getDate() == now.getDate()) {
+                if (visitTime - now < (10 * 60 * 1000)) {
+                    visitTime.setTime(now.getTime());
+                    visitTime.setMinutes(visitTime.getMinutes() + 10);
+                }
                 state = 1;
             } else {
                 state = 4;
             }
+        } else {
+            visitTime = new Date();
+            visitTime.setTime(now.getTime());
+            visitTime.setMinutes(visitTime.getMinutes() + 20);
+            state = 1;
         }
-
-    } else {
-        visitTime = new Date();
-        visitTime.setMinutes(visitTime.getMinutes() + 20);
-        state = 1;
     }
 
     buttonActivator();
@@ -163,12 +215,7 @@ function buttonActivator () {
 
 function nowCheck () {
     var now = new Date ();
-    if (visitTime - now < (9 * 60 * 1000)) {
-        visitTime.setTime(now.getTime());
-        visitTime.setMinutes(visitTime.getMinutes() + 20);
-        $("#hoursDown").css('visibility', 'hidden');
-        $("#minutesDown").css('visibility', 'visible');
-    } else if (visitTime - now < (14 * 60 * 1000)) {
+    if (visitTime - now < (15 * 60 * 1000)) {
         $("#hoursDown").css('visibility', 'hidden');
         $("#minutesDown").css('visibility', 'hidden');
     } else if (visitTime - now < (70 * 60 * 1000)) {
@@ -181,13 +228,7 @@ function nowCheck () {
 }
 
 function openingClosingCheck () {
-    if (visitTime < openingTime) {
-        visitTime = new Date(openingTime);
-        $("#hoursDown").css('visibility', 'hidden');
-        $("#minutesDown").css('visibility', 'hidden');
-        $("#hoursUp").css('visibility', 'visible');
-        $("#minutesUp").css('visibility', 'visible');
-    } else if (visitTime - openingTime < (5*60*1000)) {
+    if (visitTime - openingTime < (5*60*1000)) {
         $("#hoursDown").css('visibility', 'hidden');
         $("#minutesDown").css('visibility', 'hidden');
         $("#hoursUp").css('visibility', 'visible');
@@ -197,12 +238,6 @@ function openingClosingCheck () {
         $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'visible');
         $("#minutesUp").css('visibility', 'visible');
-    } else if (closingTime - visitTime < (5*60*1000)){
-        visitTime.setMinutes(closingTime.getMinutes() - 5);
-        $("#hoursDown").css('visibility', 'visible');
-        $("#minutesDown").css('visibility', 'visible');
-        $("#hoursUp").css('visibility', 'hidden');
-        $("#minutesUp").css('visibility', 'hidden');
     } else if (closingTime - visitTime < (10*60*1000)){
         $("#hoursDown").css('visibility', 'visible');
         $("#minutesDown").css('visibility', 'visible');
@@ -223,13 +258,7 @@ function openingClosingCheck () {
 
 function nowClosingCheck () {
     var now = new Date();
-    if (visitTime - now < (10 * 60 * 1000)) {
-        visitTime.setMinutes(now.getMinutes() + 10);
-        $("#hoursDown").css('visibility', 'hidden');
-        $("#minutesDown").css('visibility', 'hidden');
-        $("#hoursUp").css('visibility', 'visible');
-        $("#minutesUp").css('visibility', 'visible');
-    } else if (visitTime - now < (14 * 60 * 1000)) {
+    if (visitTime - now < (15 * 60 * 1000)) {
         $("#hoursDown").css('visibility', 'hidden');
         $("#minutesDown").css('visibility', 'hidden');
         $("#hoursUp").css('visibility', 'visible');
@@ -239,12 +268,6 @@ function nowClosingCheck () {
         $("#minutesDown").css('visibility', 'visible');
         $("#hoursUp").css('visibility', 'visible');
         $("#minutesUp").css('visibility', 'visible');
-    } else if (closingTime - visitTime < (5*60*1000)){
-        visitTime.setMinutes(closingTime.getMinutes() - 5);
-        $("#hoursDown").css('visibility', 'visible');
-        $("#minutesDown").css('visibility', 'visible');
-        $("#hoursUp").css('visibility', 'hidden');
-        $("#minutesUp").css('visibility', 'hidden');
     } else if (closingTime - visitTime < (10*60*1000)){
         $("#hoursDown").css('visibility', 'visible');
         $("#minutesDown").css('visibility', 'visible');
