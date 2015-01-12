@@ -298,12 +298,13 @@ function showInfoMessage (id) {
 
 function divForItem (id, name, amount, price){
     menuElems [id] = create("li",{Class:'goods'},create("div", {Class:'box',id:'box-'
-    +id, title:"Додати \"" + name + "\" до замовлення"},create("p",{},name),create("p", {class:'amount'},amount),
+    +id, title:"Додати «" + name + "» до замовлення"},create("p",{},name),create("p", {class:'amount'},amount),
     create("p",{class:'price'},parseInt(price)+' грн')));
 }
 
 function create( name, attributes ) {
     var el = document.createElement( name );
+
     if ( typeof attributes == 'object' ) {
         for ( var i in attributes ) {
             el.setAttribute( i, attributes[i] );
@@ -325,12 +326,16 @@ function create( name, attributes ) {
 }
 
 function addDivRow (productId) {
-    var divRow = '<div class="row" id="row-'+productId+'">';
+    var divRow = '<div class="row" id="row-' + productId + '">';
     var name = menu[productId].name;
-    var counter = '<div class="counter" id="counterOfProduct'+productId+'">' + order.content[productId] + '</div>';
-    var plus = '<div class="plus" id="plusProduct'+productId+'"><strong> + </strong></div>';
-    var minus = '<div class="minus" id="minusProduct'+productId+'"><strong> - </strong></div>';
-    var eliminator = '<div class="delete" id="deleteProduct'+productId+'"><strong> x </strong></div>';
+    var counter = '<div class="counter" id="counterOfProduct'+productId+'" title="Кількість замовлених «' +
+        menu[productId].name + '»">× ' + order.content[productId] + '</div>';
+    var plus = '<div class="plus" id="plusProduct' + productId + '" title="Додати ще один «' + menu[productId].name +
+        '» до замовлення"><strong> + </strong></div>';
+    var minus = '<div class="minus" id="minusProduct' + productId + '" title="Зменшити на один «' + menu[productId].name +
+        '»"><strong> - </strong></div>';
+    var eliminator = '<div class="delete" id="deleteProduct'+productId+'" title="Прибрати «' + menu[productId].name +
+        '» із замовлення"><strong> × </strong></div>';
     var divButtons = '<div class="buttons">' + counter + plus + minus + eliminator + '</div>';
     $('#rows').append (divRow + name + divButtons);
 }
@@ -346,7 +351,7 @@ function estimateSum(){
 }
 
 function updateQuantity(productId) {
-    document.getElementById('counterOfProduct'+productId).innerHTML = order.content[productId];
+    document.getElementById('counterOfProduct'+productId).innerHTML = "× " + order.content[productId];
 }
 
 function removeRowFromOrder (productId){
@@ -685,7 +690,14 @@ $(document).on ('click', '#left_pointer', function() {
     rebuild();
 });
 
-$(document).on ('mousedown mouseup', 'div.box', function() {
+//$(document).on ('mousedown mouseup', 'div.box', function() {
+//    $(this).toggleClass ('click');
+//});
+
+$(document).on ('mousedown mouseup', '.plus, .minus, .delete, #left_pointer, #right_pointer, div.box', function() {
     $(this).toggleClass ('click');
 });
 
+$(document).on ('mouseout', '.plus, .minus, .delete, #left_pointer, #right_pointer, div.box', function() {
+    $(this).removeClass ('click');
+});

@@ -2,10 +2,6 @@
     margin:0;
 }
 
-/*div {*/
-    /*UNSELECTABLE: on;*/
-/*}*/
-
 body{
     height: 100%;
     background:#792A26;
@@ -39,7 +35,6 @@ html { height: 100% }
     background-image: linear-gradient(to bottom,#08c,#04c);
     padding: 11px 19px;
     font-size: 18px;
-    border-radius: 6px;
     display: inline-block;
     line-height: 20px;
     text-align: center;
@@ -151,9 +146,6 @@ h5{
     background: -ms-linear-gradient(top, #9b9e98, #9b9e98);
     background: -o-linear-gradient(top, #9b9e98, #9b9e98);
     background-image: -ms-linear-gradient(top, #9b9e98 0%, #9b9e98 100%);
-    -webkit-border-radius: 9px;
-    -moz-border-radius: 9px;
-    border-radius: 9px;
     -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
     -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
     box-shadow: rgba(255,255,255,0.4) 0 0 0, inset rgba(255,255,255,0.4) 0 1px 0;
@@ -213,9 +205,6 @@ h5{
     height: auto;
     border: 0 solid #f7f7f7;
     background: #ebca90;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
     color: #4f4942;
     -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
     -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
@@ -283,10 +272,6 @@ h5{
     -moz-background-clip: padding;     /* Firefox 3.6 */
     -webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
     background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
-    /*border: 10px solid rgba(0,0,0,0.3);*/
-    /*-webkit-border-radius: 8px;*/
-    /*-moz-border-radius: 8px;*/
-    /*border-radius: 8px;*/
     -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
@@ -320,25 +305,28 @@ h5{
     height: inherit;
 }
 
-.box.click {
-    background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
-    background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
-    background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
-    background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
-    background-image: linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+.click {
+    background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
 }
 
 .box p {
     margin-bottom: 7px;
+    font-weight: bold;
 }
 
 .box p.amount {
     font-size: 13px;
+    font-weight: normal;
+
 }
 
 .box p.price {
-    font-weight: bold;
     margin-bottom: 0;
+    font-size: 16px;
 }
 
 #left_bar
@@ -351,14 +339,17 @@ h5{
 
 #left_bar .tips {
     color: #CCC;
-    border: 9px solid rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
     font-size: 1.1em;
     font-weight: bold;
     text-align: center;
+    text-shadow: 0 2px 3px #555;
     overflow: auto;
+    /*background*/
+    -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
 }
 
 #changePos {
@@ -368,26 +359,37 @@ h5{
 }
 
 .row {
-    background-color: #843B37;
-    border:1px solid #E8E8E8;
-    border-radius: 8px;
+    /*background-color: #843B37;*/
+    box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    /*border:1px solid #E8E8E8;*/
     margin: 10px 0;
     padding: 4px;
     text-align: left;
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 }
 
 .buttons {
     float:right;
 }
-.counter, .plus, .minus, .delete{
+
+.counter {
+    display: inline-block;
+    width: 30px;
+}
+
+.plus, .minus, .delete{
     display:inline-block;
     background-color: #843B37;
-    border:1px solid #E8E8E8;
-    border-radius: 8px;
-    width:30px;
+    /*border:1px solid #E8E8E8;*/
+    width:20px;
     text-align:center;
     margin: 0 2px;
     height: 20px;
+    box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
 }
 
 .counter {
@@ -406,8 +408,10 @@ h5{
     margin: 20px 0;
     text-align: left;
     padding: 8px;
-    border-radius: 8px;
     margin-bottom: 3px;
+    -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
 }
 
 #hrivnas {
@@ -425,9 +429,6 @@ h5{
     margin-top: 20px;
     padding:10px;
     cursor:pointer;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
     width: 150px;
 }
 
@@ -448,9 +449,6 @@ h5{
     margin-top: 20px;
     padding:10px;
     cursor:pointer;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
     width: 150px;
 }
 
