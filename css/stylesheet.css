@@ -23,6 +23,7 @@ html { height: 100% }
     padding-top: 10px;
     padding-left: 3%;
     padding-right: 3%;
+    font-size: 18px;
 }
 
 .gm-style-iw {
@@ -58,16 +59,16 @@ html { height: 100% }
 #linksRow {
     /*float: left;*/
     height: 47px;
-    line-height: 47px;
+    /*line-height: 47px;*/
     width: 100%;
     text-align: right;
 }
 
 #customerInfo {
     height: 47px;
-    line-height: 47px;
+    /*line-height: 47px;*/
     width: 100%;
-    font-size: 18px;
+    /*font-size: 18px;*/
     text-align: right;
 }
 
@@ -157,7 +158,6 @@ h5{
     vertical-align: middle;
     height: 45px;
     font-family: Calibri, Arial, sans-serif;
-    font-weight: bold;
 }
 
 #savePhone:hover {
@@ -187,16 +187,18 @@ h5{
 }
 
 #contactsLink {
-    font-size: 18px;
+    /*font-size: 18px;*/
     color: #CCC;
     margin-left: 20px;
     cursor: pointer;
+    vertical-align: middle;
 }
 
 #authenticationLink {
-    font-size: 18px;
+    /*font-size: 18px;*/
     color: #CCC;
     cursor: pointer;
+    vertical-align: middle;
 }
 
 #phoneNumber {
@@ -238,13 +240,11 @@ h5{
     text-shadow: #000000 0 1px 0;
     font-size: 24px;
     margin: 0 0 15px 0;
-    font-weight: bold;
     text-align: center;
 }
 
 .auth-text {
     font-size: 18px;
-    font-weight: bold;
     margin-bottom: 15px;
     color: #CCC;
     text-shadow: #000000 0 1px 0;
@@ -255,7 +255,7 @@ h5{
 }
 
 #wrap {
-    width:620px;
+    width:550px;
     position:relative;
     bottom:0;
     display: block;
@@ -315,13 +315,11 @@ h5{
 
 .box p {
     margin-bottom: 7px;
-    font-weight: bold;
 }
 
 .box p.amount {
     font-size: 13px;
     font-weight: normal;
-
 }
 
 .box p.price {
@@ -333,7 +331,7 @@ h5{
 {
     top: 45px;
     left: 600px;
-    width: 300px;
+    width: 350px;
     float: right;
 }
 
@@ -342,7 +340,6 @@ h5{
     padding: 15px;
     margin-bottom: 20px;
     font-size: 1.1em;
-    font-weight: bold;
     text-align: center;
     text-shadow: 0 2px 3px #555;
     overflow: auto;
@@ -387,13 +384,14 @@ h5{
     /*border:1px solid #E8E8E8;*/
     width:20px;
     text-align:center;
-    margin: 0 2px;
+    margin: 0 10px;
     height: 20px;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
 }
 
 .counter {
     cursor: default;
+    margin-right: 10px;
 }
 
 .plus, .minus, .delete:hover {
@@ -404,7 +402,6 @@ h5{
     background-color: #E8E8E8;
     color: #541D1B;
     font-size: 1.1em;
-    font-weight: bold;
     margin: 20px 0;
     text-align: left;
     padding: 8px;
@@ -461,6 +458,10 @@ h5{
 #customerExit{
     cursor: pointer;
     display: none;
+}
+
+#customerId {
+    vertical-align: middle;
 }
 
 #tips {
@@ -523,7 +524,6 @@ tr {
 
 th {
     font-size: 20px;
-    font-weight: bold;
     /*width: 250px;*/
     padding-bottom: 30px;
 }
@@ -558,26 +558,29 @@ th{
 
 
 
-@media screen and (max-width: 881px){
+/*@media screen and (max-width: 881px){*/
 
-    .text{
-        line-height: 100%;
-        font-size: 23px;
+    /*.text{*/
+        /*line-height: 100%;*/
+        /*font-size: 23px;*/
+    /*}*/
+    /*.for-map{*/
+        /*height:100%;*/
+    /*}*/
+    /*.order{*/
+        /*display:inline;*/
+    /*}*/
+/*}*/
+@media screen and (max-width: 640px){
+    .header{
+        font-size: 14px;
     }
-    .for-map{
-        height:100%;
-    }
-    .order{
-        display:inline;
-    }
-}
-@media screen and (max-width: 665px){
-    .text{
-        font-size: 21px;
-    }
-}
-@media screen and (max-width:540px){
-    #phoneNumber {
-        font-size: 1.5em;
+    #tip_line {
+        font-size: 14px;
     }
 }
+/*@media screen and (max-width:540px){*/
+    /*#phoneNumber {*/
+        /*font-size: 1.5em;*/
+    /*}*/
+/*}*/

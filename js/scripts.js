@@ -76,7 +76,7 @@ function receiptData () {
 
             for (var i = 1; i < shops.length; ++i) {
                 if (shops [i]) {
-                    var shopNameTd = '<td>' + shops[i].name + '</td>';
+                    var shopNameTd = '<td id="td-' + i + '">' + shops[i].name + '</td>';
                     var shopAddressTd = '<td>' + shops[i].street + ', ' + shops[i].house_number;
                     var phoneTd = '<td>' + shops[i].phone + '</td>';
                     rows [i] = '<tr>' + shopNameTd + shopAddressTd + phoneTd + '</tr>';
@@ -115,9 +115,11 @@ function receiptData () {
             console.log (customer);
             if (customer['id']) {
                 if (customer['firstName']) {
-                    $('#customerId').text("Ви авторизувалися як " + customer['firstName'] + ' ' + customer['lastName']);
+                    $('#customerId').html ("Ви авторизувалися як " + customer['firstName'] + ' ' + customer['lastName']
+                        + " <span id='customerExit'>(вийти)</span>");
                 } else {
-                    $('#customerId').text("Ви авторизувалися як користувач із номером телефону" + customer['phoneNumber']);
+                    $('#customerId').text("Ви авторизувалися як користувач із номером телефону" + customer['phoneNumber']
+                        + " <span id='customerExit'>(вийти)</span>");
                 }
                 $('#customerExit').css('display', 'inline');
             } else {
@@ -497,7 +499,8 @@ function preview(token){
                         console.log(customer);
                         document.cookie = "userId=" + customer['id'];
                         console.log (document.cookie);
-                        $('#customerId').text("Ви авторизувалися як " + customer['firstName'] + ' ' + customer['lastName']);
+                        $('#customerId').html ("Ви авторизувалися як " + customer['firstName'] + ' ' + customer['lastName']
+                            + " <span id='customerExit'>(вийти)</span>");
                         $("#customerExit").css ('display', 'inline');
                         page = 2;
                         rebuild();
@@ -518,7 +521,13 @@ $(document).on('click', '#savePhone', function phone(){
             console.log(customer);
             document.cookie = "userId=" + customer['id'];
             console.log (document.cookie);
-            $("#customerId").text ("Ви авторизувались як користувач із номером телефону" + customer['phoneNumber']);
+            if (customer.firstName) {
+                $("#customerId").html ("Ви авторизувалися як " + customer.firstName + " " + customer.lastName
+                    + " <span id='customerExit'>(вийти)</span>");
+            } else {
+                $("#customerId").html ("Ви авторизувались як користувач із номером телефону" + customer['phoneNumber']
+                    + " <span id='customerExit'>(вийти)</span>");
+            }
             $("#customerExit").css ('display', 'inline');
             page = 2;
             rebuild();
@@ -700,4 +709,15 @@ $(document).on ('mousedown mouseup', '.plus, .minus, .delete, #left_pointer, #ri
 
 $(document).on ('mouseout', '.plus, .minus, .delete, #left_pointer, #right_pointer, div.box', function() {
     $(this).removeClass ('click');
+});
+
+$(document).on ('click', 'td', function() {
+    var shopId = parseInt(this.id.substr(3));
+    var shopCoords = shops[shopId].place;
+    console.log (shopId);
+    if (shopId) {
+        page = 1;
+        map.setCenter (shopCoords);
+        rebuild();
+    }
 });
