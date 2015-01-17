@@ -1,0 +1,96 @@
+#authentication_page {
+    -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    padding: 20px;
+    width: 380px;
+    margin: 40px auto 10px auto;
+    text-shadow: #000000 0 1px 0;
+}
+
+#auth-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.auth-text {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#inputPhoneBlock {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+#phoneNumber {
+    display: inline;
+    font-size: 2em;
+    height: auto;
+    border: 0 solid #f7f7f7;
+    background: #ebca90;
+    color: #4f4942;
+    -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
+    -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
+    box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
+    padding: 8px;
+    width: 260px;
+    margin: 0 20px 0 0 ;
+}
+
+#phoneNumber:focus {
+    background: #EEE;
+}
+
+#savePhone {
+    border: 0 solid #fcfcfc;
+    background: #9b9e98;
+    background: -webkit-gradient(linear, left top, left bottom, from(#9b9e98), to(#9b9e98));
+    background: -webkit-linear-gradient(top, #9b9e98, #9b9e98);
+    background: -moz-linear-gradient(top, #9b9e98, #9b9e98);
+    background: -ms-linear-gradient(top, #9b9e98, #9b9e98);
+    background: -o-linear-gradient(top, #9b9e98, #9b9e98);
+    background-image: -ms-linear-gradient(top, #9b9e98 0%, #9b9e98 100%);
+    -webkit-box-shadow: rgba(255,255,255,0.4) 0 0 0, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(255,255,255,0.4) 0 0 0, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(255,255,255,0.4) 0 0 0, inset rgba(255,255,255,0.4) 0 1px 0;
+    color: #444;
+    padding: 8px 18px;
+    font-size: 16px;
+    text-decoration: none;
+    vertical-align: middle;
+    height: 45px;
+    font-family: Calibri, Arial, sans-serif;
+}
+
+#savePhone:hover {
+    border: 0 solid #447314;
+    text-shadow: #31540c 0 1px 0;
+    background: #6aa436;
+    background: -webkit-gradient(linear, left top, left bottom, from(#8dc059), to(#6aa436));
+    background: -webkit-linear-gradient(top, #8dc059, #6aa436);
+    background: -moz-linear-gradient(top, #8dc059, #6aa436);
+    background: -ms-linear-gradient(top, #8dc059, #6aa436);
+    background: -o-linear-gradient(top, #8dc059, #6aa436);
+    background-image: -ms-linear-gradient(top, #8dc059 0%, #6aa436 100%);
+    color: #fff;
+}
+
+#savePhone:active {
+    text-shadow: #31540c 0 1px 0;
+    border: 0 solid #447314;
+    background: #8dc059;
+    background: -webkit-gradient(linear, left top, left bottom, from(#6aa436), to(#6aa436));
+    background: -webkit-linear-gradient(top, #6aa436, #8dc059);
+    background: -moz-linear-gradient(top, #6aa436, #8dc059);
+    background: -ms-linear-gradient(top, #6aa436, #8dc059);
+    background: -o-linear-gradient(top, #6aa436, #8dc059);
+    background-image: -ms-linear-gradient(top, #6aa436 0%, #8dc059 100%);
+    color: #fff;
+}
+
+#uLogin {
+    margin-bottom: 20px;
+    text-align: center;
+}

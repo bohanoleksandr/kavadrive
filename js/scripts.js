@@ -76,12 +76,12 @@ function receiptData () {
 
             for (var i = 1; i < shops.length; ++i) {
                 if (shops [i]) {
-                    var shopNameTd = '<td id="td-' + i + '">' + shops[i].name + '</td>';
+                    var shopNameTd = '<td><span id="td-' + i + '" class="shopNames">' + shops[i].name + '</span></td>';
                     var shopAddressTd = '<td>' + shops[i].street + ', ' + shops[i].house_number;
                     var phoneTd = '<td>' + shops[i].phone + '</td>';
-                    rows [i] = '<tr>' + shopNameTd + shopAddressTd + phoneTd + '</tr>';
+                    rows[i] = '<tr>' + shopNameTd + shopAddressTd + phoneTd + '</tr>';
 
-                    $(rows [i]).appendTo ($('tbody'));
+                    $(rows[i]).appendTo ($('tbody'));
                 }
             }
 
@@ -101,7 +101,7 @@ function receiptData () {
                 var row = response[i];
                 menu[row[0]] = new Item(row[1], row[2], row[3]);
                 divForItem(row[0], row[1], row[2], row[3]);
-                $(menuElems[row[0]]).appendTo ($('#menulist'));
+                $(menuElems[row[0]]).appendTo ($('ul'));
             }
         }
     });
@@ -133,7 +133,7 @@ function initialize() {
 
     var mapOptions = {
         center: new google.maps.LatLng(49.0275,31.482778),
-        zoom: 6,
+        zoom: 12,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
@@ -147,6 +147,16 @@ function initialize() {
         }
     };
 
+    var bodyHeight = document.body.offsetHeight;
+
+    console.log ('body ' + bodyHeight);
+
+    var mapHeight = bodyHeight - 205;
+
+    console.log (mapHeight);
+
+    $("#map_canvas").css ('height', mapHeight);
+
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
     directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
@@ -158,23 +168,23 @@ function initialize() {
             {
                 autoGeo = true;
                 position = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                createMyMarker(position);
+                createMyMarker();
                 map.setCenter(position);
                 map.setZoom (12);
-                if (destination) getRoute(position, destination);
+                getRoute();
             },
             function() {handleNoGeolocation(true);}
         );
 
         if(!autoGeo){
-            position = new google.maps.LatLng(49.0275,31.482778);
-            createMyMarker(position);
+            position = new google.maps.LatLng(49.233083,28.468217);
+            createMyMarker();
             map.setCenter(position);
         }
 
     } else {
-        position = new google.maps.LatLng(49.0275,31.482778);
-        createMyMarker(position);
+        position = new google.maps.LatLng(49.233083,28.468216);
+        createMyMarker();
         map.setCenter(position);
         handleNoGeolocation(false);
     }
@@ -187,36 +197,87 @@ function initialize() {
                 map: map,
                 icon: image
             });
-            showInfoMessage(i);
+
+            google.maps.event.addListener (markers[i], 'click', function () {
+
+                if (selectedMarker === this) {
+                    page = 2;
+                    rebuild();
+                } else {
+                    selectShop(markers.indexOf(this));
+                }
+            });
         }
     }
+
+    google.maps.event.addListener (map, 'click', function(event) {
+        position = event.latLng;
+        createMyMarker();
+    });
+
 }
 
-function getRoute(start, end)
+function selectShop (id){
+    var marker = markers[id];
+    var shop = shops[id];
+    var message = '<strong>' + shop.name + '</strong><br/>' + shop.street + ', ' + shop.house_number +
+        '<br/>' + shop.phone + '<br/>Час роботи: ' + shop.opening_time.substring(0, 5) + ' - ' +
+        shop.closing_time.substring(0, 5) + '<br/><a class="createOrderInfoMessage">Зробити замовлення</a>';
+    var destinationLat = marker.getPosition().lat();
+    var destinationLng = marker.getPosition().lng();
+    destination = new google.maps.LatLng(destinationLat, destinationLng);
+
+    if (myInfoWindow) {
+        myInfoWindow.close();
+    }
+
+    if (infoWindow) {
+        infoWindow.close();
+    }
+
+    infoWindow = new google.maps.InfoWindow({
+        content: message
+    });
+
+    infoWindow.open(marker.get('map'), marker);
+
+    $('.createOrderInfoMessage').on('click', function() {
+        page = 2;
+        rebuild();
+    });
+
+    selectedMarker = marker;
+    order.pos = id;
+    document.getElementById('POS').innerHTML = "Ви обрали кав’ярню " + shops[order.pos].name +
+    ' (<span id="changePos">змінити</span>)';
+    getRoute();
+    updateClock();
+}
+
+function getRoute()
 {
     var selectedMode = "DRIVING";
     var request =
     {
-        origin: start,
-        destination: end,
+        origin: position,
+        destination: destination,
         travelMode: google.maps.TravelMode[selectedMode],
         unitSystem: google.maps.UnitSystem.METRIC
     };
-    directionsService.route(request, function(response, status)
-    {
-        if (status == google.maps.DirectionsStatus.OK)
+    if (destination) {
+        directionsService.route(request, function(response, status)
         {
-            directionsDisplay.setDirections(response);
-        }
-    });
+            if (status == google.maps.DirectionsStatus.OK)
+            {
+                directionsDisplay.setDirections(response);
+            }
+        });
+    }
 }
 
-function createMyMarker (position)
+function createMyMarker ()
 {
-    if(myMarker!==null)
-    {
-        myMarker.setMap(null);
-    }
+    if (myMarker) myMarker.setMap (null);
 
     myMarker = new google.maps.Marker({
         position: position,
@@ -226,81 +287,31 @@ function createMyMarker (position)
     });
 
     myInfoWindow = new google.maps.InfoWindow({
-        content: '<b>Ви тут</b><br/><sup>Маркер можна перетягнути</sup></sup><br/>'
+        content: '<b>Ви тут</b>'
     });
 
     myInfoWindow.open (myMarker.get('map'), myMarker);
 
-    google.maps.event.addListener(myMarker, 'dragend', function(){
+    getRoute();
+
+    google.maps.event.addListener (myMarker, 'dragend', function(){
         var newOriginLat = myMarker.getPosition().lat();
         var newOriginLng = myMarker.getPosition().lng();
         position = new google.maps.LatLng(newOriginLat,newOriginLng);
-        if (destination){
-            getRoute (position,destination);
-        }
+        getRoute ();
     });
-}
 
-function showInfoMessage (id) {
-    var shop = shops[id];
-    var message = '<strong>' + shop.name + '</strong><br/>' + shop.street + ', ' + shop.house_number +
-        '<br/>' + shop.phone + '<br/>Час роботи: ' + shop.opening_time.substring(0, 5) + ' - ' +
-        shop.closing_time.substring(0, 5) + '<br/><a class="createOrderInfoMessage">Зробити замовлення</a>';
-
-    var marker = markers[id];
-
-    google.maps.event.addListener(marker, 'click', function () {
-
+    google.maps.event.addListener(myMarker, 'click', function() {
         if (infoWindow) {
             infoWindow.close();
         }
-
-        if (myInfoWindow) {
-            myInfoWindow.close();
-        }
-
-        if (selectedMarker === marker) {
-            page = 2;
-            rebuild();
-        } else {
-            infoWindow = new google.maps.InfoWindow({
-                content: message
-            });
-
-            infoWindow.open(marker.get('map'), marker);
-
-            $('.createOrderInfoMessage').on('click', function() {
-                page = 2;
-                rebuild();
-            });
-
-            var destinationLat = marker.getPosition().lat();
-            var destinationLng = marker.getPosition().lng();
-            var originLat = myMarker.getPosition().lat();
-            var originLng = myMarker.getPosition().lng();
-            destination = new google.maps.LatLng(destinationLat, destinationLng);
-            position = new google.maps.LatLng(originLat, originLng);
-            getRoute(position, destination);
-            selectedMarker = marker;
-            order.pos = id;
-            document.getElementById('POS').innerHTML = "Ви обрали кав’ярню " + shops[order.pos].name + ' (<span id="changePos">змінити</span>)';
-        }
-
-        google.maps.event.addListener(myMarker, 'click', function() {
-            if (infoWindow) {
-                infoWindow.close();
-            }
-            myInfoWindow.open(myMarker.get('map'), myMarker);
-        });
-
-        updateClock();
-
+        myInfoWindow.open(myMarker.get('map'), myMarker);
     });
 }
 
 function divForItem (id, name, amount, price){
-    menuElems [id] = create("li",{Class:'goods'},create("div", {Class:'box',id:'box-'
-    +id, title:"Додати «" + name + "» до замовлення"},create("p",{},name),create("p", {class:'amount'},amount),
+    menuElems [id] = create("li",{},create("div", {Class:'menu_buttons',id:'article-'+id,title:"Додати «" + name +
+        "» до замовлення"},create("p",{},name),create("p", {class:'amount'},amount),
     create("p",{class:'price'},parseInt(price)+' грн')));
 }
 
@@ -327,8 +338,8 @@ function create( name, attributes ) {
     return el;
 }
 
-function addDivRow (productId) {
-    var divRow = '<div class="row" id="row-' + productId + '">';
+function addDivSelectArticle (productId) {
+    var bigDiv = '<div class="selected_articles">';
     var name = menu[productId].name;
     var counter = '<div class="counter" id="counterOfProduct'+productId+'" title="Кількість замовлених «' +
         menu[productId].name + '»">× ' + order.content[productId] + '</div>';
@@ -338,8 +349,8 @@ function addDivRow (productId) {
         '»"><strong> - </strong></div>';
     var eliminator = '<div class="delete" id="deleteProduct'+productId+'" title="Прибрати «' + menu[productId].name +
         '» із замовлення"><strong> × </strong></div>';
-    var divButtons = '<div class="buttons">' + counter + plus + minus + eliminator + '</div>';
-    $('#rows').append (divRow + name + divButtons);
+    var divButtons = '<div class="orderList_buttons">' + counter + plus + minus + eliminator + '</div></div>';
+    $('#selected_articles_list').append (bigDiv + name + divButtons);
 }
 
 function estimateSum(){
@@ -356,8 +367,8 @@ function updateQuantity(productId) {
     document.getElementById('counterOfProduct'+productId).innerHTML = "× " + order.content[productId];
 }
 
-function removeRowFromOrder (productId){
-    var divToBeRemoved = document.getElementById ('row-'+productId);
+function removeArticleFromOrder (productId){
+    var divToBeRemoved = document.getElementById ('selected_article-'+productId);
     divToBeRemoved.parentNode.removeChild(divToBeRemoved);
     delete order.content[productId];
 }
@@ -425,48 +436,37 @@ function preventSelection(element){
 }
 
 function rebuild () {
+    $('.pages').hide();
     switch (page) {
         case 1:
-            $('#left_pointer').css ('visibility', 'hidden');
+            $('#left_pointer').css ('display', 'none');
             $('#right_pointer').css ('visibility', 'visible');
             $('#right_pointer').attr ('title', 'Перейти до меню');
             $('#map_canvas').fadeIn();
-            $('#order').hide();
-            $('#authentication').hide();
-            $('#contacts').hide();
-            $('#tip_line').text ("Вкажіть своє розташування та оберіть кав’ярню на карті");
+            $('#tip_text').text ("Вкажіть своє розташування та оберіть кав’ярню на карті");
             break;
         case 2:
-            $('#left_pointer').css ('visibility', 'visible');
+            $('#left_pointer').css ('display', 'inline');
             $('#right_pointer').css ('visibility', 'visible');
             $('#left_pointer').attr ('title', 'Перейти до карти');
             $('#right_pointer').attr ('title', 'Перейти до авторизації');
-            $('#map_canvas').hide();
-            $('#order').fadeIn('slow');
-            $('#authentication').hide();
-            $('#contacts').hide();
-            $('#tip_line').text ("Зробіть замовлення");
+            $('#menu_page').fadeIn('slow');
+            $('#tip_text').text ("Зробіть замовлення");
             break;
         case 3:
-            $('#left_pointer').css ('visibility', 'visible');
+            $('#left_pointer').css ('display', 'inline');
             $('#right_pointer').css ('visibility', 'visible');
             $('#left_pointer').attr ('title', 'Перейти до меню');
             $('#right_pointer').attr ('title', 'Перейти до контактів');
-            $('#map_canvas').hide();
-            $('#order').hide();
-            $('#authentication').fadeIn('slow');
-            $('#contacts').hide();
-            $('#tip_line').text ("Вкажіть контактні дані");
+            $('#authentication_page').fadeIn('slow');
+            $('#tip_text').text ("Вкажіть контактні дані");
             break;
         case 4:
-            $('#left_pointer').css ('visibility', 'visible');
+            $('#left_pointer').css ('display', 'inline');
             $('#right_pointer').css ('visibility', 'hidden');
             $('#left_pointer').attr ('title', 'Перейти до авторизації');
-            $('#map_canvas').hide();
-            $('#order').hide();
-            $('#authentication').hide();
-            $('#contacts').fadeIn('slow');
-            $('#tip_line').text ("");
+            $('#contacts_page').fadeIn('slow');
+            $('#tip_text').text ("");
             break;
         default:
             break;
@@ -535,16 +535,16 @@ $(document).on('click', '#savePhone', function phone(){
     }
 });
 
-$(document).on("click", 'div.box', function(){
+$(document).on("click", 'div.menu_buttons', function(){
     $('#magicButton').css ('display', 'block');
-    var boxId = parseInt(this.id.substr(4));
-    if (order.content[boxId]){
-        order.content[boxId]++;
-        updateQuantity(boxId);
+    var articleId = parseInt(this.id.substr(8));
+    if (order.content[articleId]){
+        order.content[articleId]++;
+        updateQuantity(articleId);
     }
     else{
-        order.content[boxId] = 1;
-        addDivRow(boxId);
+        order.content[articleId] = 1;
+        addDivSelectArticle(articleId);
     }
     estimateSum()
 });
@@ -562,7 +562,7 @@ $(document).on('click', '.minus', function(){
     if(order.content[productId]){
         updateQuantity(productId);
     }else{
-        removeRowFromOrder(productId);
+        removeArticleFromOrder(productId);
     }
     var emptiness = true;
     for (var i in order.content) {
@@ -576,7 +576,7 @@ $(document).on('click', '.minus', function(){
 
 $(document).on('click', '.delete', function(){
     var productId = parseInt(this.id.substring(13));
-    removeRowFromOrder(productId);
+    removeArticleFromOrder(productId);
     var emptiness = true;
     for (var i in order.content) {
         emptiness = false;
@@ -587,67 +587,67 @@ $(document).on('click', '.delete', function(){
     estimateSum();
 });
 
-$(document).on('click', '.saveOrder', function submit(){
-    if (!customer['id']){
-        page = 3;
-        rebuild();
-    } else if (!order.pos){
-        page = 1;
-        rebuild();
-    } else {
-        order.visitTime = visitTime;
-        $.post(
-            "php/orderRecording.php",
-            {
-                order: JSON.stringify(order),
-                customerId: customer ['id']
-            },
-            function(result){
-                if (result) {
-                    $(".tips").css ('display', 'none');
-                    $(".saveOrder").css ('display', 'none');
-                    var visitTimeMinutes = order.visitTime.getMinutes();
-                    if (visitTimeMinutes < 10) {
-                        visitTimeMinutes = '0' + visitTimeMinutes;
+$(document).on('click', '#saveOrder', function submit(){
+    if (!$(this).hasClass('make_new_order')) {
+        if (!customer['id']){
+            page = 3;
+            rebuild();
+        } else if (!order.pos){
+            page = 1;
+            rebuild();
+        } else {
+            order.visitTime = visitTime;
+            $.post(
+                "php/orderRecording.php",
+                {
+                    order: JSON.stringify(order),
+                    customerId: customer ['id']
+                },
+                function(result){
+                    if (result) {
+                        $(".blocks").css ('display', 'none');
+                        $("#saveOrder").addClass ('make_new_order');
+                        $("#saveOrder").text ('Зробити нове замовлення');
+                        var visitTimeMinutes = order.visitTime.getMinutes();
+                        if (visitTimeMinutes < 10) {
+                            visitTimeMinutes = '0' + visitTimeMinutes;
+                        }
+                        $("#thanks").html (
+                            "Дякуємо!<br/></br>" +
+                            "Замовлення № " + result + " прийнято на суму:" +
+                            "<p class='important'>" + order.sum + " грн</p><br/>" +
+                            "Заберіть його у кав’ярні:" +
+                            "<p class='important'>" + shops[order.pos].name + " - " + shops[order.pos].street + ", "
+                            + shops[order.pos].house_number + "</p><br/>" +
+                            "Час візиту до кав’ярні:<p class='important'>" +
+                            order.visitTime.getHours() + ":" + visitTimeMinutes + "<br/>" +
+                            "<sub>" + order.visitTime.getDate() + " " + month_array[order.visitTime.getMonth()] + "</sub></p><br/>" +
+                            "НОМЕР ЗАМОВЛЕННЯ:" + "<br/>" +
+                            "<p id='order_id'>" + result + "</p>"
+                        );
+                        $('#thanks').css('display', 'block');
+                    } else {
+                        alert ("Вибачте, проводяться сервісні роботи\r\nСпробуйте замовити пізніше");
                     }
-                    $("#thanks").html (
-                        "Дякуємо!<br/></br>" +
-                        "Замовлення № " + result + " прийнято на суму:" +
-                        "<p class='important'>" + order.sum + " грн</p><br/>" +
-                        "Заберіть його у кав’ярні:" +
-                        "<p class='important'>" + shops[order.pos].name + " - " + shops[order.pos].street + ", "
-                        + shops[order.pos].house_number + "</p><br/>" +
-                        "Час візиту до кав’ярні:<p class='important'>" +
-                        order.visitTime.getHours() + ":" + visitTimeMinutes + "<br/>" +
-                        "<sub>" + order.visitTime.getDate() + " " + month_array[order.visitTime.getMonth()] + "</sub></p><br/>" +
-                        "НОМЕР ЗАМОВЛЕННЯ:" + "<br/>" +
-                        "<p id='order_id'>" + result + "</p>"
-                    );
-                    $('#thanks').css('display', 'block');
-                    $('#ok').css('display', 'inline');
-                } else {
-                    alert ("Вибачте, проводяться сервісні роботи\r\nСпробуйте замовити пізніше");
                 }
-            }
-        )
+            )
+        }
+    } else {
+        $("#saveOrder").removeClass ('make_new_order');
+        $("#saveOrder").text ('Замовити');
+        $(".blocks").css ('display', 'block');
+        $("#thanks").css ('display', 'none');
+        $("#hrivnas").text ('0 грн');
+        $("#magicButton").css ('display', 'none');
+        order.content = {};
+        updateClock();
+        $(".selected_articles").remove();
     }
 });
 
 $(document).on ('click', '#changePos', function (){
     page = 1;
     rebuild();
-});
-
-$(document).on ('click', '#ok', function() {
-    $(".tips").css ('display', 'block');
-    $(".saveOrder").css ('display', 'inline');
-    $("#thanks").css ('display', 'none');
-    $("#ok").css ('display', 'none');
-    $("#hrivnas").text ('0 грн');
-    $("#magicButton").css ('display', 'none');
-    order.content = {};
-    updateClock();
-    $(".row").remove();
 });
 
 $(document).on ('click', '#customerExit', function() {
@@ -699,25 +699,26 @@ $(document).on ('click', '#left_pointer', function() {
     rebuild();
 });
 
-//$(document).on ('mousedown mouseup', 'div.box', function() {
-//    $(this).toggleClass ('click');
-//});
-
-$(document).on ('mousedown mouseup', '.plus, .minus, .delete, #left_pointer, #right_pointer, div.box', function() {
-    $(this).toggleClass ('click');
+$(document).on ('mousedown mouseup', '.plus, .minus, .delete, .pointers, div.menu_buttons', function() {
+    $(this).toggleClass ('pressed_button');
 });
 
-$(document).on ('mouseout', '.plus, .minus, .delete, #left_pointer, #right_pointer, div.box', function() {
-    $(this).removeClass ('click');
+$(document).on ('mouseout', '.plus, .minus, .delete, .pointers, div.menu_buttons', function() {
+    $(this).removeClass ('pressed_button');
 });
 
-$(document).on ('click', 'td', function() {
+$(document).on ('click', '.shopNames', function() {
     var shopId = parseInt(this.id.substr(3));
     var shopCoords = shops[shopId].place;
-    console.log (shopId);
-    if (shopId) {
-        page = 1;
-        map.setCenter (shopCoords);
-        rebuild();
-    }
+    page = 1;
+    map.setCenter (shopCoords);
+    selectShop(shopId);
+    rebuild();
+});
+
+$(window).resize (function() {
+    var bodyHeight = document.body.offsetHeight;
+    var mapHeight = bodyHeight - 205;
+    console.log (mapHeight);
+    $("#map_canvas").css ('height', mapHeight);
 });

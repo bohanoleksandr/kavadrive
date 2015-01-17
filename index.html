@@ -9,6 +9,9 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/stylesheet.css" rel="stylesheet" type="text/css"/>
         <link href="css/time.css" rel="stylesheet" type="text/css"/>
+        <link href="css/menu_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="css/auth_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="css/contacts_styles.css" rel="stylesheet" type="text/css"/>
 
         <script type="text/javascript" src="http://ulogin.ru/js/ulogin.js"></script>
         <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
@@ -32,41 +35,43 @@
 								
     </head>
     <body>
-        <div class="main"> 
-            <div class = "header">
+        <div id="main">
+            <div id="header">
                 <div id="logo">
                     <a href = "index.html">
                         <img src = "images/logo.jpg"/>
                     </a>
                 </div>
 
-                <div id = "linksRow">
-                    <a id="authenticationLink" title="Перейти до авторизації">Авторизація</a>
-                    <a id="contactsLink" title="Переглянути контактні дані усіх кав’ярень">Контакти</a>
+                <div class="headerLines">
+                    <span id="authenticationLink" class="headerLinks" title="Перейти до авторизації">Авторизація</span>
+                    <span id="contactsLink" class="headerLinks" title="Переглянути контактні дані усіх кав’ярень">Контакти</span>
                 </div>
 
-                <div id="customerInfo">
-                    <span id="customerId">
+                <div class="headerLines">
+                    <div id="customerId">
                         <span id="customerExit">(вийти)</span>
-                    </span>
+                    </div>
                 </div>
             </div>
 
-            <div id="tips">
-                <div id="left_pointer">&lsaquo;</div>
-                <div id="tip_line">Вкажіть своє розташування та оберіть кав’ярню на карті</div>
-                <div id="right_pointer" title="Перейти до меню">&rsaquo;</div>
+            <div id="tip_line">
+                <div id="left_pointer" class="pointers">&lsaquo;</div>
+                    <div id="tip_container">
+                        <div id="tip_text">Вкажіть своє розташування та оберіть кав’ярню на карті</div>
+                    </div>
+                <div id="right_pointer" class="pointers" title="Перейти до меню">&rsaquo;</div>
             </div>
 			
-            <div id="map_canvas"></div>
+            <div id="map_canvas" class="pages"></div>
 
-            <div id="order">
-                <div id="wrap" align="left">
-                    <ul id="menulist"></ul>
+            <div id="menu_page" class="pages">
+                <div id="left_bar" align="left">
+                    <ul></ul>
                 </div>
-                <div id="left_bar">
-                    <div id = "POS" class="tips">Ви не обрали кав’ярню (<span id="changePos">обрати</span>)</div>
-                    <div id = "time" class="tips">
+                <div id="right_bar">
+                    <div id = "POS" class="blocks">Ви не обрали кав’ярню (<span id="changePos">обрати</span>)</div>
+                    <div id = "time" class="blocks">
                         <div>Вкажіть час Вашого візиту до кав’ярні:</div>
                         <div id="order_time_menu">
                             <div class="timeButtonsDiv">
@@ -100,35 +105,34 @@
                             </div>
                         </div>
                     </div>
-                    <div class = "tips" id = "orderList">
+                    <div class="blocks" id="orderList">
                         Зміст замовлення:
-                        <div id = "rows"></div>
-                        <div id = "sum">Всього до сплати:<span id="hrivnas">0 грн</span></div>
+                        <div id="selected_articles_list"></div>
+                        <div id="sum">Всього до сплати:<span id="hrivnas">0 грн</span></div>
                     </div>
-                    <div id="thanks" class="tips"></div>
-                    <div id = "magicButton">
-                        <button id="saveOrder1" class="saveOrder" title="Відправити замовлення">Замовити</button>
-                        <button id="ok">Зробити нове замовлення</button>
+                    <div id="thanks" class="blocks"></div>
+                    <div id="magicButton">
+                        <button id="saveOrder" title="Відправити замовлення">Замовити</button>
                     </div>
 
                 </div>
             </div>
 
-            <div id="authentication">
-                <div class="auth-title">Авторизація</div>
+            <div id="authentication_page" class="pages">
+                <div id="auth-title">Авторизація</div>
                 <div class="auth-text">Телефон:</div>
                 <div id="inputPhoneBlock">
                     <input class="input-block-level" id ="phoneNumber" type="text" name = "number">
                     <button id="savePhone" type="button">Увійти</button>
                 </div>
                 <div class="auth-text">Або авторизуйтеся через соціальну мережу:</div>
-                <div id="uLogin" class = "uLogin" data-ulogin=	"display=panel;fields=first_name,last_name;
+                <div id="uLogin" data-ulogin="display=panel;fields=first_name,last_name;
                     providers=vkontakte,facebook,google,yandex,mailru;
                     hidden=other;callback=preview;redirect_uri=">
                 </div>
             </div>
 
-            <div id = "contacts">
+            <div id = "contacts_page" class="pages">
                 <table>
                     <tbody>
                         <tr>
@@ -140,9 +144,11 @@
                 </table>
             </div>
 
-            <div id="adminData">
-                тел. 067-431-2002, Skype: kavadrive, ел-пошта: kavadrive@gmail.com
-            </div>
+            <div id="appendix"></div>
+        </div>
+
+        <div id="adminData">
+            <span>тел. 067-431-2002, kavadrive@gmail.com, Skype: kavadrive</span>
         </div>
     </body>
 </html>
