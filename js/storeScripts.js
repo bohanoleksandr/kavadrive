@@ -16,7 +16,7 @@
 var statuses_array = {
     1: 'відкрито',
     2: 'підготовлено',
-    3: 'відхилено',
+    3: 'не з’явився',
     4: 'cкасовано',
     5: 'продано'
 };
@@ -24,16 +24,17 @@ var statuses_array = {
 var worker = null;
 var shop = null;
 var orders = [];
+var ordersLength = null;
 
 var selected_order = null;
 
 
 function receiptData () {
-    $.post(
-        "../../php/getOrders.php",
-        "",
-        function (result) {
-            var receivedData = JSON.parse (result);
+    $.ajax({
+        url: "../../php/getOrders.php",
+        cache: false,
+        success: function (result) {
+            var receivedData = JSON.parse(result);
             orders = receivedData['orders'];
             for (var i = 0; i < orders.length; i++) {
                 orders[i]['visitTime'] = orders[i]['visitTime'].replace(/-/gi, '/');
@@ -44,9 +45,11 @@ function receiptData () {
             $('#seller').text(' ' + worker);
             $('#shop').text(' ' + shop);
             //$('#modalWindow').modal('hide');
+            if (ordersLength && orders.length > ordersLength) sound();
+            ordersLength = orders.length;
             fillTable();
         }
-    );
+    });
 }
 
 function fillTable () {
@@ -66,7 +69,7 @@ function fillTable () {
                 status = 'error';
                 break;
             case '4':
-                status = 'error';
+                status = 'cancelled';
                 break;
             case '5':
                 status = 'success';
@@ -78,6 +81,9 @@ function fillTable () {
 }
 
 function buildRow(order, status) {
+    var additionNewClass = '';
+    var tagWithOrderId = null;
+
     var tagWithNameSurname = "-";
     if (order['firstName']) {
         tagWithNameSurname = '<a href="' + order['identitySoc'] + '" target="blank">' + order['firstName'] + ' '
@@ -121,9 +127,20 @@ function buildRow(order, status) {
     var orderTimeDate = orderTime.getDate();
     var orderTimeMonth = month_array [orderTime.getMonth()];
 
+    var now = new Date();
+
+    if (now - orderTime < 5 * 60 * 1000 && status == 'info') {
+        additionNewClass = 'new';
+        tagWithOrderId = order['id'] + ' (нове)';
+    } else {
+        tagWithOrderId = order['id'];
+    }
+
     var htmlForTableRow =
-        '<tr class="tableRow ' + status + '">'
-        + '<td class="td_id">' + order['id'] + '</td>'
+        '<tr class="tableRow ' + status + ' ' + additionNewClass + '">'
+        + '<td class="td_id">' + tagWithOrderId + '</td>'
+        + '<td class="td_content"><img title="Переглянути зміст замовлення № ' + order['id'] + '" ' +
+            'id="content' + order['id'] + '" src="../images/paper.jpg"></td>'
         + '<td class="td_customer">' + tagWithNameSurname + '</td>'
         + '<td class="td_phone">' + phoneNumber + '</td>'
         + '<td class="td_time">' + visitTimeHour + ':' + visitTimeMinutes + ' - ' + visitTimeDate + ' ' + visitTimeMonth + '</td>'
@@ -168,9 +185,14 @@ function get_cookie ( cookie_name )
         return null;
 }
 
+function sound (){
+    $('#notifyAudio')[0].play();
+}
+
 $(document).ready (function() {
 
-    receiptData();
+    receiptData ();
+    setInterval ('receiptData()', 10000);
 
     console.log (document.cookie);
 
@@ -197,12 +219,12 @@ $(document).ready (function() {
         }
     });
 
-    $(document).on('click', '.tableRow', function () {
+    $(document).on('click', 'img', function () {
         //очистка списка
         $('.list').empty();
         //добавление элементов на форму
         //номер заказа
-        var id = $(this).text().charAt(0);
+        var id = this.id.substr(7);
         for (var i = 1; i < 10; i++) {//если число больше 9
             if (!isNaN(parseInt($(this).text().charAt(i)))) {
                 id += parseInt($(this).text().charAt(i));
@@ -240,7 +262,6 @@ $(document).ready (function() {
     });
 
     $('.status').change(function () {
-        console.log('aaa');
         changeStatus(this.value);
     });
 
@@ -268,7 +289,7 @@ $(document).ready (function() {
         //создание html-стр для печати накладной
         win.document.writeln('<html><head><title>Друк накладної</title>' +
         '<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>' +
-        '<link href="css/storeStyle.css" rel="stylesheet" type="text/css"/>' +
+        '<link href="css/store_styles.css" rel="stylesheet" type="text/css"/>' +
         '</head><body>' +
         '<div class="btn-group buttons"> <div class="btn btn-primary" onclick="window.print();">Друк</div>' +
         '<div class="btn" onclick="window.close();">Закрити</div></div><hr>' +
@@ -316,6 +337,5 @@ $(document).ready (function() {
     });
 
 });
-
 
 

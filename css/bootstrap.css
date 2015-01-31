@@ -2257,6 +2257,14 @@ table th[class*="span"],
   background-color: #98cee9;
 }
 
+.table tbody tr.cancelled > td {
+  background-color: #c8ccc6;
+}
+
+.table tbody tr.new > td {
+  background-color: #57afdb;
+}
+
 .table-hover tbody tr.success:hover > td {
   background-color: #99cf83;
 }
@@ -2271,6 +2279,14 @@ table th[class*="span"],
 
 .table-hover tbody tr.info:hover > td {
   background-color: #78bfe2;
+}
+
+.table-hover tbody tr.cancelled:hover > td {
+  background-color: #b7b7b5;
+}
+
+.table tbody tr.new:hover > td {
+  background-color: #37a0d4;
 }
 
 [class^="icon-"],

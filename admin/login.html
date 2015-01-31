@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/store_styles.css" rel="stylesheet" type="text/css"/>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="js/loginJS.js" type="text/javascript"></script>
+    </head>
+    <body>
+	<form class="authentication" action = "../php/authenticationPos.php" method = "POST">
+        <h2 class="form-signin-heading">Авторизація</h2>
+		<label class="radio">
+			 <input type="radio" name="role" value="1" checked/>
+			  Продавець
+		</label>
+		<label class="radio">
+			 <input type="radio" name="role" value="2"/>
+			  Адміністратор складу
+		</label>
+		<select class = "input-block-level shops" name="selectedShop">
+
+		</select>	
+        <input type="text" class="input-block-level" placeholder="username" name ="login">
+        <input type="password" class="input-block-level" placeholder="password" name ="password">
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me"> Запам’ятати мене
+        </label>
+        <p>
+            <input class="btn btn-large btn-primary" type="submit" value="Вхід"/>
+            <input class="btn btn-large btn-primary" type="reset" value="Очистити"/>
+        </p>
+      </form>	
+	</body>
+</html>

@@ -4,7 +4,7 @@ var req = getXmlHttp();
 
 vote('../../php/getShops.php',function () {
 	for(var i in this){
-		$('#shopList').append('<option value="' + this[i][0] + '">' + this[i][1] + '</option>');
+		$('.shops').append('<option value="' + this[i][0] + '">' + this[i][1] + '</option>');
 	}
 });
 
@@ -42,9 +42,9 @@ function vote(phpFile, callback) {
 $(document).ready(function(){
 	$('input:radio').click(function(){
 		if($("input:radio:checked").val() == '2'){
-			$('#shopList').hide();
+			$('.shops').hide();
 		}else{
-			$('#shopList').show();
+			$('.shops').show();
 		}
 	});
 });

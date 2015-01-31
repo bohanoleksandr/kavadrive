@@ -339,7 +339,7 @@ function create( name, attributes ) {
 }
 
 function addDivSelectArticle (productId) {
-    var bigDiv = '<div class="selected_articles">';
+    var bigDiv = '<div class="selected_articles" id="menu_content_article-' + productId + '">';
     var name = menu[productId].name;
     var counter = '<div class="counter" id="counterOfProduct'+productId+'" title="Кількість замовлених «' +
         menu[productId].name + '»">× ' + order.content[productId] + '</div>';
@@ -368,7 +368,7 @@ function updateQuantity(productId) {
 }
 
 function removeArticleFromOrder (productId){
-    var divToBeRemoved = document.getElementById ('selected_article-'+productId);
+    var divToBeRemoved = document.getElementById ('menu_content_article-' + productId);
     divToBeRemoved.parentNode.removeChild(divToBeRemoved);
     delete order.content[productId];
 }

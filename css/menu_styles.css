@@ -35,7 +35,7 @@
     text-align:center;
     font: 15px Calibri, Helvetica, Arial, Sans-Serif;
     text-shadow: 0 2px 3px #555;
-    padding: 7px;
+    padding: 7px 0;
 }
 
 .pressed_button {
@@ -95,13 +95,13 @@
 }
 
 .orderList_buttons {
-    float:right;
+    float: right;
 }
 
 .counter {
     display: inline-block;
     width: 30px;
-    margin-right: 10px;
+    /*margin-right: 10px;*/
 }
 
 .plus, .minus, .delete{
@@ -109,7 +109,7 @@
     background-color: #843B37;
     width: 20px;
     text-align: center;
-    margin: 0 10px;
+    margin: 0 8px;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     cursor: pointer;
 }

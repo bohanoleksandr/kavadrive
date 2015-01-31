@@ -129,7 +129,7 @@ $(document).ready(function(){
 		win.document.open();		
 		win.document.writeln('<html><head><title>Друк накладної</title>'+
 								'<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>'+
-								'<link href="../store/css/storeStyle.css" rel="stylesheet" type="text/css"/>'+
+								'<link href="../store/css/store_styles.css" rel="stylesheet" type="text/css"/>'+
 								'</head><body>'+
 								'<div class="btn-group buttons"> <div class="btn btn-primary" onclick="window.print();">Друк</div>'+
 									'<div class="btn" onclick="window.close();">Закрити</div></div><hr>'+

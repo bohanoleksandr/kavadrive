@@ -1,7 +1,7 @@
 <?php
 include_once('connectdb.php');
 
-$shopNumber = $_COOKIE ['shopId'];
+$shopNumber = $_COOKIE ['shopId'];/*,*/
 $workerId = $_COOKIE ['workerId'];
 
 $result1 = mysql_query ("    SELECT
@@ -17,8 +17,8 @@ $result1 = mysql_query ("    SELECT
 							WHERE
 								`orders`.`pos` =".$shopNumber."
 							ORDER BY
-								`orders`.`visit_time`
-							DESC;"
+								`orders`.`visit_time` DESC,
+								`orders`.`id` DESC;"
 );
 
 $orders = array();

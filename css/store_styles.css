@@ -66,6 +66,23 @@ a {
     /*background: #99cf83;*/
 /*}*/
 
+#banner {
+	text-align: center;
+}
+
+.auth_input {
+	width: 100%;
+}
+
+td.td_content{
+	text-align: center;
+}
+
+img {
+	cursor: pointer;
+}
+
+
 @media print{
 	.btn-group{
 		display:none;
