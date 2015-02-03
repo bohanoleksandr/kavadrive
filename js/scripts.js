@@ -201,8 +201,7 @@ function initialize() {
             google.maps.event.addListener (markers[i], 'click', function () {
 
                 if (selectedMarker === this) {
-                    page = 2;
-                    rebuild();
+                    rebuildPage(1);
                 } else {
                     selectShop(markers.indexOf(this));
                 }
@@ -242,8 +241,7 @@ function selectShop (id){
     infoWindow.open(marker.get('map'), marker);
 
     $('.createOrderInfoMessage').on('click', function() {
-        page = 2;
-        rebuild();
+        rebuildPage(1);
     });
 
     selectedMarker = marker;
@@ -435,38 +433,39 @@ function preventSelection(element){
     addHandler(element, 'keyup', killCtrlA);
 }
 
-function rebuild () {
+function rebuildPage (new_page) {
+    page = new_page;
     $('.pages').hide();
-    switch (page) {
+    switch (new_page) {
         case 1:
             $('#left_pointer').css ('display', 'none');
             $('#right_pointer').css ('visibility', 'visible');
-            $('#right_pointer').attr ('title', 'Перейти до меню');
-            $('#map_canvas').fadeIn();
-            $('#tip_text').text ("Вкажіть своє розташування та оберіть кав’ярню на карті");
-            break;
-        case 2:
-            $('#left_pointer').css ('display', 'inline');
-            $('#right_pointer').css ('visibility', 'visible');
-            $('#left_pointer').attr ('title', 'Перейти до карти');
             $('#right_pointer').attr ('title', 'Перейти до авторизації');
             $('#menu_page').fadeIn('slow');
             $('#tip_text').text ("Зробіть замовлення");
             break;
-        case 3:
+        case 2:
             $('#left_pointer').css ('display', 'inline');
             $('#right_pointer').css ('visibility', 'visible');
             $('#left_pointer').attr ('title', 'Перейти до меню');
-            $('#right_pointer').attr ('title', 'Перейти до контактів');
+            $('#right_pointer').attr ('title', 'Перейти до списку кав’ярень');
             $('#authentication_page').fadeIn('slow');
             $('#tip_text').text ("Вкажіть контактні дані");
+            break;
+        case 3:
+            $('#left_pointer').css ('display', 'inline');
+            $('#right_pointer').css ('visibility', 'visible');
+            $('#left_pointer').attr ('title', 'Перейти до авторизації');
+            $('#right_pointer').attr ('title', 'Перейти до карти');
+            $('#contacts_page').fadeIn('slow');
+            $('#tip_text').text ("Список кав’ярень");
             break;
         case 4:
             $('#left_pointer').css ('display', 'inline');
             $('#right_pointer').css ('visibility', 'hidden');
-            $('#left_pointer').attr ('title', 'Перейти до авторизації');
-            $('#contacts_page').fadeIn('slow');
-            $('#tip_text').text ("");
+            $('#left_pointer').attr ('title', 'Перейти до списку кав’ярень');
+            $('#map_canvas').fadeIn();
+            $('#tip_text').text ("Вкажіть своє розташування та оберіть кав’ярню на карті");
             break;
         default:
             break;
@@ -480,7 +479,7 @@ function delete_cookie ( cookie_name )
     document.cookie = cookie_name += "=; expires=" + cookie_date.toGMTString();
 }
 
-function preview(token){
+function preview (token){
     $.getJSON("//ulogin.ru/token.php?host=" +
         encodeURIComponent(location.toString()) + "&token=" + token + "&callback=?",
         function(data){
@@ -496,14 +495,11 @@ function preview(token){
                     },
                     function(result){
                         customer = JSON.parse(result);
-                        console.log(customer);
                         document.cookie = "userId=" + customer['id'];
-                        console.log (document.cookie);
                         $('#customerId').html ("Ви авторизувалися як " + customer['firstName'] + ' ' + customer['lastName']
                             + " <span id='customerExit'>(вийти)</span>");
                         $("#customerExit").css ('display', 'inline');
-                        page = 2;
-                        rebuild();
+                        rebuildPage(1);
                     }
                 );
             }
@@ -518,9 +514,7 @@ $(document).on('click', '#savePhone', function phone(){
     }else{
         $.post("php/phoneNumber.php", "phoneNum=" + phoneNum, function(result){
             customer = JSON.parse(result);
-            console.log(customer);
             document.cookie = "userId=" + customer['id'];
-            console.log (document.cookie);
             if (customer.firstName) {
                 $("#customerId").html ("Ви авторизувалися як " + customer.firstName + " " + customer.lastName
                     + " <span id='customerExit'>(вийти)</span>");
@@ -529,8 +523,7 @@ $(document).on('click', '#savePhone', function phone(){
                     + " <span id='customerExit'>(вийти)</span>");
             }
             $("#customerExit").css ('display', 'inline');
-            page = 2;
-            rebuild();
+            rebuildPage(1);
         });
     }
 });
@@ -590,11 +583,9 @@ $(document).on('click', '.delete', function(){
 $(document).on('click', '#saveOrder', function submit(){
     if (!$(this).hasClass('make_new_order')) {
         if (!customer['id']){
-            page = 3;
-            rebuild();
+            rebuildPage(2);
         } else if (!order.pos){
-            page = 1;
-            rebuild();
+            rebuildPage(3);
         } else {
             order.visitTime = visitTime;
             $.post(
@@ -646,8 +637,7 @@ $(document).on('click', '#saveOrder', function submit(){
 });
 
 $(document).on ('click', '#changePos', function (){
-    page = 1;
-    rebuild();
+    rebuildPage(3);
 });
 
 $(document).on ('click', '#customerExit', function() {
@@ -658,6 +648,7 @@ $(document).on ('click', '#customerExit', function() {
     customer ['lastName'] = null;
     $('#customerId').text ("Ви не авторизовані");
     $('#customerExit').css ('display', 'none');
+    rebuildPage(2);
 });
 
 $(function($){
@@ -680,23 +671,25 @@ $(document).ready(function(){
 });
 
 $(document).on ('click', '#authenticationLink', function() {
-    page = 3;
-    rebuild();
+    rebuildPage(2);
 });
 
 $(document).on ('click', '#contactsLink', function() {
-    page = 4;
-    rebuild();
+    rebuildPage(3);
+});
+
+$(document).on ('click', '#mapLink', function () {
+    rebuildPage(4);
 });
 
 $(document).on ('click', '#right_pointer', function() {
     page += 1;
-    rebuild();
+    rebuildPage(page);
 });
 
 $(document).on ('click', '#left_pointer', function() {
     page -= 1;
-    rebuild();
+    rebuildPage(page);
 });
 
 $(document).on ('mousedown mouseup', '.plus, .minus, .delete, .pointers, div.menu_buttons', function() {
@@ -710,15 +703,13 @@ $(document).on ('mouseout', '.plus, .minus, .delete, .pointers, div.menu_buttons
 $(document).on ('click', '.shopNames', function() {
     var shopId = parseInt(this.id.substr(3));
     var shopCoords = shops[shopId].place;
-    page = 1;
     map.setCenter (shopCoords);
     selectShop(shopId);
-    rebuild();
+    rebuildPage(1);
 });
 
 $(window).resize (function() {
     var bodyHeight = document.body.offsetHeight;
     var mapHeight = bodyHeight - 205;
-    console.log (mapHeight);
     $("#map_canvas").css ('height', mapHeight);
 });

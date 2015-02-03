@@ -1,3 +1,7 @@
+#menu_page {
+    display: block;
+}
+
 #left_bar {
     width: 550px;
     float: left;
