@@ -39,7 +39,7 @@ $recordingOrder = "INSERT INTO `orders` (`customer`, `pos`, `sum`, `order_status
     .$customerId."', '".$pos."', '".$sum."', '1', '".$visit_time."');";
 $result = mysql_query($recordingOrder);
 $recordId = mysql_insert_id();
-$result = mysql_query("INSERT INTO `order_history` (`order_id`, `action`) VALUES ('".$recordId."', '1');");
+//$result = mysql_query("INSERT INTO `order_history` (`order`,  `action`) VALUES ('".$recordId."', '1');");
 
 foreach ($content as $product=>$quantity) {
     $recordingContent = "INSERT INTO `order_content` (`order_id`, `product_id`, `quantity`) VALUES ('".$recordId."', '".$product."', '".$quantity."')";

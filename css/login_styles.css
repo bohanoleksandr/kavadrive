@@ -1,0 +1,18 @@
+.authentication {
+    display:block;
+    margin: 10% auto 0 auto;
+    width:30%;
+    background-color:#DEDCDC;
+}
+
+#banner {
+    text-align: center;
+}
+
+.auth_input {
+    width: 100%;
+}
+
+.btn{
+    margin: 0;
+}

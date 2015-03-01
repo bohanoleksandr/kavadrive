@@ -1,24 +1,7 @@
 var page = 1;
 
 var shops = [];
-google.maps.visualRefresh = true;
-var map = null;
-var markers = [];
-var selectedMarker = null;
-var autoGeo = false;
-var position = null;
-var infoWindow = null;
-var destination = null;
-var myMarker = null;
-var myInfoWindow = null;
-var directionsService = new google.maps.DirectionsService();
-var directionsDisplay;
-var image = {
-    url: '../images/coffee_bean.png',
-    size: new google.maps.Size(20, 32),
-    origin: new google.maps.Point(0,0),
-    anchor: new google.maps.Point(0, 32)
-};
+
 var menu = {};
 var customer = {
     id: null,
@@ -30,10 +13,13 @@ var order = {
     pos: null,
     content: {},
     sum: 0,
-    visitTime: null
+    visitTime: null,
+    emptiness: true
 };
 
 var menuElems = [];
+
+var map = null;
 
 function Item(name, amount, price) {
     this.name = name;
@@ -54,9 +40,46 @@ function Shop (name, opening_time, closing_time, street, house_number, latitude,
 }
 
 Parse.initialize("WeDR0ZQxPkgQD8eTeICgQqLGxPvUF64BXhoQkV5c", "W43O6W4YLG0VSDH9EDqLaSFxOCdCAr23ZFvjmvvD");
-$(document).ready (receiptData());
+$(document).ready (receiptData(), preventSelection(document));
 
 function receiptData () {
+    $.ajax({
+        url: 'php/getMenu.php',
+        type: 'POST',
+        cache: false,
+        success: function(msg){
+            var response=JSON.parse(msg);
+
+            for(var i in response){
+                var row = response[i];
+                menu[row[0]] = new Item(row[1], row[2], row[3]);
+                divForItem(row[0], row[1], row[2], row[3]);
+                $(menuElems[row[0]]).appendTo ($('ul'));
+            }
+        }
+    });
+
+    $.ajax({
+        url: 'php/authentication.php',
+        type: 'POST',
+        cache: false,
+        success: function (msg){
+            customer = JSON.parse(msg);
+            if (customer['id']) {
+                if (customer['firstName']) {
+                    $('#customerId').html ("Ви авторизувалися як " + customer['firstName'] + ' ' + customer['lastName']
+                    + " <span id='customerExit'>(вийти)</span>");
+                } else {
+                    $('#customerId').html ("Ви авторизувалися як користувач із номером телефону" + customer['phoneNumber']
+                    + " <span id='customerExit'>(вийти)</span>");
+                }
+                $('#customerExit').css('display', 'inline');
+            } else {
+                $('#customerId').text ("Ви не авторизовані");
+            }
+        }
+    });
+
     $.ajax({
         url: 'php/getShops.php',
         type: 'POST',
@@ -84,226 +107,7 @@ function receiptData () {
                     $(rows[i]).appendTo ($('tbody'));
                 }
             }
-
-            initialize();
-            preventSelection(document);
         }
-    });
-
-    $.ajax({
-        url: 'php/getMenu.php',
-        type: 'POST',
-        cache: false,
-        success: function(msg){
-            var response=JSON.parse(msg);
-
-            for(var i in response){
-                var row = response[i];
-                menu[row[0]] = new Item(row[1], row[2], row[3]);
-                divForItem(row[0], row[1], row[2], row[3]);
-                $(menuElems[row[0]]).appendTo ($('ul'));
-            }
-        }
-    });
-
-    $.ajax({
-        url: 'php/authentication.php',
-        type: 'POST',
-        cache: false,
-        success: function (msg){
-            customer = JSON.parse(msg);
-            console.log (customer);
-            if (customer['id']) {
-                if (customer['firstName']) {
-                    $('#customerId').html ("Ви авторизувалися як " + customer['firstName'] + ' ' + customer['lastName']
-                        + " <span id='customerExit'>(вийти)</span>");
-                } else {
-                    $('#customerId').text("Ви авторизувалися як користувач із номером телефону" + customer['phoneNumber']
-                        + " <span id='customerExit'>(вийти)</span>");
-                }
-                $('#customerExit').css('display', 'inline');
-            } else {
-                $('#customerId').text ("Ви не авторизовані");
-            }
-        }
-    });
-}
-
-function initialize() {
-
-    var mapOptions = {
-        center: new google.maps.LatLng(49.0275,31.482778),
-        zoom: 12,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-    var rendererOptions = {
-        map: map,
-        suppressMarkers: true,
-        preserveViewport: true,
-        polylineOptions: {
-            strokeColor: "#792A26",
-            strokeWeight: 4
-        }
-    };
-
-    var bodyHeight = document.body.offsetHeight;
-
-    console.log ('body ' + bodyHeight);
-
-    var mapHeight = bodyHeight - 205;
-
-    console.log (mapHeight);
-
-    $("#map_canvas").css ('height', mapHeight);
-
-    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
-    directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-    directionsDisplay.setMap (map);
-
-    if(navigator.geolocation)
-    {
-        navigator.geolocation.getCurrentPosition(function(pos)
-            {
-                autoGeo = true;
-                position = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                createMyMarker();
-                map.setCenter(position);
-                map.setZoom (12);
-                getRoute();
-            },
-            function() {handleNoGeolocation(true);}
-        );
-
-        if(!autoGeo){
-            position = new google.maps.LatLng(49.233083,28.468217);
-            createMyMarker();
-            map.setCenter(position);
-        }
-
-    } else {
-        position = new google.maps.LatLng(49.233083,28.468216);
-        createMyMarker();
-        map.setCenter(position);
-        handleNoGeolocation(false);
-    }
-
-    for (var i = 1; i < shops.length; i++) {
-        if (shops[i]) {
-            markers[i] = new google.maps.Marker
-            ({
-                position: shops[i].place,
-                map: map,
-                icon: image
-            });
-
-            google.maps.event.addListener (markers[i], 'click', function () {
-
-                if (selectedMarker === this) {
-                    rebuildPage(1);
-                } else {
-                    selectShop(markers.indexOf(this));
-                }
-            });
-        }
-    }
-
-    google.maps.event.addListener (map, 'click', function(event) {
-        position = event.latLng;
-        createMyMarker();
-    });
-
-}
-
-function selectShop (id){
-    var marker = markers[id];
-    var shop = shops[id];
-    var message = '<strong>' + shop.name + '</strong><br/>' + shop.street + ', ' + shop.house_number +
-        '<br/>' + shop.phone + '<br/>Час роботи: ' + shop.opening_time.substring(0, 5) + ' - ' +
-        shop.closing_time.substring(0, 5) + '<br/><a class="createOrderInfoMessage">Зробити замовлення</a>';
-    var destinationLat = marker.getPosition().lat();
-    var destinationLng = marker.getPosition().lng();
-    destination = new google.maps.LatLng(destinationLat, destinationLng);
-
-    if (myInfoWindow) {
-        myInfoWindow.close();
-    }
-
-    if (infoWindow) {
-        infoWindow.close();
-    }
-
-    infoWindow = new google.maps.InfoWindow({
-        content: message
-    });
-
-    infoWindow.open(marker.get('map'), marker);
-
-    $('.createOrderInfoMessage').on('click', function() {
-        rebuildPage(1);
-    });
-
-    selectedMarker = marker;
-    order.pos = id;
-    document.getElementById('POS').innerHTML = "Ви обрали кав’ярню " + shops[order.pos].name +
-    ' (<span id="changePos">змінити</span>)';
-    getRoute();
-    updateClock();
-}
-
-function getRoute()
-{
-    var selectedMode = "DRIVING";
-    var request =
-    {
-        origin: position,
-        destination: destination,
-        travelMode: google.maps.TravelMode[selectedMode],
-        unitSystem: google.maps.UnitSystem.METRIC
-    };
-    if (destination) {
-        directionsService.route(request, function(response, status)
-        {
-            if (status == google.maps.DirectionsStatus.OK)
-            {
-                directionsDisplay.setDirections(response);
-            }
-        });
-    }
-}
-
-function createMyMarker ()
-{
-    if (myMarker) myMarker.setMap (null);
-
-    myMarker = new google.maps.Marker({
-        position: position,
-        map: map,
-        icon: "https://maps.google.com/mapfiles/kml/shapes/library_maps.png",
-        draggable:true
-    });
-
-    myInfoWindow = new google.maps.InfoWindow({
-        content: '<b>Ви тут</b>'
-    });
-
-    myInfoWindow.open (myMarker.get('map'), myMarker);
-
-    getRoute();
-
-    google.maps.event.addListener (myMarker, 'dragend', function(){
-        var newOriginLat = myMarker.getPosition().lat();
-        var newOriginLng = myMarker.getPosition().lng();
-        position = new google.maps.LatLng(newOriginLat,newOriginLng);
-        getRoute ();
-    });
-
-    google.maps.event.addListener(myMarker, 'click', function() {
-        if (infoWindow) {
-            infoWindow.close();
-        }
-        myInfoWindow.open(myMarker.get('map'), myMarker);
     });
 }
 
@@ -352,10 +156,12 @@ function addDivSelectArticle (productId) {
 }
 
 function estimateSum(){
+    order.emptiness = true;
     var tempSum = 0;
     for(var key in order.content)
     {
         tempSum  += parseFloat(menu[key].price)*order.content[key];
+        order.emptiness = false;
     }
     order.sum = tempSum;
     document.getElementById('hrivnas').innerHTML = order.sum+" грн";
@@ -466,6 +272,12 @@ function rebuildPage (new_page) {
             $('#left_pointer').attr ('title', 'Перейти до списку кав’ярень');
             $('#map_canvas').fadeIn();
             $('#tip_text').text ("Вкажіть своє розташування та оберіть кав’ярню на карті");
+            if (!map) {
+                initialize() ;
+            } else {
+                //mapReopen();
+                shopWasChanged();
+            }
             break;
         default:
             break;
@@ -499,12 +311,27 @@ function preview (token){
                         $('#customerId').html ("Ви авторизувалися як " + customer['firstName'] + ' ' + customer['lastName']
                             + " <span id='customerExit'>(вийти)</span>");
                         $("#customerExit").css ('display', 'inline');
-                        rebuildPage(1);
+                        if (order.emptiness) {
+                            rebuildPage(1);
+                        } else {
+                            if (order.pos) {
+                                rebuildPage(1);
+                                $("#saveOrder").trigger('click');
+                            } else {
+                                rebuildPage(3);
+                            }
+                        }
                     }
                 );
             }
         }
     );
+}
+
+function changePOS (shopId) {
+    order.pos = shopId;
+    $('#POS').html("Ви обрали кав’ярню " + shops[order.pos].name + ' (<span id="changePos">змінити</span>)');
+    updateClock();
 }
 
 $(document).on('click', '#savePhone', function phone(){
@@ -523,7 +350,16 @@ $(document).on('click', '#savePhone', function phone(){
                     + " <span id='customerExit'>(вийти)</span>");
             }
             $("#customerExit").css ('display', 'inline');
-            rebuildPage(1);
+            if (order.emptiness) {
+                rebuildPage(1);
+            } else {
+                if (order.pos) {
+                    rebuildPage(1);
+                    $("#saveOrder").trigger('click');
+                } else {
+                    rebuildPage(3);
+                }
+            }
         });
     }
 });
@@ -557,27 +393,21 @@ $(document).on('click', '.minus', function(){
     }else{
         removeArticleFromOrder(productId);
     }
-    var emptiness = true;
-    for (var i in order.content) {
-        emptiness = false;
-    }
-    if (emptiness) {
+
+    estimateSum();
+
+    if (order.emptiness) {
         $('#magicButton').css ('display', 'none');
     }
-    estimateSum();
 });
 
 $(document).on('click', '.delete', function(){
     var productId = parseInt(this.id.substring(13));
     removeArticleFromOrder(productId);
-    var emptiness = true;
-    for (var i in order.content) {
-        emptiness = false;
-    }
-    if (emptiness) {
+    estimateSum();
+    if (order.emptiness) {
         $('#magicButton').css ('display', 'none');
     }
-    estimateSum();
 });
 
 $(document).on('click', '#saveOrder', function submit(){
@@ -701,15 +531,16 @@ $(document).on ('mouseout', '.plus, .minus, .delete, .pointers, div.menu_buttons
 });
 
 $(document).on ('click', '.shopNames', function() {
-    var shopId = parseInt(this.id.substr(3));
-    var shopCoords = shops[shopId].place;
-    map.setCenter (shopCoords);
-    selectShop(shopId);
-    rebuildPage(1);
-});
+    changePOS(parseInt(this.id.substr(3)));
 
-$(window).resize (function() {
-    var bodyHeight = document.body.offsetHeight;
-    var mapHeight = bodyHeight - 205;
-    $("#map_canvas").css ('height', mapHeight);
+    if (order.emptiness) {
+        rebuildPage(1);
+    } else {
+        if (customer['id']) {
+            rebuildPage(1);
+            $("#saveOrder").trigger('click');
+        } else {
+            rebuildPage(2);
+        }
+    }
 });

@@ -21,6 +21,8 @@ var statuses_array = {
     5: 'продано'
 };
 
+var statuses_to_show = [];
+
 var worker = null;
 var shop = null;
 var orders = [];
@@ -76,7 +78,7 @@ function fillTable () {
                 break;
         }
 
-        buildRow(orders[i], status);
+        if (statuses_to_show [orders[i]['status']]) buildRow(orders[i], status);
     }
 }
 
@@ -112,7 +114,7 @@ function buildRow(order, status) {
     var visitTimeMonth = month_array [visitTime.getMonth()];
 
     var orderTime = new Date(order['orderTime']);
-    orderTime.setHours(orderTime.getHours());
+    orderTime.setHours(orderTime.getHours() + 1);
 
     var orderTimeHour = orderTime.getHours();
     if (orderTimeHour < 10) {
@@ -136,6 +138,12 @@ function buildRow(order, status) {
         tagWithOrderId = order['id'];
     }
 
+    var changeMaker = order['changeMaker'];
+    if (!changeMaker) changeMaker = "дані відсутні";
+    if (order['status'] == 1) {
+        changeMaker = '';
+    }
+
     var htmlForTableRow =
         '<tr class="tableRow ' + status + ' ' + additionNewClass + '">'
         + '<td class="td_id">' + tagWithOrderId + '</td>'
@@ -147,6 +155,7 @@ function buildRow(order, status) {
         + '<td class="td_date">' + orderTimeHour + ':' + orderTimeMinutes + ' - ' + orderTimeDate + ' ' + orderTimeMonth + '</td>'
         + '<td class="td_sum">' + order['sum'] + '</td>'
         + '<td class="td_status">' + statuses_array [order['status']] + '</td>'
+        + '<td class="td_worker">' + changeMaker + '</td>'
         + '</tr>';
     $('.tabRow').append(htmlForTableRow);
 }
@@ -161,15 +170,13 @@ function changeStatus(new_status) {
         },
         function (result) {
             console.log(result);
-            if (new_status == '5') {
-                $('.accept').addClass ('disabled');
+            if (new_status == 5) {
+                $('.changeStatus').addClass ('disabled');
                 $('#printDoc').removeClass('disabled');
-            } else {
-                $('.accept').removeClass ('disabled');
-                $('#printDoc').addClass('disabled');
             }
             //$('#modalWindow').modal('hide');
             selected_order.status = new_status;
+            $('#current_status').children('span').text(statuses_array[new_status]);
             fillTable();
         }
     );
@@ -194,8 +201,7 @@ $(document).ready (function() {
     receiptData ();
     setInterval ('receiptData()', 10000);
 
-    console.log (document.cookie);
-
+    for (var i = 1; i <= 5; i++) statuses_to_show [i] = true;
 
 
     $('.search').change(function () {
@@ -238,7 +244,7 @@ $(document).ready (function() {
                 selected_order = orders[i];
         }
 
-        $('.status [value = ' + selected_order.status + ']').attr ("selected", "selected");
+        $('#current_status').children('span').text(statuses_array[selected_order.status]);
 
         document.getElementById("orderNum").innerHTML = selected_order.id;
         //ряд таблицы
@@ -250,23 +256,23 @@ $(document).ready (function() {
         }
         $('.list').append('<tr><td colspan ="3">Всього</td><td>' + selected_order.sum + '</td></tr>');
 
-        if (selected_order.status == '5') {
+        if (selected_order.status == 5) {
             $('#printDoc').removeClass('disabled');
-            $('.accept').addClass('disabled');
+            $('.changeStatus').addClass('disabled');
         } else {
             $('#printDoc').addClass('disabled');
-            $('.accept').removeClass('disabled');
+            $('.changeStatus').removeClass('disabled');
         }
 
         $('#modalWindow').modal();
     });
 
-    $('.status').change(function () {
-        changeStatus(this.value);
-    });
+    //$('.status').change(function () {
+    //    changeStatus(this.value);
+    //});
 
-    $('.accept').click(function () {
-        changeStatus('5');
+    $('.changeStatus').click (function() {
+        changeStatus(this.id.substr(12));
     });
 
     $('.print').click(function () {
@@ -334,6 +340,12 @@ $(document).ready (function() {
 
     $('.exit').click(function () {
         window.location.href = "login.html";
+    });
+
+    $('input.sorting_checkbox').change(function() {
+        var statusId = $(this).parent()[0].id.substr(7);
+        statuses_to_show [statusId] = !statuses_to_show [statusId];
+        fillTable();
     });
 
 });

@@ -29,19 +29,30 @@
 				</li>
 			</ul>
 			<ul class="nav pull-right">
-				<li>
-					<p class="navbar-text"><strong>Сортування:</strong> </p>
-				</li>
-				<li class="divider-vertical">
-				</li>
-				<li>
-					<select class = "input-block-level sort">
-						<option value="1">Всі замовлення</option>
-						<option value="2">Відкриті</option>
-						<option value="3">Продані</option>
-						<option value="4">Відхилені</option>
-					</select>
-				</li>
+                <!--<li>-->
+                    <!--<p class="navbar-text"><strong>Сортування: </strong></p>-->
+                <!--</li>-->
+                <li>
+                    <p class="navbar-text">
+                        <strong>Сортування: </strong>
+                        <span class="sorting" id="sorting1"><input type="checkbox" class="sorting_checkbox" checked>відкриті</span>
+                        <span class="sorting" id="sorting2"><input type="checkbox" class="sorting_checkbox" checked>підготовлені</span>
+                        <span class="sorting" id="sorting3"><input type="checkbox" class="sorting_checkbox" checked>неявки</span>
+                        <span class="sorting" id="sorting4"><input type="checkbox" class="sorting_checkbox" checked>скасовані</span>
+                        <span class="sorting" id="sorting5"><input type="checkbox" class="sorting_checkbox" checked>продані</span>
+                    </p>
+                </li>
+
+				<!--<li class="divider-vertical">-->
+				<!--</li>-->
+				<!--<li>-->
+					<!--<select class = "input-block-level sort">-->
+						<!--<option value="1">Всі замовлення</option>-->
+						<!--<option value="2">Відкриті</option>-->
+						<!--<option value="3">Продані</option>-->
+						<!--<option value="4">Відхилені</option>-->
+					<!--</select>-->
+				<!--</li>-->
 				<li class="divider-vertical">
 				</li>
 				<li>					
@@ -62,6 +73,7 @@
                     <th>Час замовлення</th>
                     <th>Сума</th>
                     <th>Статус</th>
+					<th>Змінено</th>
                 </tr>
             </thead>
             <tbody class="tabRow">
@@ -74,6 +86,7 @@
                     <td><input id='td_date' class='search'/></td>
                     <td><input id='td_sum' class='search'/></td>
                     <td><input id='td_status' class='search'/></td>
+					<td><input id='td_worker' class='search'></td>
                 </tr>
             </tbody>
 		</table>
@@ -100,19 +113,26 @@
 					</tbody>
 				</table>
 			</div>
+
 			<div class="modal-footer">
-				<select class = "input-block-level status">
-                    <option value="1">відкрито</option>
-					<option value="2">підготовлено</option>
-					<option value="3">не з’явився</option>
-					<option value="4">скасовано</option>
-					<option value="5">продано</option>
-				</select>
+				<div id="current_status">Поточний статус: <span></span></div>
+				<!--<select class = "input-block-level status">-->
+                    <!--<option value="1">відкрито</option>-->
+					<!--<option value="2">підготовлено</option>-->
+					<!--<option value="3">не з’явився</option>-->
+					<!--<option value="4">скасовано</option>-->
+					<!--<option value="5">продано</option>-->
+				<!--</select>-->
 				<div class="btn-group modalButtons">
-					<div type="button" class="btn btn-primary accept">Провести</div>
-					<div type="button" class="btn btn-default disabled print"id="printDoc">Друк накладної</div> 
+					<div class="btn btn-default changeStatus" id="changeStatus2">Підготовлено</div>
+					<div class="btn btn-default changeStatus" id="changeStatus3">Не з’явився</div>
+					<div class="btn btn-default changeStatus" id="changeStatus4">Скасувати</div>
+					<div class="btn btn-default changeStatus" id="changeStatus5">Провести</div>
+				</div>
+				<div class="btn-group modalButtons">
+					<div type="button" class="btn btn-default disabled print" id="printDoc">Друк накладної</div>
 					<div type="button" class="btn btn-default closeWindow">Закрити</div>
-				</div>				
+				</div>
 			</div>			
 		</div>
 

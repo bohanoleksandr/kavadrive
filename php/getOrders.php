@@ -1,10 +1,10 @@
 <?php
 include_once('connectdb.php');
 
-$shopNumber = $_COOKIE ['shopId'];/*,*/
+$shopNumber = $_COOKIE ['shopId'];
 $workerId = $_COOKIE ['workerId'];
 
-$result1 = mysql_query ("    SELECT
+$result1 = mysql_query ("   SELECT
 								`orders`.*,
 								`customers`.`phoneNumber`,
 								`customers`.`firstName`,
@@ -24,7 +24,22 @@ $result1 = mysql_query ("    SELECT
 $orders = array();
 
 while($row_with_order = mysql_fetch_assoc($result1)){
-    $result2 =  mysql_query ("  SELECT
+
+    $result2 = mysql_query("SELECT workers.name
+                            FROM order_history
+                            INNER JOIN
+                                (SELECT `order`, MAX(time) AS lastTime
+                                FROM order_history
+                                GROUP BY `order`) groupedHistory
+                            ON order_history.`order` = groupedHistory.`order`
+                            AND order_history.time = groupedHistory.lastTime
+                            INNER JOIN workers ON order_history.worker = workers.id
+                            WHERE order_history.`order` = ".$row_with_order['id'].";");
+
+    $row2 = mysql_fetch_array($result2);
+    $changeMaker = $row2['name'];
+
+    $result3 =  mysql_query ("  SELECT
 											`order_content`.`quantity`,
 											`products`.`id`,
 											`products`.`name`,
@@ -40,7 +55,7 @@ while($row_with_order = mysql_fetch_assoc($result1)){
 
     $orderContent = array();
 
-    while($row_with_content = mysql_fetch_assoc($result2)){
+    while($row_with_content = mysql_fetch_assoc($result3)){
         $orderContent[] = array(
             "product_id"=>$row_with_content['id'],
             "itemName"=>$row_with_content['name'],
@@ -61,17 +76,18 @@ while($row_with_order = mysql_fetch_assoc($result1)){
         "sum"=>$row_with_order['sum'],
         "status"=>$row_with_order['order_status'],
         "pos"=>$shopNumber,
+        "changeMaker"=>$changeMaker,
         "content"=>$orderContent
     );
 }
 
-$result3 = mysql_query("SELECT `name` FROM `stores` WHERE `stores`.`id` =".$shopNumber.";");
-$row3 = mysql_fetch_array ($result3);
-$shopName = $row3['name'];
-
-$result4 = mysql_query("SELECT `name` FROM `workers` WHERE `id` =".$workerId.";");
+$result4 = mysql_query("SELECT `name` FROM `stores` WHERE `stores`.`id` =".$shopNumber.";");
 $row4 = mysql_fetch_array ($result4);
-$workerName = $row4['name'];
+$shopName = $row4['name'];
+
+$result5 = mysql_query("SELECT `name` FROM `workers` WHERE `id` =".$workerId.";");
+$row5 = mysql_fetch_array ($result5);
+$workerName = $row5['name'];
 
 $dataToSend = array (
     'shop' => $shopName,
