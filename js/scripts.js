@@ -67,15 +67,18 @@ function receiptData () {
             customer = JSON.parse(msg);
             if (customer['id']) {
                 if (customer['firstName']) {
-                    $('#customerId').html ("Ви авторизувалися як " + customer['firstName'] + ' ' + customer['lastName']
+                    $('#customerId').html ("Ви авторизовані: " + customer['firstName'] + ' ' + customer['lastName']
+                    + " <span id='customerExit'>(вийти)</span>");
+                } else if (customer['phoneNumber']){
+                    $('#customerId').html ("Ви авторизовані: " + customer['phoneNumber']
                     + " <span id='customerExit'>(вийти)</span>");
                 } else {
-                    $('#customerId').html ("Ви авторизувалися як користувач із номером телефону" + customer['phoneNumber']
+                    $('#customerId').html ("Ви авторизовані: " + customer['mail']
                     + " <span id='customerExit'>(вийти)</span>");
                 }
                 $('#customerExit').css('display', 'inline');
             } else {
-                $('#customerId').text ("Ви не авторизовані");
+                $('#customerId').text ("");
             }
         }
     });
@@ -144,7 +147,7 @@ function addDivSelectArticle (productId) {
     var bigDiv = '<div class="selected_articles" id="menu_content_article-' + productId + '">';
     var name = menu[productId].name;
     var counter = '<div class="counter" id="counterOfProduct'+productId+'" title="Кількість замовлених «' +
-        menu[productId].name + '»">× ' + order.content[productId] + '</div>';
+        menu[productId].name + '»"> ' + order.content[productId] + '</div>';
     var plus = '<div class="plus" id="plusProduct' + productId + '" title="Додати ще один «' + menu[productId].name +
         '» до замовлення"><strong> + </strong></div>';
     var minus = '<div class="minus" id="minusProduct' + productId + '" title="Зменшити на один «' + menu[productId].name +
@@ -168,7 +171,7 @@ function estimateSum(){
 }
 
 function updateQuantity(productId) {
-    document.getElementById('counterOfProduct'+productId).innerHTML = "× " + order.content[productId];
+    document.getElementById('counterOfProduct'+productId).innerHTML =  order.content[productId];
 }
 
 function removeArticleFromOrder (productId){
@@ -308,7 +311,7 @@ function preview (token){
                     function(result){
                         customer = JSON.parse(result);
                         document.cookie = "userId=" + customer['id'];
-                        $('#customerId').html ("Ви авторизувалися як " + customer['firstName'] + ' ' + customer['lastName']
+                        $('#customerId').html ("Ви авторизовані: " + customer['firstName'] + ' ' + customer['lastName']
                             + " <span id='customerExit'>(вийти)</span>");
                         $("#customerExit").css ('display', 'inline');
                         if (order.emptiness) {
@@ -336,31 +339,81 @@ function changePOS (shopId) {
 
 $(document).on('click', '#savePhone', function phone(){
     var phoneNum = $("#phoneNumber").val();
+    var name = $("#optionName").val();
+    var surname = $("#optionSurname").val();
     if (!phoneNum){
         alert ("Ви не вказали номер телефону!");
-    }else{
-        $.post("php/phoneNumber.php", "phoneNum=" + phoneNum, function(result){
-            customer = JSON.parse(result);
-            document.cookie = "userId=" + customer['id'];
-            if (customer.firstName) {
-                $("#customerId").html ("Ви авторизувалися як " + customer.firstName + " " + customer.lastName
+    } else {
+        $.post(
+            "php/phoneNumber.php",
+            {
+                phoneNum: phoneNum,
+                name: name,
+                surname: surname
+            },
+            function(result){
+                customer = JSON.parse(result);
+                document.cookie = "userId=" + customer['id'];
+                if (customer.firstName) {
+                    $("#customerId").html ("Ви авторизовані: " + customer.firstName + " " + customer.lastName
                     + " <span id='customerExit'>(вийти)</span>");
-            } else {
-                $("#customerId").html ("Ви авторизувались як користувач із номером телефону" + customer['phoneNumber']
-                    + " <span id='customerExit'>(вийти)</span>");
-            }
-            $("#customerExit").css ('display', 'inline');
-            if (order.emptiness) {
-                rebuildPage(1);
-            } else {
-                if (order.pos) {
-                    rebuildPage(1);
-                    $("#saveOrder").trigger('click');
                 } else {
-                    rebuildPage(3);
+                    $("#customerId").html ("Ви авторизовані: " + customer['phoneNumber']
+                    + " <span id='customerExit'>(вийти)</span>");
+                }
+                $("#customerExit").css ('display', 'inline');
+                if (order.emptiness) {
+                    rebuildPage(1);
+                } else {
+                    if (order.pos) {
+                        rebuildPage(1);
+                        $("#saveOrder").trigger('click');
+                    } else {
+                        rebuildPage(3);
+                    }
                 }
             }
-        });
+        );
+    }
+});
+
+$(document).on('click', '#saveMail', function mail(){
+    var mail = $("#mail").val();
+    var name = $("#optionName").val();
+    var surname = $("#optionSurname").val();
+    if (!mail){
+        alert ("Ви не вказали електронну пошту!");
+    }else{
+        $.post(
+            "php/mail.php",
+            {
+                mail: mail,
+                name: name,
+                surname: surname
+            },
+            function(result){
+                customer = JSON.parse(result);
+                document.cookie = "userId=" + customer['id'];
+                if (customer.firstName) {
+                    $("#customerId").html ("Ви авторизовані: " + customer.firstName + " " + customer.lastName
+                    + " <span id='customerExit'>(вийти)</span>");
+                } else {
+                    $("#customerId").html ("Ви авторизовані: " + customer['mail']
+                    + " <span id='customerExit'>(вийти)</span>");
+                }
+                $("#customerExit").css ('display', 'inline');
+                if (order.emptiness) {
+                    rebuildPage(1);
+                } else {
+                    if (order.pos) {
+                        rebuildPage(1);
+                        $("#saveOrder").trigger('click');
+                    } else {
+                        rebuildPage(3);
+                    }
+                }
+            }
+        );
     }
 });
 
@@ -476,7 +529,7 @@ $(document).on ('click', '#customerExit', function() {
     customer ['phoneNumber'] = null;
     customer ['firstName'] = null;
     customer ['lastName'] = null;
-    $('#customerId').text ("Ви не авторизовані");
+    $('#customerId').text ("");
     $('#customerExit').css ('display', 'none');
     rebuildPage(2);
 });
@@ -543,4 +596,33 @@ $(document).on ('click', '.shopNames', function() {
             rebuildPage(2);
         }
     }
+});
+
+$(document).on ('change', 'input:radio', function() {
+    switch ($('input:radio:checked').prop('value')) {
+        case 'phone':
+            $('#inputPhoneBlock').fadeIn();
+            $('#inputMailBlock').hide();
+            $('#uLogin').hide();
+            $('#inputNameBlock').hide();
+            $('#inputPhoneBlock').after($('#inputNameBlock').fadeIn());
+            break;
+        case 'mail':
+            $('#inputPhoneBlock').hide();
+            $('#inputMailBlock').fadeIn();
+            $('#uLogin').hide();
+            $('#inputNameBlock').hide();
+            $('#inputMailBlock').after($('#inputNameBlock').fadeIn());
+            break;
+        case 'socNetwork':
+            $('#inputPhoneBlock').hide();
+            $('#inputMailBlock').hide();
+            $('#inputNameBlock').hide();
+            $('#uLogin').fadeIn();
+            break;
+    }
+});
+
+$(document).ready (function(){
+    $("#authentication_page").trigger('reset');
 });

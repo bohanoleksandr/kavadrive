@@ -10,24 +10,26 @@
 
 #auth-title {
     font-size: 24px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     text-align: center;
+}
+
+input[type='radio'] {
+    margin: 0;
 }
 
 .auth-text {
     font-size: 18px;
-    margin-bottom: 15px;
+    margin: 20px 0;
 }
 
-#inputPhoneBlock {
-    margin-bottom: 40px;
+.inputBlock {
+    margin: 20px 0;
     text-align: center;
 }
 
-#phoneNumber {
+.inputData {
     display: inline;
-    font-size: 2em;
-    height: auto;
     border: 0 solid #f7f7f7;
     background: #ebca90;
     color: #4f4942;
@@ -35,15 +37,36 @@
     -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
     box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
     padding: 8px;
-    width: 260px;
     margin: 0 20px 0 0 ;
+    text-align: center;
 }
 
-#phoneNumber:focus {
+.inputData:focus {
     background: #EEE;
 }
 
-#savePhone {
+#phoneNumber{
+    width: 260px;
+    font-size: 21px;
+}
+
+#optionName {
+    width: 160px;
+    font-size: 18px;
+}
+
+#optionSurname {
+    width: 160px;
+    margin: 0;
+    font-size: 18px;
+}
+
+#mail {
+    width: 260px;
+    font-size: 16px;
+}
+
+.savePhoneMail {
     border: 0 solid #fcfcfc;
     background: #9b9e98;
     background: -webkit-gradient(linear, left top, left bottom, from(#9b9e98), to(#9b9e98));
@@ -60,11 +83,11 @@
     font-size: 16px;
     text-decoration: none;
     vertical-align: middle;
-    height: 45px;
+    height: 40px;
     font-family: Calibri, Arial, sans-serif;
 }
 
-#savePhone:hover {
+.savePhoneMail:hover {
     border: 0 solid #447314;
     text-shadow: #31540c 0 1px 0;
     background: #6aa436;
@@ -77,7 +100,7 @@
     color: #fff;
 }
 
-#savePhone:active {
+.savePhoneMail:active {
     text-shadow: #31540c 0 1px 0;
     border: 0 solid #447314;
     background: #8dc059;
@@ -91,6 +114,10 @@
 }
 
 #uLogin {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-align: center;
+}
+
+div.auth-text span {
+    margin-left: 10px;
 }

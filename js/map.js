@@ -88,9 +88,9 @@ function initialize() {
                 }
             });
 
-            infoMessages[i] = '<strong>' + shops[i].name + '</strong><br/>' + shops[i].street + ', ' + shops[i].house_number +
-                '<br/>' + shops[i].phone + '<br/>Час роботи: ' + shops[i].opening_time.substring(0, 5) + ' - ' +
-                shops[i].closing_time.substring(0, 5) + '<br/><a class="createOrderInfoMessage">Зробити замовлення</a>'
+            infoMessages[i] = '<strong>' + shops[i].name + '</strong><br/><a class="createOrderInfoMessage">Зробити замовлення</a>'
+                + '<br/>Час роботи: ' + shops[i].opening_time.substring(0, 5) + ' - ' + shops[i].closing_time.substring(0, 5)
+                + '<br/>' + shops[i].phone + '<br/>' + shops[i].street + ', ' + shops[i].house_number;
         }
     }
 
