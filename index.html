@@ -115,36 +115,37 @@
                     <div id = "POS" class="blocks">Ви не обрали кав’ярню (<span id="changePos">обрати</span>)</div>
                     <div id="thanks" class="blocks"></div>
                     <div id="magicButton">
-                        <button id="saveOrder" title="Відправити замовлення">Замовити</button>
+                        <button id="saveOrder" class="greenButton" title="Відправити замовлення">Замовити</button>
                     </div>
 
                 </div>
             </div>
 
             <form id="authentication_page" class="pages">
-                <div id="auth-title">Способи аторизації</div>
+                <div id="auth-title">Авторизація</div>
                 <div class="auth-text">
                     <input name="auth" type="radio" value="phone" checked>
                     <span>Телефон</span>
                 </div>
                 <div id="inputPhoneBlock" class="inputBlock">
                     <input id ="phoneNumber" class="inputData" name="number">
-                    <button id="savePhone" class="savePhoneMail" type="button">Увійти</button>
+                    <button id="savePhone" class="savePhoneMail greenButton" type="button">Увійти</button>
                 </div>
                 <div id="inputNameBlock" class="auth-text">
-                    Вкажіть ім’я та прізвище
-                     <div class="inputBlock">
+                    <div class="nameTitleDiv" style="margin-right: 20px">Ім’я</div>
+                    <div class="nameTitleDiv">Прізвище</div>
+                    <div class="inputBlock">
                         <input id="optionName" class="inputData">
                         <input id="optionSurname" class="inputData">
-                     </div>
+                    </div>
                 </div>
                 <div class="auth-text">
                     <input name="auth" type="radio" value="mail">
                     <span>Електронна пошта</span>
                 </div>
                 <div id="inputMailBlock" class="inputBlock" hidden>
-                    <input id="mail" class="inputData">
-                    <button id="saveMail" class="savePhoneMail" type="button">Увійти</button>
+                    <input id="mail" name="mail" class="inputData">
+                    <button id="saveMail" class="savePhoneMail greenButton" type="button">Увійти</button>
                 </div>
                 <div class="auth-text">
                     <input name="auth" type="radio" value="socNetwork">

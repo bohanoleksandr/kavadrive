@@ -259,6 +259,7 @@ function rebuildPage (new_page) {
             $('#left_pointer').attr ('title', 'Перейти до меню');
             $('#right_pointer').attr ('title', 'Перейти до списку кав’ярень');
             $('#authentication_page').fadeIn('slow');
+            $('#phoneNumber').focus();
             $('#tip_text').text ("Вкажіть контактні дані");
             break;
         case 3:
@@ -337,6 +338,16 @@ function changePOS (shopId) {
     updateClock();
 }
 
+
+function checkMail (mail) {
+    if (mail == "" || mail.indexOf('@', 1) == -1) {
+        alert("Некоректний ввод");
+        return false;
+    } else {
+        return true;
+    }
+}
+
 $(document).on('click', '#savePhone', function phone(){
     var phoneNum = $("#phoneNumber").val();
     var name = $("#optionName").val();
@@ -347,9 +358,10 @@ $(document).on('click', '#savePhone', function phone(){
         $.post(
             "php/phoneNumber.php",
             {
-                phoneNum: phoneNum,
+                phoneNumber: phoneNum,
                 name: name,
-                surname: surname
+                surname: surname,
+                action: "enter"
             },
             function(result){
                 customer = JSON.parse(result);
@@ -383,13 +395,14 @@ $(document).on('click', '#saveMail', function mail(){
     var surname = $("#optionSurname").val();
     if (!mail){
         alert ("Ви не вказали електронну пошту!");
-    }else{
+    } else if (checkMail(mail)) {
         $.post(
             "php/mail.php",
             {
                 mail: mail,
                 name: name,
-                surname: surname
+                surname: surname,
+                action: "enter"
             },
             function(result){
                 customer = JSON.parse(result);
@@ -606,6 +619,7 @@ $(document).on ('change', 'input:radio', function() {
             $('#uLogin').hide();
             $('#inputNameBlock').hide();
             $('#inputPhoneBlock').after($('#inputNameBlock').fadeIn());
+            $('#phoneNumber').focus();
             break;
         case 'mail':
             $('#inputPhoneBlock').hide();
@@ -613,6 +627,7 @@ $(document).on ('change', 'input:radio', function() {
             $('#uLogin').hide();
             $('#inputNameBlock').hide();
             $('#inputMailBlock').after($('#inputNameBlock').fadeIn());
+            $('#mail').focus();
             break;
         case 'socNetwork':
             $('#inputPhoneBlock').hide();
@@ -621,6 +636,36 @@ $(document).on ('change', 'input:radio', function() {
             $('#uLogin').fadeIn();
             break;
     }
+});
+
+$(document).on ('change', '#phoneNumber', function() {
+    $.post(
+        "php/phoneNumber.php",
+        {
+            phoneNumber: this.value,
+            action: "check"
+        },
+        function(result){
+            customer = JSON.parse(result);
+            $("#optionName").val(customer.firstName);
+            $("#optionSurname").val(customer.lastName);
+        }
+    );
+});
+
+$(document).on ('change', '#mail', function() {
+    $.post(
+        "php/mail.php",
+        {
+            mail: this.value,
+            action: "check"
+        },
+        function(result){
+            customer = JSON.parse(result);
+            $("#optionName").val(customer.firstName);
+            $("#optionSurname").val(customer.lastName);
+        }
+    );
 });
 
 $(document).ready (function(){

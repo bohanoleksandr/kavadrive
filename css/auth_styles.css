@@ -14,13 +14,24 @@
     text-align: center;
 }
 
+#inputNameBlock {
+    text-align: center;
+}
+
 input[type='radio'] {
-    margin: 0;
+    margin: 0 10px 0 0 ;
 }
 
 .auth-text {
     font-size: 18px;
     margin: 20px 0;
+}
+
+.nameTitleDiv {
+    display: inline-block;
+    width: 170px;
+    text-align: left;
+    padding-left: 6px;
 }
 
 .inputBlock {
@@ -66,28 +77,18 @@ input[type='radio'] {
     font-size: 16px;
 }
 
-.savePhoneMail {
+.greenButton:hover {
     border: 0 solid #fcfcfc;
-    background: #9b9e98;
-    background: -webkit-gradient(linear, left top, left bottom, from(#9b9e98), to(#9b9e98));
-    background: -webkit-linear-gradient(top, #9b9e98, #9b9e98);
-    background: -moz-linear-gradient(top, #9b9e98, #9b9e98);
-    background: -ms-linear-gradient(top, #9b9e98, #9b9e98);
-    background: -o-linear-gradient(top, #9b9e98, #9b9e98);
-    background-image: -ms-linear-gradient(top, #9b9e98 0%, #9b9e98 100%);
+    background: #798287;
     -webkit-box-shadow: rgba(255,255,255,0.4) 0 0 0, inset rgba(255,255,255,0.4) 0 1px 0;
     -moz-box-shadow: rgba(255,255,255,0.4) 0 0 0, inset rgba(255,255,255,0.4) 0 1px 0;
     box-shadow: rgba(255,255,255,0.4) 0 0 0, inset rgba(255,255,255,0.4) 0 1px 0;
-    color: #444;
-    padding: 8px 18px;
-    font-size: 16px;
+    color: #222;
     text-decoration: none;
-    vertical-align: middle;
-    height: 40px;
-    font-family: Calibri, Arial, sans-serif;
+    text-shadow: none;
 }
 
-.savePhoneMail:hover {
+.greenButton {
     border: 0 solid #447314;
     text-shadow: #31540c 0 1px 0;
     background: #6aa436;
@@ -98,6 +99,11 @@ input[type='radio'] {
     background: -o-linear-gradient(top, #8dc059, #6aa436);
     background-image: -ms-linear-gradient(top, #8dc059 0%, #6aa436 100%);
     color: #fff;
+    padding: 8px 18px;
+    font-size: 16px;
+    vertical-align: middle;
+    height: 40px;
+    font-family: Calibri, Arial, sans-serif;
 }
 
 .savePhoneMail:active {
@@ -116,8 +122,4 @@ input[type='radio'] {
 #uLogin {
     margin-bottom: 10px;
     text-align: center;
-}
-
-div.auth-text span {
-    margin-left: 10px;
 }

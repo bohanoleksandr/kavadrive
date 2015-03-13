@@ -13,9 +13,9 @@
 }
 
 #left_bar ul li{
-    -moz-background-clip: padding;     /* Firefox 3.6 */
-    -webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
-    background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
+    /*-moz-background-clip: padding;     *//* Firefox 3.6 */
+    /*-webkit-background-clip: padding;  *//* Safari 4? Chrome 6? */
+    /*background-clip: padding-box;      *//* Firefox 4, Safari 5, Opera 10, IE 9 */
     -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
@@ -108,6 +108,10 @@
     /*margin-right: 10px;*/
 }
 
+.inputer {
+    width: 30px;
+}
+
 .plus, .minus, .delete{
     display: inline-block;
     background-color: #843B37;
@@ -139,14 +143,14 @@
     display: none;
 }
 
-#saveOrder {
-    background: none repeat scroll 0 0 #AD7B05; color:#FFFFFF;
-    font-size: 1.1em;
-    margin: 20px 0;
-    padding: 10px;
-    cursor: pointer;
-    width: 150px;
-}
+/*#saveOrder {*/
+    /*background: none repeat scroll 0 0 #AD7B05; color:#FFFFFF;*/
+    /*font-size: 1.1em;*/
+    /*margin: 20px 0;*/
+    /*padding: 10px;*/
+    /*cursor: pointer;*/
+    /*width: 150px;*/
+/*}*/
 
 #thanks {
     display: none;
