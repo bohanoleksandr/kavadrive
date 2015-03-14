@@ -146,10 +146,8 @@ function create( name, attributes ) {
 function addDivSelectArticle (productId) {
     var bigDiv = '<div class="selected_articles" id="menu_content_article-' + productId + '">';
     var name = menu[productId].name;
-    //var counter = '<div class="counter" id="counterOfProduct'+productId+'" title="Кількість замовлених «' +
-    //    menu[productId].name + '»"> ' + order.content[productId] + '</div>';
-    var counter = '<input class="counter" id="counterOfProduct' + productId + '" title="Кількість замовлених «' +
-        menu[productId].name + '»" value="1">';
+    var counter = '<div class="counter" id="counterOfProduct'+productId+'" title="Кількість замовлених «' +
+        menu[productId].name + '»"> ' + order.content[productId] + '</div>';
     var plus = '<div class="plus" id="plusProduct' + productId + '" title="Додати ще один «' + menu[productId].name +
         '» до замовлення"><strong> + </strong></div>';
     var minus = '<div class="minus" id="minusProduct' + productId + '" title="Зменшити на один «' + menu[productId].name +
@@ -173,7 +171,7 @@ function estimateSum(){
 }
 
 function updateQuantity(productId) {
-    $('#counterOfProduct'+productId).val(order.content[productId]);
+    document.getElementById('counterOfProduct'+productId).innerHTML =  order.content[productId];
 }
 
 function removeArticleFromOrder (productId){
@@ -350,21 +348,6 @@ function checkMail (mail) {
     }
 }
 
-function manualChangeOfQuantity (input){
-    var itemId = parseInt(input.id.substr(16));
-    var newValue = parseInt(input.value);
-    if (typeof newValue == "number" && newValue > 0 && newValue < 100) {
-        order.content[itemId] = newValue;
-        updateQuantity(itemId);
-        estimateSum();
-    } else if (newValue == 0) {
-        removeArticleFromOrder(itemId);
-    } else {
-        $(input).val(order.content[itemId]);
-    }
-    input.blur();
-}
-
 $(document).on('click', '#savePhone', function phone(){
     var phoneNum = $("#phoneNumber").val();
     var name = $("#optionName").val();
@@ -450,19 +433,20 @@ $(document).on('click', '#saveMail', function mail(){
 $(document).on("click", 'div.menu_buttons', function(){
     $('#magicButton').css ('display', 'block');
     var articleId = parseInt(this.id.substr(8));
-    if (!order.content[articleId]){
-        order.content[articleId] = 1;
-        addDivSelectArticle(articleId);
-    } else if (order.content[articleId] < 99){
+    if (order.content[articleId]){
         order.content[articleId]++;
         updateQuantity(articleId);
+    }
+    else{
+        order.content[articleId] = 1;
+        addDivSelectArticle(articleId);
     }
     estimateSum()
 });
 
 $(document).on('click', '.plus', function(){
     var productId = parseInt(this.id.substr(11));
-    if (order.content[productId] < 99) order.content[productId]++;
+    order.content[productId]++;
     updateQuantity(productId);
     estimateSum();
 });
@@ -686,18 +670,4 @@ $(document).on ('change', '#mail', function() {
 
 $(document).ready (function(){
     $("#authentication_page").trigger('reset');
-});
-
-$(document).on ('focus', 'input.counter', function() {
-    $(this).select();
-});
-
-$(document).on ('change', 'input.counter', function() {
-    manualChangeOfQuantity(this);
-});
-
-$(document).on ('keyup', 'input.counter', function(e) {
-    if (e.keyCode == 13) {
-        manualChangeOfQuantity(this);
-    }
 });

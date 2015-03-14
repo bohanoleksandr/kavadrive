@@ -87,12 +87,10 @@
 }
 
 .selected_articles {
-    height: 25px;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     margin: 10px 0;
     padding: 4px;
     text-align: left;
-    font-size: 16px;
     background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
@@ -102,35 +100,26 @@
 
 .orderList_buttons {
     float: right;
-    height: inherit;
 }
 
-input.counter  {
+.counter {
     display: inline-block;
-    width: 25px;
-    height: 18px;
-    font-size: 18px;
-    text-align: center;
-    font-family: Calibri;
-    background: #ebca90;
-    color: #4F4942;
-    margin: 0 8px 2px 0;
+    width: 30px;
+    /*margin-right: 10px;*/
 }
 
-input.counter:focus {
-    background: #EEE;
+.inputer {
+    width: 30px;
 }
 
 .plus, .minus, .delete{
     display: inline-block;
     background-color: #843B37;
-    width: 25px;
+    width: 20px;
     text-align: center;
     margin: 0 8px;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     cursor: pointer;
-    height: 21px;
-    padding: 2px 0;
 }
 
 #sum {
