@@ -3,11 +3,15 @@
 }
 
 #left_bar {
-    width: 550px;
-    float: left;
+    /*max-width: 550px;*/
+    overflow: hidden;
+    text-align: center;
+    padding: 0 auto;
+    /*float: left;*/
 }
 
 #left_bar ul{
+    text-align: center;
     margin: 0;
     padding: 0;
 }
@@ -66,13 +70,14 @@
 
 #right_bar {
     width: 350px;
-    float: right;
+    margin: 0 auto;
+    /*float: right;*/
 }
 
 #right_bar div.blocks {
     padding: 15px;
     margin-bottom: 20px;
-    font-size: 1.1em;
+    font-size: 18px;
     text-align: center;
     text-shadow: 0 2px 3px #555;
     overflow: auto;

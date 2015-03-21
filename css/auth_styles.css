@@ -3,7 +3,7 @@
     -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     padding: 20px;
-    width: 380px;
+    width: 310px;
     margin: 40px auto 10px auto;
     text-shadow: #000000 0 1px 0;
 }
@@ -29,7 +29,7 @@ input[type='radio'] {
 
 .nameTitleDiv {
     display: inline-block;
-    width: 170px;
+    width: 130px;
     text-align: left;
     padding-left: 6px;
 }
@@ -48,8 +48,9 @@ input[type='radio'] {
     -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
     box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
     padding: 8px;
-    margin: 0 20px 0 0 ;
+    margin: 0 10px 0 0 ;
     text-align: center;
+    height: 25px;
 }
 
 .inputData:focus {
@@ -57,24 +58,24 @@ input[type='radio'] {
 }
 
 #phoneNumber{
-    width: 260px;
+    width: 180px;
     font-size: 21px;
 }
 
 #optionName {
-    width: 160px;
+    width: 125px;
     font-size: 18px;
 }
 
 #optionSurname {
-    width: 160px;
+    width: 125px;
     margin: 0;
     font-size: 18px;
 }
 
 #mail {
-    width: 260px;
-    font-size: 16px;
+    width: 180px;
+    font-size: 14px;
 }
 
 .greenButton:hover {
@@ -101,9 +102,9 @@ input[type='radio'] {
     color: #fff;
     padding: 8px 18px;
     font-size: 16px;
-    vertical-align: middle;
-    height: 40px;
+    height: 41px;
     font-family: Calibri, Arial, sans-serif;
+    vertical-align: top;
 }
 
 .savePhoneMail:active {

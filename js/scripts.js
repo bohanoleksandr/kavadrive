@@ -54,7 +54,7 @@ function receiptData () {
                 var row = response[i];
                 menu[row[0]] = new Item(row[1], row[2], row[3]);
                 divForItem(row[0], row[1], row[2], row[3]);
-                $(menuElems[row[0]]).appendTo ($('ul'));
+                $(menuElems[row[0]]).appendTo ($('ul#menuList'));
             }
         }
     });
@@ -67,14 +67,12 @@ function receiptData () {
             customer = JSON.parse(msg);
             if (customer['id']) {
                 if (customer['firstName']) {
-                    $('#customerId').html ("Ви авторизовані: " + customer['firstName'] + ' ' + customer['lastName']
-                    + " <span id='customerExit'>(вийти)</span>");
+                    $('#customerId').html (customer['firstName'] + ' ' + customer['lastName']
+                    + " <span id='customerExit'>(<span>вийти</span>)</span>");
                 } else if (customer['phoneNumber']){
-                    $('#customerId').html ("Ви авторизовані: " + customer['phoneNumber']
-                    + " <span id='customerExit'>(вийти)</span>");
+                    $('#customerId').html (customer['phoneNumber'] + " <span id='customerExit'>(<span>вийти</span>)</span>");
                 } else {
-                    $('#customerId').html ("Ви авторизовані: " + customer['mail']
-                    + " <span id='customerExit'>(вийти)</span>");
+                    $('#customerId').html (customer['mail'] + " <span id='customerExit'>(<span>вийти</span>)</span>");
                 }
                 $('#customerExit').css('display', 'inline');
             } else {
@@ -270,7 +268,7 @@ function rebuildPage (new_page) {
             $('#left_pointer').attr ('title', 'Перейти до авторизації');
             $('#right_pointer').attr ('title', 'Перейти до карти');
             $('#contacts_page').fadeIn('slow');
-            $('#tip_text').text ("Список кав’ярень");
+            $('#tip_text').text ("Виберіть кав’ярню");
             break;
         case 4:
             $('#left_pointer').css ('display', 'inline');
@@ -314,8 +312,8 @@ function preview (token){
                     function(result){
                         customer = JSON.parse(result);
                         document.cookie = "userId=" + customer['id'];
-                        $('#customerId').html ("Ви авторизовані: " + customer['firstName'] + ' ' + customer['lastName']
-                            + " <span id='customerExit'>(вийти)</span>");
+                        $('#customerId').html (customer['firstName'] + ' ' + customer['lastName']
+                            + " <span id='customerExit'>(<span>вийти</span>)</span>");
                         $("#customerExit").css ('display', 'inline');
                         if (order.emptiness) {
                             rebuildPage(1);
@@ -384,11 +382,10 @@ $(document).on('click', '#savePhone', function phone(){
                 customer = JSON.parse(result);
                 document.cookie = "userId=" + customer['id'];
                 if (customer.firstName) {
-                    $("#customerId").html ("Ви авторизовані: " + customer.firstName + " " + customer.lastName
-                    + " <span id='customerExit'>(вийти)</span>");
+                    $("#customerId").html (customer.firstName + " " + customer.lastName
+                    + " <span id='customerExit'>(<span>вийти</span>)</span>");
                 } else {
-                    $("#customerId").html ("Ви авторизовані: " + customer['phoneNumber']
-                    + " <span id='customerExit'>(вийти)</span>");
+                    $("#customerId").html (customer['phoneNumber'] + " <span id='customerExit'>(<span>вийти</span>)</span>");
                 }
                 $("#customerExit").css ('display', 'inline');
                 if (order.emptiness) {
@@ -425,11 +422,10 @@ $(document).on('click', '#saveMail', function mail(){
                 customer = JSON.parse(result);
                 document.cookie = "userId=" + customer['id'];
                 if (customer.firstName) {
-                    $("#customerId").html ("Ви авторизовані: " + customer.firstName + " " + customer.lastName
-                    + " <span id='customerExit'>(вийти)</span>");
+                    $("#customerId").html (customer.firstName + " " + customer.lastName
+                    + " <span id='customerExit'>(<span>вийти</span>)</span>");
                 } else {
-                    $("#customerId").html ("Ви авторизовані: " + customer['mail']
-                    + " <span id='customerExit'>(вийти)</span>");
+                    $("#customerId").html (customer['mail'] + " <span id='customerExit'>(<span>вийти</span>)</span>");
                 }
                 $("#customerExit").css ('display', 'inline');
                 if (order.emptiness) {
@@ -604,11 +600,11 @@ $(document).on ('click', '#left_pointer', function() {
     rebuildPage(page);
 });
 
-$(document).on ('mousedown mouseup', '.plus, .minus, .delete, .pointers, div.menu_buttons', function() {
+$(document).on ('mousedown mouseup', '.plus, .minus, .delete, div.menu_buttons', function() {
     $(this).toggleClass ('pressed_button');
 });
 
-$(document).on ('mouseout', '.plus, .minus, .delete, .pointers, div.menu_buttons', function() {
+$(document).on ('mouseout', '.plus, .minus, .delete, div.menu_buttons', function() {
     $(this).removeClass ('pressed_button');
 });
 
@@ -686,6 +682,7 @@ $(document).on ('change', '#mail', function() {
 
 $(document).ready (function(){
     $("#authentication_page").trigger('reset');
+    $("#nav-trigger")[0].checked = false;
 });
 
 $(document).on ('focus', 'input.counter', function() {
@@ -699,5 +696,34 @@ $(document).on ('change', 'input.counter', function() {
 $(document).on ('keyup', 'input.counter', function(e) {
     if (e.keyCode == 13) {
         manualChangeOfQuantity(this);
+    }
+});
+
+//$(document).on ('click', '#site-wrap', function() {
+//    $("#nav-trigger")[0].checked = false;
+//});
+
+$(document).on ('click', '#navigationMenu li', function() {
+    switch (parseInt(this.id.substr(2))) {
+        case 1:
+            $("#nav-trigger")[0].checked = false;
+            rebuildPage(2);
+            break;
+        case 2:
+            //TODO
+            break;
+        case 3:
+            //TODO
+            break;
+        case 4:
+            $("#nav-trigger")[0].checked = false;
+            rebuildPage(3);
+            break;
+        case 5:
+            $("#nav-trigger")[0].checked = false;
+            rebuildPage(4);
+            break;
+        default:
+            break;
     }
 });

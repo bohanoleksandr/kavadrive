@@ -156,8 +156,8 @@ function updateClock() {
 
     buttonActivator();
 
-    $("#hours").html(addZero(visitTime.getHours()));
-    $("#minutes").html(addZero(visitTime.getMinutes()));
+    $("#hours").text (addZero(visitTime.getHours()));
+    $("#minutes").text (addZero(visitTime.getMinutes()));
     $("#order_date").html(visitTime.getDate());
     $("#order_month").html(month_array[visitTime.getMonth()]);
     $("#order_day").html(day_array[visitTime.getDay()]);
@@ -339,5 +339,12 @@ $(document).ready(function () {
         visitTime.setDate(visitTime.getDate() - 1);
         updateClock();
     });
+
+    //$("#hours").change (function() {
+    //    console.log (this.value);
+    //    //visitTime.setHours(parseInt(this.value));
+    //    //updateClock();
+    //});
+
 });
 

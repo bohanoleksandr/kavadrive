@@ -10,6 +10,7 @@
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     float: left;
 	padding: 10px 10px;
+    font-size: 36px;
 }
 
 #order_date_menu {
@@ -27,15 +28,15 @@
 }
 
 .timeButtonsDiv {
-	height: 12px;
+	height: 21px;
 }
 
 .button_time_reg_up {
 	width: 0;
 	height: 0;
-	border-left: 16px solid transparent; /* Прозрачные границы */
-	border-right: 16px solid transparent; /* Прозрачные границы */
-	border-bottom: 12px solid;
+	border-left: 18px solid transparent; /* Прозрачные границы */
+	border-right: 18px solid transparent; /* Прозрачные границы */
+	border-bottom: 21px solid;
 	border-top: 0;
 	border-bottom-color: #3F1513;
 	float: left;
@@ -45,9 +46,9 @@
 .button_time_reg_down {
 	width: 0;
 	height: 0;
-	border-left: 16px solid transparent; /* Прозрачные границы */
-	border-right: 16px solid transparent; /* Прозрачные границы */
-	border-top: 10px solid;
+	border-left: 18px solid transparent; /* Прозрачные границы */
+	border-right: 18px solid transparent; /* Прозрачные границы */
+	border-top: 21px solid;
 	border-bottom: 0;
 	border-top-color: #3F1513;
 	float: left;
@@ -55,33 +56,20 @@
 }
 
 #hoursUp {
-	margin-left: 2px;
-	margin-right: 31px;
+	margin-right: 26px;
 }
 
 #hoursDown {
-	margin-left: 2px;
-	margin-right: 31px;
+	margin-right: 26px;
 }
 
-#dayUp {
-	margin-left: 2px;
-}
-
-#dayDown {
-	margin-left: 2px;
-}
-
-#clockDigits {
-	height: 22px;
-	font-size: 36px;
-	padding: 12px 0;
-}
+/*#clockDigits {*/
+	/*height: 22px;*/
+	/*font-size: 36px;*/
+	/*padding: 12px 0;*/
+/*}*/
 
 #order_date {
-    width: 37px;
-    height: 22px;
-	padding: 12px 0;
     float: left;
 	font-size: 36px;
 }
