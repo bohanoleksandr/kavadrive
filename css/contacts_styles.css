@@ -1,3 +1,12 @@
+#contacts_page {
+    /*text-align: center;*/
+}
+
+#contacts_page div {
+    width: 350px;
+    margin: 0 auto;
+}
+
 table {
     font-size: 18px;
     text-align: left;

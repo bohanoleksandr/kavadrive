@@ -42,6 +42,14 @@ function Shop (name, opening_time, closing_time, street, house_number, latitude,
 Parse.initialize("WeDR0ZQxPkgQD8eTeICgQqLGxPvUF64BXhoQkV5c", "W43O6W4YLG0VSDH9EDqLaSFxOCdCAr23ZFvjmvvD");
 $(document).ready (receiptData(), preventSelection(document));
 
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-58458963-1', 'auto');
+ga('send', 'pageview');
+
 function receiptData () {
     $.ajax({
         url: 'php/getMenu.php',
@@ -54,7 +62,7 @@ function receiptData () {
                 var row = response[i];
                 menu[row[0]] = new Item(row[1], row[2], row[3]);
                 divForItem(row[0], row[1], row[2], row[3]);
-                $(menuElems[row[0]]).appendTo ($('ul#menuList'));
+                $(menuElems[row[0]]).appendTo ($('#menuList'));
             }
         }
     });
@@ -113,9 +121,9 @@ function receiptData () {
 }
 
 function divForItem (id, name, amount, price){
-    menuElems [id] = create("li",{},create("div", {Class:'menu_buttons',id:'article-'+id,title:"Додати «" + name +
+    menuElems [id] = create("div", {Class:'menu_buttons not_pressed_button',id:'article-'+id,title:"Додати «" + name +
         "» до замовлення"},create("p",{},name),create("p", {class:'amount'},amount),
-    create("p",{class:'price'},parseInt(price)+' грн')));
+        create("p",{class:'price'},parseInt(price)+' грн'));
 }
 
 function create( name, attributes ) {
@@ -334,7 +342,7 @@ function preview (token){
 
 function changePOS (shopId) {
     order.pos = shopId;
-    $('#POS').html("Ви обрали кав’ярню " + shops[order.pos].name + ' (<span id="changePos">змінити</span>)');
+    $('#POS').html(shops[order.pos].name + ' (<span id="changePos">змінити</span>)');
     updateClock();
 }
 
@@ -544,7 +552,7 @@ $(document).on('click', '#saveOrder', function submit(){
     }
 });
 
-$(document).on ('click', '#changePos', function (){
+$(document).on ('click', '#POS', function (){
     rebuildPage(3);
 });
 

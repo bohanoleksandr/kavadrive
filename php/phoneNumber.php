@@ -32,6 +32,9 @@ if ($action == "check" && !$customerNewness){
         if ($customer['firstName']){
             $editUserQuery = "UPDATE `customers` SET `firstName` = '".$customer['firstName']."', `lastName` = '".$customer['lastName']."' WHERE `id` = '".$customer['id']."';";
             mysql_query($editUserQuery);
+        } else {
+            $customer['firstName'] = $row['firstName'];
+            $customer['lastName'] = $row['lastName'];
         }
     }
 }

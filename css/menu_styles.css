@@ -2,48 +2,30 @@
     display: block;
 }
 
-#left_bar {
-    /*max-width: 550px;*/
-    overflow: hidden;
+#menuList {
     text-align: center;
-    padding: 0 auto;
-    /*float: left;*/
 }
 
-#left_bar ul{
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-#left_bar ul li{
-    /*-moz-background-clip: padding;     *//* Firefox 3.6 */
-    /*-webkit-background-clip: padding;  *//* Safari 4? Chrome 6? */
-    /*background-clip: padding-box;      *//* Firefox 4, Safari 5, Opera 10, IE 9 */
+#menuList div.menu_buttons{
     -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
-    list-style-type: none;
     height: 80px;
     width: 160px;
-    margin-right: 22px;
-    margin-bottom: 25px;
-    float: left;
-    font-size: 2em;
+    margin: 0 11px 25px 11px;
     overflow: hidden;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.not_pressed_button {
     background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
-}
-
-.menu_buttons {
-    cursor: pointer;
-    text-align:center;
-    font: 15px Calibri, Helvetica, Arial, Sans-Serif;
-    text-shadow: 0 2px 3px #555;
-    padding: 7px 0;
 }
 
 .pressed_button {
@@ -55,26 +37,19 @@
 }
 
 .menu_buttons p {
-    margin-bottom: 7px;
+    margin: 5px 0;
 }
 
 .menu_buttons p.amount {
     font-size: 13px;
-    font-weight: normal;
 }
 
-.menu_buttons p.price {
-    margin-bottom: 0;
-    font-size: 16px;
-}
-
-#right_bar {
+#bottom_bar {
     width: 350px;
     margin: 0 auto;
-    /*float: right;*/
 }
 
-#right_bar div.blocks {
+#bottom_bar div.blocks {
     padding: 15px;
     margin-bottom: 20px;
     font-size: 18px;
