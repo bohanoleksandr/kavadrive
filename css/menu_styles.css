@@ -62,8 +62,11 @@
 }
 
 #POS {
-    text-decoration: underline;
     cursor: pointer;
+}
+
+#changePos {
+    text-decoration: underline;
 }
 
 .selected_articles {
