@@ -108,12 +108,20 @@ function receiptData () {
 
             for (var i = 1; i < shops.length; ++i) {
                 if (shops [i]) {
-                    var shopNameTd = '<td><span id="td-' + i + '" class="shopNames">' + shops[i].name + '</span></td>';
-                    var shopAddressTd = '<td>' + shops[i].street + ', ' + shops[i].house_number;
-                    var phoneTd = '<td>' + shops[i].phone + '</td>';
-                    rows[i] = '<tr>' + shopNameTd + shopAddressTd + phoneTd + '</tr>';
-
-                    $(rows[i]).appendTo ($('tbody'));
+                    //var shopNameTd = '<td><span id="td-' + i + '" class="shopNames">' + shops[i].name + '</span></td>';
+                    //var shopAddressTd = '<td>' + shops[i].street + ', ' + shops[i].house_number;
+                    //var phoneTd = '<td>' + shops[i].phone + '</td>';
+                    //rows[i] = '<tr>' + shopNameTd + shopAddressTd + phoneTd + '</tr>';
+                    //
+                    //$(rows[i]).appendTo ($('tbody'));
+                    rows[i] = '<div id="shop' + i + '" class="shops">' + shops[i].name + '<span>обрати</span></div>' +
+                        '<ul id="infoShop' + i + '">' +
+                        '<li>години роботи: ' + shops[i].opening_time.substring(0, 5) + ' - ' + shops[i].closing_time.substring(0, 5) + '</li>' +
+                        '<li>телефон: ' + shops[i].phone + '</li>' +
+                        '<li>' + shops[i].street + ', ' + shops[i].house_number + '</li>' +
+                        '<li>Вінниця</li>' +
+                        '<li>кав’ярня на карті</li>' + '</ul>';
+                    $(rows[i]).appendTo ($('#contacts_page'));
                 }
             }
         }
@@ -255,15 +263,16 @@ function rebuildPage (new_page) {
     $('.pages').hide();
     switch (new_page) {
         case 1:
-            $('#left_pointer').css ('display', 'none');
-            $('#right_pointer').css ('visibility', 'visible');
+            //$('#left_pointer').css ('display', 'none');
+            //$('#right_pointer').css ('visibility', 'visible');
+            $('#left_pointer').attr ('title', 'Перейти до карти');
             $('#right_pointer').attr ('title', 'Перейти до авторизації');
             $('#menu_page').fadeIn('slow');
             $('#tip_text').text ("Зробіть замовлення");
             break;
         case 2:
-            $('#left_pointer').css ('display', 'inline');
-            $('#right_pointer').css ('visibility', 'visible');
+            //$('#left_pointer').css ('display', 'inline');
+            //$('#right_pointer').css ('visibility', 'visible');
             $('#left_pointer').attr ('title', 'Перейти до меню');
             $('#right_pointer').attr ('title', 'Перейти до списку кав’ярень');
             $('#authentication_page').fadeIn('slow');
@@ -271,17 +280,18 @@ function rebuildPage (new_page) {
             $('#tip_text').text ("Вкажіть контактні дані");
             break;
         case 3:
-            $('#left_pointer').css ('display', 'inline');
-            $('#right_pointer').css ('visibility', 'visible');
+            //$('#left_pointer').css ('display', 'inline');
+            //$('#right_pointer').css ('visibility', 'visible');
             $('#left_pointer').attr ('title', 'Перейти до авторизації');
             $('#right_pointer').attr ('title', 'Перейти до карти');
             $('#contacts_page').fadeIn('slow');
             $('#tip_text').text ("Виберіть кав’ярню");
             break;
         case 4:
-            $('#left_pointer').css ('display', 'inline');
-            $('#right_pointer').css ('visibility', 'hidden');
+            //$('#left_pointer').css ('display', 'inline');
+            //$('#right_pointer').css ('visibility', 'hidden');
             $('#left_pointer').attr ('title', 'Перейти до списку кав’ярень');
+            $('#right_pointer').attr ('title', 'Перейти до меню');
             $('#map_canvas').fadeIn();
             $('#tip_text').text ("Вкажіть своє розташування та оберіть кав’ярню на карті");
             if (!map) {
@@ -600,11 +610,13 @@ $(document).on ('click', '#mapLink', function () {
 
 $(document).on ('click', '#right_pointer', function() {
     page += 1;
+    if (page > 4) page = 1;
     rebuildPage(page);
 });
 
 $(document).on ('click', '#left_pointer', function() {
     page -= 1;
+    if (page < 1) page = 4;
     rebuildPage(page);
 });
 
@@ -616,8 +628,8 @@ $(document).on ('mouseout', '.plus, .minus, .delete, div.menu_buttons', function
     $(this).removeClass ('pressed_button');
 });
 
-$(document).on ('click', '.shopNames', function() {
-    changePOS(parseInt(this.id.substr(3)));
+$(document).on ('click', 'div.shops span', function() {
+    changePOS(parseInt(this.parentNode.id.substr(4)));
 
     if (order.emptiness) {
         rebuildPage(1);
@@ -734,4 +746,9 @@ $(document).on ('click', '#navigationMenu li', function() {
         default:
             break;
     }
+});
+
+$(document).on ('click', 'div.shops span', function(){
+    var id = this.parentNode.id.substr(4);
+    //$("#contacts_page ul#infoShop" + id + " li").show();
 });
