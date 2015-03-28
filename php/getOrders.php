@@ -7,6 +7,7 @@ $workerId = $_COOKIE ['workerId'];
 $result1 = mysql_query ("   SELECT
 								`orders`.*,
 								`customers`.`phoneNumber`,
+								`customers`.`mail`,
 								`customers`.`firstName`,
 								`customers`.`lastName`,
 								`customers`.`identitySoc`
@@ -71,6 +72,7 @@ while($row_with_order = mysql_fetch_assoc($result1)){
         "lastName"=>$row_with_order['lastName'],
         "identitySoc"=>$row_with_order['identitySoc'],
         "phoneNumber"=>$row_with_order['phoneNumber'],
+        "mail"=>$row_with_order['mail'],
         "orderTime"=>$row_with_order['date'],
         "visitTime"=>$row_with_order['visit_time'],
         "sum"=>$row_with_order['sum'],

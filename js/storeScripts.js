@@ -50,6 +50,7 @@ function receiptData () {
             if (ordersLength && orders.length > ordersLength) sound();
             ordersLength = orders.length;
             fillTable();
+            alarm();
         }
     });
 }
@@ -83,18 +84,37 @@ function fillTable () {
 }
 
 function buildRow(order, status) {
+    var now = new Date();
     var additionNewClass = '';
     var tagWithOrderId = null;
 
-    var tagWithNameSurname = "-";
-    if (order['firstName']) {
-        tagWithNameSurname = '<a href="' + order['identitySoc'] + '" target="blank">' + order['firstName'] + ' '
-        + order['lastName'] + '</a>';
+    if (now - orderTime < 5 * 60 * 1000 && status == 'info') {
+        additionNewClass = 'new';
+        tagWithOrderId = order['id'] + ' (нове)';
+    } else {
+        tagWithOrderId = order['id'];
     }
 
-    var phoneNumber = "-";
+    var tagWithNameSurname = "-";
+    //var tagWithSocNetworkLink = "-";
+
+    if (order['identitySoc']) {
+        tagWithNameSurname = '<a href="' + order['identitySoc'] + '" target="blank">' + order['firstName'] + ' '
+        + order['lastName'] + '</a>';
+    } else if (order['firstName']) {
+        tagWithNameSurname = order['firstName'] + ' ' + order['lastName'];
+    }
+
+    var phoneNumberOrMail = "-";
     if (order['phoneNumber']) {
-        phoneNumber = order['phoneNumber'];
+        phoneNumberOrMail = order['phoneNumber'];
+    } else if (order['mail']){
+        phoneNumberOrMail = order['mail'];
+    }
+
+    var mail = "-";
+    if (order['mail']) {
+        mail = order['mail'];
     }
 
     var visitTime = new Date(order['visitTime']);
@@ -129,20 +149,11 @@ function buildRow(order, status) {
     var orderTimeDate = orderTime.getDate();
     var orderTimeMonth = month_array [orderTime.getMonth()];
 
-    var now = new Date();
-
-    if (now - orderTime < 5 * 60 * 1000 && status == 'info') {
-        additionNewClass = 'new';
-        tagWithOrderId = order['id'] + ' (нове)';
-    } else {
-        tagWithOrderId = order['id'];
-    }
+    var sum = Number (order['sum']);
 
     var changeMaker = order['changeMaker'];
     if (!changeMaker) changeMaker = "дані відсутні";
-    if (order['status'] == 1) {
-        changeMaker = '';
-    }
+    if (order['status'] == 1) changeMaker = '';
 
     var htmlForTableRow =
         '<tr class="tableRow ' + status + ' ' + additionNewClass + '">'
@@ -150,10 +161,12 @@ function buildRow(order, status) {
         + '<td class="td_content"><img title="Переглянути зміст замовлення № ' + order['id'] + '" ' +
             'id="content' + order['id'] + '" src="../images/paper.jpg"></td>'
         + '<td class="td_customer">' + tagWithNameSurname + '</td>'
-        + '<td class="td_phone">' + phoneNumber + '</td>'
+        //+ '<td class="td_socNetwork">' + tagWithSocNetworkLink + '</td>'
+        + '<td class="td_phone">' + phoneNumberOrMail + '</td>'
+        //+ '<td class="td_mail">' + mail + '</td>'
         + '<td class="td_time">' + visitTimeHour + ':' + visitTimeMinutes + ' - ' + visitTimeDate + ' ' + visitTimeMonth + '</td>'
         + '<td class="td_date">' + orderTimeHour + ':' + orderTimeMinutes + ' - ' + orderTimeDate + ' ' + orderTimeMonth + '</td>'
-        + '<td class="td_sum">' + order['sum'] + '</td>'
+        + '<td class="td_sum">' + sum.toFixed(2) + '</td>'
         + '<td class="td_status">' + statuses_array [order['status']] + '</td>'
         + '<td class="td_worker">' + changeMaker + '</td>'
         + '</tr>';
@@ -196,11 +209,19 @@ function sound (){
     $('#notifyAudio')[0].play();
 }
 
+function alarm () {
+    var now = new Date ();
+    var visitTime = null;
+    for (var i = 0; i < orders.length; i++) {
+        visitTime = new Date (orders[i].visitTime);
+        if (visitTime - now < 60*1000) console.log (orders[i].id);
+    }
+}
+
 $(document).ready (function() {
 
     receiptData ();
     setInterval ('receiptData()', 10000);
-
     for (var i = 1; i <= 5; i++) statuses_to_show [i] = true;
 
 

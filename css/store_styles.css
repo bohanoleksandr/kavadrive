@@ -3,6 +3,19 @@
 	width:98%;
 }
 
+.table th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#th_id {
+    width: 65px;
+}
+
+#th_sum {
+    width: 45px;
+}
+
 .sorting {
     margin: 0 5px;
     padding: 7px;
@@ -38,7 +51,11 @@ input.sorting_checkbox {
     width: 98%;
 }
 
-td.td_content{
+.table td {
+    vertical-align: middle;
+}
+
+td.td_content, td.td_id, td.td_sum, td.td_status {
     text-align: center;
 }
 
@@ -47,7 +64,7 @@ img {
 }
 
 a {
-    color: #333;
+    color: #005580;
 }
 
 #unsuccessful_search {
