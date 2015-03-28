@@ -29,13 +29,13 @@ p {
 #main{
     margin: 0 auto;
     /*height:100%;*/
-    padding: 10px 10px ;
+    padding: 5px 5px ;
     /*display: inline;*/
 }
 
 #adminData {
-    height: 40px;
-    margin-top: -40px;
+    height: 35px;
+    margin-top: -35px;
     padding: 0 3%;
     z-index: 2;
     position: relative;
@@ -223,6 +223,19 @@ a {
 a:hover {
     color: #005580;
     text-decoration: underline;
+}
+
+#about_page {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+#about_page div {
+    margin: 10px auto;
+}
+
+div.center {
+    text-align: center;
 }
 
 @media screen and (max-width: 550px){

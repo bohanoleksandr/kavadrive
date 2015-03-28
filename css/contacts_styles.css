@@ -16,6 +16,14 @@
     color: #FFF;
 }
 
+li.anchor {
+    cursor: pointer;
+}
+
+li.anchor:hover {
+    text-decoration: underline;
+}
+
 .shops span {
     float: right;
     text-decoration: underline;

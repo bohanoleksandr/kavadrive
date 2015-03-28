@@ -120,7 +120,7 @@ function receiptData () {
                         '<li>телефон: ' + shops[i].phone + '</li>' +
                         '<li>' + shops[i].street + ', ' + shops[i].house_number + '</li>' +
                         '<li>Вінниця</li>' +
-                        '<li>кав’ярня на карті</li>' + '</ul>';
+                        '<li class="anchor">кав’ярня на карті</li>' + '</ul>';
                     $(rows[i]).appendTo ($('#contacts_page'));
                 }
             }
@@ -265,7 +265,7 @@ function rebuildPage (new_page) {
         case 1:
             //$('#left_pointer').css ('display', 'none');
             //$('#right_pointer').css ('visibility', 'visible');
-            $('#left_pointer').attr ('title', 'Перейти до карти');
+            $('#left_pointer').attr ('title', 'Перейти до інформації');
             $('#right_pointer').attr ('title', 'Перейти до авторизації');
             $('#menu_page').fadeIn('slow');
             $('#tip_text').text ("Зробіть замовлення");
@@ -291,7 +291,7 @@ function rebuildPage (new_page) {
             //$('#left_pointer').css ('display', 'inline');
             //$('#right_pointer').css ('visibility', 'hidden');
             $('#left_pointer').attr ('title', 'Перейти до списку кав’ярень');
-            $('#right_pointer').attr ('title', 'Перейти до меню');
+            $('#right_pointer').attr ('title', 'Перейти до інформації');
             $('#map_canvas').fadeIn();
             $('#tip_text').text ("Вкажіть своє розташування та оберіть кав’ярню на карті");
             if (!map) {
@@ -301,6 +301,11 @@ function rebuildPage (new_page) {
                 shopWasChanged();
             }
             break;
+        case 5:
+            $('#left_pointer').attr ('title', 'Перейти до карти');
+            $('#right_pointer').attr ('title', 'Перейти до меню');
+            $('#about_page').fadeIn('slow');
+            $('#tip_text').text ("Про нас");
         default:
             break;
     }
@@ -610,13 +615,13 @@ $(document).on ('click', '#mapLink', function () {
 
 $(document).on ('click', '#right_pointer', function() {
     page += 1;
-    if (page > 4) page = 1;
+    if (page > 5) page = 1;
     rebuildPage(page);
 });
 
 $(document).on ('click', '#left_pointer', function() {
     page -= 1;
-    if (page < 1) page = 4;
+    if (page < 1) page = 5;
     rebuildPage(page);
 });
 
@@ -748,7 +753,8 @@ $(document).on ('click', '#navigationMenu li', function() {
     }
 });
 
-$(document).on ('click', 'div.shops span', function(){
-    var id = this.parentNode.id.substr(4);
-    //$("#contacts_page ul#infoShop" + id + " li").show();
+$(document).on ('click', 'li.anchor', function(){
+    changePOS(this.parentNode.id.substr(8));
+    //shopWasChanged();
+    rebuildPage(4);
 });
