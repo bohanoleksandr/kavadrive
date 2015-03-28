@@ -1,7 +1,7 @@
 #contacts_page {
     /*text-align: center;*/
     font-size: 18px;
-    width: 320px;
+    max-width: 320px;
     margin: 0 auto;
 }
 

@@ -172,9 +172,9 @@ img {
     z-index: 0;
     font-size: 18px;
     text-align: left;
-    margin-top: 58px;
+    margin-top: 50px;
     padding: 0;
-    width: 200px;
+    width: 150px;
 }
 
 #navigationMenu li {
@@ -204,7 +204,7 @@ label span {
 }
 
 #nav-trigger:checked ~ #site-wrap {
-    right: 200px;
+    right: 160px;
 }
 
 #nav-trigger + label, #site-wrap {
@@ -228,14 +228,34 @@ a:hover {
 #about_page {
     max-width: 700px;
     margin: 0 auto;
+    line-height: 1.7;
 }
 
 #about_page div {
-    margin: 10px auto;
+    margin: 0 auto 30px;
+}
+
+#about_page ul {
+    text-align: justify;
+    padding-left: 15px;
+}
+
+#about_page ul li {
+    margin: 15px 0;
 }
 
 div.center {
     text-align: center;
+    color: #fff;
+}
+
+div.justify {
+    text-align: justify;
+    text-indent: 30px;
+}
+
+span.white {
+    color: #fff;
 }
 
 @media screen and (max-width: 550px){

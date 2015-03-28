@@ -305,7 +305,7 @@ function rebuildPage (new_page) {
             $('#left_pointer').attr ('title', 'Перейти до карти');
             $('#right_pointer').attr ('title', 'Перейти до меню');
             $('#about_page').fadeIn('slow');
-            $('#tip_text').text ("Про нас");
+            $('#tip_text').text ("");
         default:
             break;
     }
@@ -729,23 +729,21 @@ $(document).on ('keyup', 'input.counter', function(e) {
 //});
 
 $(document).on ('click', '#navigationMenu li', function() {
+    $("#nav-trigger")[0].checked = false;
     switch (parseInt(this.id.substr(2))) {
         case 1:
-            $("#nav-trigger")[0].checked = false;
             rebuildPage(2);
             break;
         case 2:
-            //TODO
+            rebuildPage(5);
             break;
         case 3:
             //TODO
             break;
         case 4:
-            $("#nav-trigger")[0].checked = false;
             rebuildPage(3);
             break;
         case 5:
-            $("#nav-trigger")[0].checked = false;
             rebuildPage(4);
             break;
         default:
