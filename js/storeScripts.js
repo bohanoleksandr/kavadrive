@@ -47,7 +47,7 @@ function receiptData () {
             $('#seller').text(' ' + worker);
             $('#shop').text(' ' + shop);
             //$('#modalWindow').modal('hide');
-            if (ordersLength && orders.length > ordersLength) sound();
+            if (ordersLength && orders.length > ordersLength) sound(1);
             ordersLength = orders.length;
             fillTable();
             alarm();
@@ -118,7 +118,7 @@ function buildRow(order, status) {
     }
 
     var visitTime = new Date(order['visitTime']);
-    visitTime.setHours(visitTime.getHours() + 2);
+    visitTime.setHours(visitTime.getHours() + 3);
 
     var visitTimeHour = visitTime.getHours();
     if (visitTimeHour < 10) {
@@ -205,8 +205,17 @@ function get_cookie ( cookie_name )
         return null;
 }
 
-function sound (){
-    $('#notifyAudio')[0].play();
+function sound (track){
+    switch (track) {
+        case 1:
+            $('#notifyAudio')[0].play();
+            break;
+        case 2:
+            $('#alarm')[0].play();
+            break;
+        default:
+            break;
+    }
 }
 
 function alarm () {
@@ -214,7 +223,11 @@ function alarm () {
     var visitTime = null;
     for (var i = 0; i < orders.length; i++) {
         visitTime = new Date (orders[i].visitTime);
-        if (visitTime - now < 60*1000) console.log (orders[i].id);
+        visitTime.setHours(visitTime.getHours() + 3);
+        if (visitTime - now < (10*60*1000)+10000 && visitTime - now > 10*60*1000) {
+            $('#content' + orders[i].id).trigger ('click');
+            sound(2);
+        }
     }
 }
 
@@ -352,6 +365,7 @@ $(document).ready (function() {
     });
 
     $('.closeWindow').click(function () {
+        $('#alarm')[0].pause();
         $('#modalWindow').modal('hide');
     });
 
