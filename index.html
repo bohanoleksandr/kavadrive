@@ -40,17 +40,19 @@
         <div id="site-wrap">
             <div id="main">
                 <div id="header">
-                    <div id="logo">
+                    <div id="logoDiv" class="mapWithout">
                         <a href = "index.html">
-                            <img src = "images/logo.jpg"/>
+                            <img id="logo" src = "images/logo.jpg"/>
                         </a>
                     </div>
 
-                    <div class="headerLines">
+                    <div id="firstHeaderLine" class="headerLines mapWithout">
                         <!--<span id="authenticationLink" class="headerLinks" title="Перейти до авторизації">Авторизація</span>-->
                         <!--<span id="contactsLink" class="headerLinks" title="Переглянути контактні дані усіх кав’ярень">Контакти</span>-->
                         <!--<span id="mapLink" class="headerLinks" title="Подивитись карту із відміченими кав’ярнями">Обрати кав’ярню на карті</span>-->
-                        <span id="ukr" class="movy">ua</span> | <span id="ang" class="movy">en</span> | <span id="rus" class="movy">ru</span>
+                        <span id="divLang">
+                            <span id="ukr" class="movy">ua</span> | <span id="ang" class="movy">en</span> | <span id="rus" class="movy">ru</span>
+                        </span>
                     </div>
 
                     <div class="headerLines">
@@ -58,7 +60,7 @@
                             <span id="customerExit"></span>
                         </span>
                         <div id="trigger">
-                            <label for="nav-trigger">МЕНЮ <span> ☰</span></label>
+                            <label for="nav-trigger">МЕНЮ <img id="menu" src="images/menu.png"/></label>
                         </div>
                     </div>
                 </div>
@@ -207,11 +209,26 @@
                         МІСЦЕ ЗУСТРІЧІ - КАВДРАЙВ - ЗАМОВЛЯЙ ОНЛАЙН!
                     </div>
                 </div>
-                <div id="appendix"></div>
+                <div id="appendix" class="mapWithout"></div>
             </div>
         </div>
-        <div id="adminData">
-            <span>тел. 067-431-2002, kavadrive@gmail.com, Skype: kavadrive</span>
+        <div id="footer" class="mapWithout">
+            <div id="socNetworksLine">
+                <img src="images/vkontakte.png">
+                <img src="images/facebook.png">
+                <img src="images/googlePlus.png">
+                <img src="images/twitter.png">
+                <img src="images/youtube.png">
+                <img src="images/odnoklasniki.png">
+            </div>
+            <div id="footerLinksLine">
+                <span id="span1">Авторизація</span> |
+                <span id="span2">Про нас</span> |
+                <span id="span3">Партнерам</span> |
+                <span id="span4">Обрати кав’ярню</span> |
+                <span id="span5">Кав’ярня на карті</span>
+            </div>
+            <div id="adminData">тел. 067-431-2002, kavadrive@gmail.com, Skype: kavadrive</div>
         </div>
     </body>
 </html>

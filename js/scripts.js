@@ -261,6 +261,7 @@ function preventSelection(element){
 function rebuildPage (new_page) {
     page = new_page;
     $('.pages').hide();
+    $("#navigationMenu li").css('text-decoration', 'none');
     switch (new_page) {
         case 1:
             //$('#left_pointer').css ('display', 'none');
@@ -269,6 +270,8 @@ function rebuildPage (new_page) {
             $('#right_pointer').attr ('title', 'Перейти до авторизації');
             $('#menu_page').fadeIn('slow');
             $('#tip_text').text ("Зробіть замовлення");
+            $('.mapWithout').show();
+            $('#divLang').appendTo('#firstHeaderLine');
             break;
         case 2:
             //$('#left_pointer').css ('display', 'inline');
@@ -278,6 +281,9 @@ function rebuildPage (new_page) {
             $('#authentication_page').fadeIn('slow');
             $('#phoneNumber').focus();
             $('#tip_text').text ("Вкажіть контактні дані");
+            $('.mapWithout').show();
+            $('#divLang').appendTo('#firstHeaderLine');
+            $('#li1').css('text-decoration', 'underline');
             break;
         case 3:
             //$('#left_pointer').css ('display', 'inline');
@@ -286,6 +292,9 @@ function rebuildPage (new_page) {
             $('#right_pointer').attr ('title', 'Перейти до карти');
             $('#contacts_page').fadeIn('slow');
             $('#tip_text').text ("Виберіть кав’ярню");
+            $('.mapWithout').show();
+            $('#divLang').appendTo('#firstHeaderLine');
+            $('#li4').css('text-decoration', 'underline');
             break;
         case 4:
             //$('#left_pointer').css ('display', 'inline');
@@ -293,19 +302,26 @@ function rebuildPage (new_page) {
             $('#left_pointer').attr ('title', 'Перейти до списку кав’ярень');
             $('#right_pointer').attr ('title', 'Перейти до інформації');
             $('#map_canvas').fadeIn();
-            $('#tip_text').text ("Вкажіть своє розташування та оберіть кав’ярню на карті");
+            $('#tip_text').text ("Оберіть кав’ярню на карті");
+            $('.mapWithout').hide();
+            $('#divLang').appendTo('#navigationMenu');
             if (!map) {
                 initialize() ;
             } else {
                 //mapReopen();
                 shopWasChanged();
             }
+            $('#li5').css('text-decoration', 'underline');
             break;
         case 5:
             $('#left_pointer').attr ('title', 'Перейти до карти');
             $('#right_pointer').attr ('title', 'Перейти до меню');
             $('#about_page').fadeIn('slow');
             $('#tip_text').text ("");
+            $('.mapWithout').show();
+            $('#divLang').appendTo('#firstHeaderLine');
+            $('#li2').css('text-decoration', 'underline');
+            break;
         default:
             break;
     }
@@ -731,6 +747,28 @@ $(document).on ('keyup', 'input.counter', function(e) {
 $(document).on ('click', '#navigationMenu li', function() {
     $("#nav-trigger")[0].checked = false;
     switch (parseInt(this.id.substr(2))) {
+        case 1:
+            rebuildPage(2);
+            break;
+        case 2:
+            rebuildPage(5);
+            break;
+        case 3:
+            //TODO
+            break;
+        case 4:
+            rebuildPage(3);
+            break;
+        case 5:
+            rebuildPage(4);
+            break;
+        default:
+            break;
+    }
+});
+
+$(document).on ('click', '#footerLinksLine span', function() {
+    switch (parseInt(this.id.substr(4))) {
         case 1:
             rebuildPage(2);
             break;

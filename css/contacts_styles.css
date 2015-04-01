@@ -18,10 +18,11 @@
 
 li.anchor {
     cursor: pointer;
+    text-decoration: underline;
 }
 
 li.anchor:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .shops span {

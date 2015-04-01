@@ -35,7 +35,7 @@ function initialize() {
     };
 
     var bodyHeight = document.body.offsetHeight;
-    var mapHeight = bodyHeight - 205;
+    var mapHeight = bodyHeight - 110;
     $("#map_canvas").css ('height', mapHeight);
 
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
@@ -76,7 +76,8 @@ function initialize() {
             ({
                 position: shops[i].place,
                 map: map,
-                icon: image
+                icon: image,
+                title: "Натисніть, щоб обрати кав’ярню " + shops[i]['name']
             });
 
             google.maps.event.addListener (markers[i], 'click', function () {
@@ -171,6 +172,6 @@ function shopWasChanged (){
 
 $(window).resize (function() {
     var bodyHeight = document.body.offsetHeight;
-    var mapHeight = bodyHeight - 205;
+    var mapHeight = bodyHeight - 110;
     $("#map_canvas").css ('height', mapHeight);
 });

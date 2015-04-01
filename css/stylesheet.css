@@ -31,26 +31,19 @@ p {
     /*height:100%;*/
     padding: 5px 5px ;
     /*display: inline;*/
-}
-
-#adminData {
-    height: 35px;
-    margin-top: -35px;
-    padding: 0 3%;
-    z-index: 2;
-    position: relative;
+    overflow: hidden;
 }
 
 #header{
     font-size: 18px;
 }
 
-#logo{
+#logoDiv {
     float:left;
     margin-right: 20px;
 }
 
-img {
+#logo {
     height: 80px;
 }
 
@@ -64,14 +57,14 @@ img {
 .movy {
     font-size: 20px;
     cursor: pointer;
-}
-
-.movy:hover {
     text-decoration: underline;
 }
 
+.movy:hover {
+    text-decoration: none;
+}
+
 #trigger {
-    width: 110px;
     display: inline-block;
     margin-left: 30px;
 }
@@ -96,6 +89,10 @@ img {
 
 #customerExit span {
     text-decoration: underline;
+}
+
+img#menu {
+    height: 11px;
 }
 
 #tip_line {
@@ -148,7 +145,6 @@ img {
 #map_canvas {
     min-height: 200px;
     width: 100%;
-    margin-bottom: 10px;
     float: left;
 }
 
@@ -157,7 +153,7 @@ img {
 }
 
 #appendix {
-    height: 30px;
+    height: 90px;
     clear: both;
 }
 
@@ -172,7 +168,7 @@ img {
     z-index: 0;
     font-size: 18px;
     text-align: left;
-    margin-top: 50px;
+    margin-top: 45px;
     padding: 0;
     width: 150px;
 }
@@ -182,9 +178,9 @@ img {
     cursor: pointer;
 }
 
-#navigationMenu li:hover {
-    text-decoration: underline;
-}
+/*#navigationMenu li:hover {*/
+    /*text-decoration: underline;*/
+/*}*/
 
 label[for="nav-trigger"] {
     z-index: 2;
@@ -194,7 +190,7 @@ label[for="nav-trigger"] {
 }
 
 label span {
-    font-size: 24px;
+    /*font-size: 24px;*/
     margin-left: 10px;
 }
 
@@ -258,15 +254,50 @@ span.white {
     color: #fff;
 }
 
-@media screen and (max-width: 550px){
+#footer {
+    height: 95px;
+    margin-top: -95px;
+    padding: 0 3%;
+    z-index: 2;
+    position: relative;
+}
+
+#adminData {
+    height: 25px;
+}
+
+#footerLinksLine {
+    height: 25px;
+    text-align: center;
+}
+
+#socNetworksLine {
+    height: 40px;
+    text-align: center;
+}
+
+#socNetworksLine img {
+    cursor: pointer;
+}
+
+#footerLinksLine span{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#footerLinksLine span:hover{
+    text-decoration: none;
+}
+
+@media screen and (max-width: 600px){
     #header{
         font-size: 14px;
     }
-    #tip_line {
-        font-size: 14px;
-    }
-    #logo {
+    #logoDiv {
         margin-right: 0;
+    }
+    #footer {
+        font-size: 14px;
     }
 }
 
