@@ -261,44 +261,33 @@ function preventSelection(element){
 function rebuildPage (new_page) {
     page = new_page;
     $('.pages').hide();
-    $("#navigationMenu li").css('text-decoration', 'none');
+    $(".clickNav").css('text-decoration', 'none');
+    $('#li' + new_page).css ('text-decoration', 'underline');
+    $('#span' + new_page).css ('text-decoration', 'underline');
+    $('#divLang').appendTo('#firstHeaderLine');
+    $('.mapWithout').show();
+
     switch (new_page) {
         case 1:
-            //$('#left_pointer').css ('display', 'none');
-            //$('#right_pointer').css ('visibility', 'visible');
             $('#left_pointer').attr ('title', 'Перейти до інформації');
             $('#right_pointer').attr ('title', 'Перейти до авторизації');
             $('#menu_page').fadeIn('slow');
             $('#tip_text').text ("Зробіть замовлення");
-            $('.mapWithout').show();
-            $('#divLang').appendTo('#firstHeaderLine');
             break;
         case 2:
-            //$('#left_pointer').css ('display', 'inline');
-            //$('#right_pointer').css ('visibility', 'visible');
             $('#left_pointer').attr ('title', 'Перейти до меню');
             $('#right_pointer').attr ('title', 'Перейти до списку кав’ярень');
             $('#authentication_page').fadeIn('slow');
             $('#phoneNumber').focus();
             $('#tip_text').text ("Вкажіть контактні дані");
-            $('.mapWithout').show();
-            $('#divLang').appendTo('#firstHeaderLine');
-            $('#li1').css('text-decoration', 'underline');
             break;
         case 3:
-            //$('#left_pointer').css ('display', 'inline');
-            //$('#right_pointer').css ('visibility', 'visible');
             $('#left_pointer').attr ('title', 'Перейти до авторизації');
             $('#right_pointer').attr ('title', 'Перейти до карти');
             $('#contacts_page').fadeIn('slow');
             $('#tip_text').text ("Виберіть кав’ярню");
-            $('.mapWithout').show();
-            $('#divLang').appendTo('#firstHeaderLine');
-            $('#li4').css('text-decoration', 'underline');
             break;
         case 4:
-            //$('#left_pointer').css ('display', 'inline');
-            //$('#right_pointer').css ('visibility', 'hidden');
             $('#left_pointer').attr ('title', 'Перейти до списку кав’ярень');
             $('#right_pointer').attr ('title', 'Перейти до інформації');
             $('#map_canvas').fadeIn();
@@ -308,19 +297,14 @@ function rebuildPage (new_page) {
             if (!map) {
                 initialize() ;
             } else {
-                //mapReopen();
                 shopWasChanged();
             }
-            $('#li5').css('text-decoration', 'underline');
             break;
         case 5:
             $('#left_pointer').attr ('title', 'Перейти до карти');
             $('#right_pointer').attr ('title', 'Перейти до меню');
             $('#about_page').fadeIn('slow');
             $('#tip_text').text ("");
-            $('.mapWithout').show();
-            $('#divLang').appendTo('#firstHeaderLine');
-            $('#li2').css('text-decoration', 'underline');
             break;
         default:
             break;
@@ -744,53 +728,37 @@ $(document).on ('keyup', 'input.counter', function(e) {
 //    $("#nav-trigger")[0].checked = false;
 //});
 
-$(document).on ('click', '#navigationMenu li', function() {
+$(document).on ('click', '.clickNav', function() {
     $("#nav-trigger")[0].checked = false;
-    switch (parseInt(this.id.substr(2))) {
-        case 1:
-            rebuildPage(2);
-            break;
-        case 2:
-            rebuildPage(5);
-            break;
-        case 3:
-            //TODO
-            break;
-        case 4:
-            rebuildPage(3);
-            break;
-        case 5:
-            rebuildPage(4);
-            break;
-        default:
-            break;
+    var new_page = null;
+    if (this.parentNode.id == "navigationMenu") {
+        new_page = parseInt(this.id.substr(2));
+    } else {
+        new_page = parseInt(this.id.substr(4));
     }
-});
-
-$(document).on ('click', '#footerLinksLine span', function() {
-    switch (parseInt(this.id.substr(4))) {
-        case 1:
-            rebuildPage(2);
-            break;
-        case 2:
-            rebuildPage(5);
-            break;
-        case 3:
-            //TODO
-            break;
-        case 4:
-            rebuildPage(3);
-            break;
-        case 5:
-            rebuildPage(4);
-            break;
-        default:
-            break;
-    }
+    if (new_page!=6) rebuildPage (new_page);
 });
 
 $(document).on ('click', 'li.anchor', function(){
     changePOS(this.parentNode.id.substr(8));
     //shopWasChanged();
     rebuildPage(4);
+});
+
+$(document).on ('click', '#socNetworksLine img', function() {
+//    alert (this.src.substr(24));
+    switch (this.src.substr(24)) {
+        case "facebook.png":
+            window.open ('https://www.facebook.com/pages/KAVAdrive/842493369146499', '_blank');
+            break;
+        case "googlePlus.png":
+            window.open ('https://plus.google.com/');
+            break;
+        case "vkontakte.png":
+            window.open ('https://vk.com/kava_drive');
+            break;
+        case "twitter.png":
+            window.open('https://twitter.com/');
+            break;
+    }
 });

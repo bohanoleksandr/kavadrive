@@ -55,13 +55,18 @@ p {
 }
 
 .movy {
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     text-decoration: underline;
 }
 
 .movy:hover {
     text-decoration: none;
+}
+
+#ukr {
+    text-decoration: none;
+    color: #FFFFFF;
 }
 
 #trigger {
@@ -153,7 +158,7 @@ img#menu {
 }
 
 #appendix {
-    height: 90px;
+    height: 120px;
     clear: both;
 }
 
@@ -176,6 +181,10 @@ img#menu {
 #navigationMenu li {
     height: 40px;
     cursor: pointer;
+}
+
+#li1 {
+    text-decoration: underline;
 }
 
 /*#navigationMenu li:hover {*/
@@ -260,6 +269,7 @@ span.white {
     padding: 0 3%;
     z-index: 2;
     position: relative;
+    text-align: center;
 }
 
 #adminData {
@@ -268,25 +278,28 @@ span.white {
 
 #footerLinksLine {
     height: 25px;
-    text-align: center;
+}
+
+#span1 {
+    text-decoration: underline;
 }
 
 #socNetworksLine {
     height: 40px;
-    text-align: center;
 }
 
 #socNetworksLine img {
     cursor: pointer;
+    margin: 0 5px;
 }
 
 #footerLinksLine span{
     cursor: pointer;
-    text-decoration: underline;
+    margin: 0 10px;
 }
 
-#footerLinksLine span:hover{
-    text-decoration: none;
+#footerLinksLine span:hover {
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 600px){
