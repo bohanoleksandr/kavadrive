@@ -306,6 +306,8 @@ function rebuildPage (new_page) {
             $('#about_page').fadeIn('slow');
             $('#tip_text').text ("");
             break;
+        case 6:
+            $('#partners_page').fadeIn('slow');
         default:
             break;
     }
@@ -615,13 +617,13 @@ $(document).on ('click', '#mapLink', function () {
 
 $(document).on ('click', '#right_pointer', function() {
     page += 1;
-    if (page > 5) page = 1;
+    if (page > 6) page = 1;
     rebuildPage(page);
 });
 
 $(document).on ('click', '#left_pointer', function() {
     page -= 1;
-    if (page < 1) page = 5;
+    if (page < 1) page = 6;
     rebuildPage(page);
 });
 
@@ -736,7 +738,7 @@ $(document).on ('click', '.clickNav', function() {
     } else {
         new_page = parseInt(this.id.substr(4));
     }
-    if (new_page!=6) rebuildPage (new_page);
+    rebuildPage (new_page);
 });
 
 $(document).on ('click', 'li.anchor', function(){
