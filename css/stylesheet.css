@@ -158,7 +158,7 @@ img#menu {
 }
 
 #appendix {
-    height: 120px;
+    height: 130px;
     clear: both;
 }
 
@@ -237,7 +237,7 @@ a:hover {
 }
 
 #about_page div {
-    margin: 0 auto 30px;
+    margin: 0 auto 10px;
 }
 
 #about_page ul {
@@ -264,43 +264,48 @@ span.white {
 }
 
 #footer {
-    height: 95px;
-    margin-top: -95px;
+    /*height: 135px;*/
+    margin-top: -135px;
     padding: 0 3%;
     z-index: 2;
     position: relative;
     text-align: center;
 }
 
-#adminData {
-    height: 25px;
+.footerLines {
+    padding: 5px 0;
 }
 
-#footerLinksLine {
-    height: 25px;
-}
+/*#adminData {*/
+    /*height: 25px;*/
+/*}*/
 
-#span1 {
+/*#navLine {*/
+    /*height: 25px;*/
+/*}*/
+
+#nav1 {
     text-decoration: underline;
 }
 
-#socNetworksLine {
-    height: 40px;
-}
+/*#networksLine {*/
+    /*height: 40px;*/
+/*}*/
 
-#socNetworksLine img {
+#networksLine img {
     cursor: pointer;
     margin: 0 5px;
 }
 
-#footerLinksLine span{
+#navLine div{
     cursor: pointer;
     margin: 0 10px;
+    display: inline-block;
 }
 
-#footerLinksLine span:hover {
-    text-decoration: underline;
-}
+/*#footerLinksLine span:hover {*/
+    /*text-decoration: underline;*/
+/*}*/
 
 @media screen and (max-width: 600px){
     #header{

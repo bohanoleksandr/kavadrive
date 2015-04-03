@@ -261,11 +261,11 @@ function preventSelection(element){
 function rebuildPage (new_page) {
     page = new_page;
     $('.pages').hide();
-    $(".clickNav").css('text-decoration', 'none');
+    $('.clickNav').css('text-decoration', 'none');
     $('#li' + new_page).css ('text-decoration', 'underline');
-    $('#span' + new_page).css ('text-decoration', 'underline');
+    $('#nav' + new_page).css ('text-decoration', 'underline');
     $('#divLang').appendTo('#firstHeaderLine');
-    $('.mapWithout').show();
+    $('.hideFromMap').show();
 
     switch (new_page) {
         case 1:
@@ -292,7 +292,7 @@ function rebuildPage (new_page) {
             $('#right_pointer').attr ('title', 'Перейти до інформації');
             $('#map_canvas').fadeIn();
             $('#tip_text').text ("Оберіть кав’ярню на карті");
-            $('.mapWithout').hide();
+            $('.hideFromMap').hide();
             $('#divLang').appendTo('#navigationMenu');
             if (!map) {
                 initialize() ;
@@ -386,6 +386,21 @@ function manualChangeOfQuantity (input){
         $(input).val(order.content[itemId]);
     }
     input.blur();
+}
+
+function footerResponsive (){
+    var footerHeight = $('#footer')[0].offsetHeight;
+    var margin = 0 - footerHeight;
+    var appendix = footerHeight +10;
+    $('#footer').css ('margin-top', margin);
+    $('#appendix').css ('height', appendix);
+//    for (var i=0; i < 3; i++) {
+//        if ($('.footerLines')[i].offsetHeight > 50) {
+//            $('.footerLines')[i].css('display', 'none');
+//        } else {
+//            $('.footerLines')[i].css('display', 'block');
+//        }
+//    }
 }
 
 $(document).on('click', '#savePhone', function phone(){
@@ -710,6 +725,7 @@ $(document).on ('change', '#mail', function() {
 $(document).ready (function(){
     $("#authentication_page").trigger('reset');
     $("#nav-trigger")[0].checked = false;
+    footerResponsive();
 });
 
 $(document).on ('focus', 'input.counter', function() {
@@ -736,7 +752,7 @@ $(document).on ('click', '.clickNav', function() {
     if (this.parentNode.id == "navigationMenu") {
         new_page = parseInt(this.id.substr(2));
     } else {
-        new_page = parseInt(this.id.substr(4));
+        new_page = parseInt(this.id.substr(3));
     }
     rebuildPage (new_page);
 });
@@ -747,7 +763,7 @@ $(document).on ('click', 'li.anchor', function(){
     rebuildPage(4);
 });
 
-$(document).on ('click', '#socNetworksLine img', function() {
+$(document).on ('click', '#networksLine img', function() {
 //    alert (this.src.substr(24));
     switch (this.src.substr(24)) {
         case "facebook.png":
@@ -763,4 +779,8 @@ $(document).on ('click', '#socNetworksLine img', function() {
             window.open('https://twitter.com/');
             break;
     }
+});
+
+$(window).resize(function(){
+    footerResponsive();
 });
