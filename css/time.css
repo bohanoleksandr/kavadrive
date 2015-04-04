@@ -13,6 +13,18 @@
     font-size: 36px;
 }
 
+div#hours {
+    width: 40px;
+}
+
+div#minutes {
+    width: 40px;
+}
+
+div#double_dot {
+    width: 10px;
+}
+
 #order_date_menu {
 	background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 	background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
@@ -27,6 +39,10 @@
 	float: right;
 }
 
+#clockDigits div {
+    display: inline-block;
+}
+
 .timeButtonsDiv {
 	height: 21px;
 }
@@ -34,8 +50,8 @@
 .button_time_reg_up {
 	width: 0;
 	height: 0;
-	border-left: 18px solid transparent; /* Прозрачные границы */
-	border-right: 18px solid transparent; /* Прозрачные границы */
+	border-left: 20px solid transparent; /* Прозрачные границы */
+	border-right: 20px solid transparent; /* Прозрачные границы */
 	border-bottom: 21px solid;
 	border-top: 0;
 	border-bottom-color: #3F1513;
@@ -46,8 +62,8 @@
 .button_time_reg_down {
 	width: 0;
 	height: 0;
-	border-left: 18px solid transparent; /* Прозрачные границы */
-	border-right: 18px solid transparent; /* Прозрачные границы */
+	border-left: 20px solid transparent; /* Прозрачные границы */
+	border-right: 20px solid transparent; /* Прозрачные границы */
 	border-top: 21px solid;
 	border-bottom: 0;
 	border-top-color: #3F1513;
@@ -72,7 +88,7 @@
 #order_date {
     float: left;
 	font-size: 36px;
-    width: 37px;
+    width: 40px;
 }
 
 #order_month {
@@ -93,4 +109,6 @@
 	text-align: left;
 	margin-left: 5px;
 }
+
+
 

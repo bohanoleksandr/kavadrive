@@ -391,7 +391,7 @@ function manualChangeOfQuantity (input){
 function footerResponsive (){
     var footerHeight = $('#footer')[0].offsetHeight;
     var margin = 0 - footerHeight;
-    var appendix = footerHeight +10;
+    var appendix = footerHeight + 10;
     $('#footer').css ('margin-top', margin);
     $('#appendix').css ('height', appendix);
 //    for (var i=0; i < 3; i++) {

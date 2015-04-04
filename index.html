@@ -12,6 +12,7 @@
         <link href="css/menu_styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/auth_styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/contacts_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="css/partners_styles.css" rel="stylesheet" type="text/css"/>
 
         <script type="text/javascript" src="http://ulogin.ru/js/ulogin.js"></script>
         <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
@@ -92,11 +93,11 @@
                                     <div id="hoursUp" class="button_time_reg_up" title="На годину пізніше"></div>
                                     <div id="minutesUp" class="button_time_reg_up" title="На 5 хвилин пізніше"></div>
                                 </div>
-                                <!--<div id="clockDigits">-->
-                                    <span id="hours"></span>
-                                    <span id="double_dot">:</span>
-                                    <span id="minutes"></span>
-                                <!--</div>-->
+                                <div id="clockDigits">
+                                    <div id="hours"></div>
+                                    <div id="double_dot">:</div>
+                                    <div id="minutes"></div>
+                                </div>
                                 <div class="timeButtonsDiv">
                                     <div id="hoursDown" class="button_time_reg_down" title="На годину раніше"></div>
                                     <div id="minutesDown" class="button_time_reg_down" title="На 5 хвилин раніше"></div>
@@ -212,18 +213,18 @@
                 </div>
 
                 <div id="partners_page" class="pages">
-                    <div class="main">
-                        <form action="" class="form" method="post" >
+                    <div id="addCafe">
+                        <form action="" id="partners" method="post" >
                             <div class="zagolovok1">Бажаєте приєднати Ваш заклад до мережі КАВАДРАЙВ?</div>
-                            <div class="zagolovok">Назва закладу</div>  <input class="input" type="text" name=""></input>
-                            <div class="zagolovok">Географічні координати </div><input class="input" type="text" name=""></input>
-                            <div class="zagolovok">Електрона пошта</div> <input class="input" type="text" name=""></input>
-                            <div class="zagolovok">Телефон робочий</div><input class="input" type="text" name=""></input>
-                            <div class="zagolovok">Телефон мобільний </div><input class="input" type="text" name=""></input>
-                            <div class="zagolovok">Skype</div><input class="input" type="text" name=""></input>
-                            <div class="zagolovok">Адреса закладу</div> <input class="input" type="text" name=""></input>
-                            <div class="zagolovok">Контактна особа</div> <input class="input" type="text" name=""></input>
-                            <button class="button" type="button">Приєднатися</button>
+                            <div class="zagolovok">Назва закладу</div>  <input class="input" type="text" name="">
+                            <div class="zagolovok">Географічні координати </div><input class="input" type="text" name="">
+                            <div class="zagolovok">Електрона пошта</div> <input class="input" type="text" name="">
+                            <div class="zagolovok">Телефон робочий</div><input class="input" type="text" name="">
+                            <div class="zagolovok">Телефон мобільний </div><input class="input" type="text" name="">
+                            <div class="zagolovok">Skype</div><input class="input" type="text" name="">
+                            <div class="zagolovok">Адреса закладу</div> <input class="input" type="text" name="">
+                            <div class="zagolovok">Контактна особа</div> <input class="input" type="text" name="">
+                            <button id="partnersButton" type="button">Приєднатися</button>
                         </form>
                     </div>
                 </div>

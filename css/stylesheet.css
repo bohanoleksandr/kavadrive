@@ -55,9 +55,9 @@ p {
 }
 
 .movy {
-    font-size: 18px;
     cursor: pointer;
     text-decoration: underline;
+    margin: 5px;
 }
 
 .movy:hover {
@@ -194,7 +194,7 @@ img#menu {
 label[for="nav-trigger"] {
     z-index: 2;
     cursor: pointer;
-    font-size: 18px;
+    /*font-size: 18px;*/
     height: 40px;
 }
 
@@ -266,14 +266,15 @@ span.white {
 #footer {
     /*height: 135px;*/
     margin-top: -135px;
-    padding: 0 3%;
+    padding: 5px;
     z-index: 2;
     position: relative;
     text-align: center;
 }
 
 .footerLines {
-    padding: 5px 0;
+    padding-top: 5px;
+    line-height: 2;
 }
 
 /*#adminData {*/
@@ -309,13 +310,19 @@ span.white {
 
 @media screen and (max-width: 600px){
     #header{
-        font-size: 14px;
+        font-size: 16px;
     }
     #logoDiv {
         margin-right: 0;
     }
     #footer {
         font-size: 14px;
+    }
+    #logo {
+        height: 60px;
+    }
+    .headerLines {
+        height: 30px;
     }
 }
 

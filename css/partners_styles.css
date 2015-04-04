@@ -1,0 +1,81 @@
+#addCafe {
+    height: 660px;
+    padding: 20px;
+    width: 370px;
+    margin: 40px auto 10px auto;
+    background: #792a26;
+    -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+}
+
+input.input {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    width: 360px;
+    float: left;
+    height: 30px;
+    border-radius: 2px;
+    background: #ebca90;
+    border: solid 1px #ffffff;
+    font-size: 18px;
+}
+
+input.input:focus {
+    background: #ffffff;
+}
+
+.zagolovok{
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 3px;
+    color:#cccccc;
+    font-family: Calibri, Arial, sans-serif;
+    font-size: 14pt;
+    float: left;
+    height: 20px;
+    width: 200px;
+}
+
+.zagolovok1{
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+    color:#cccccc;
+    font-family: Calibri, Arial, sans-serif;
+    font-size: 14pt;
+    text-align: center;
+}
+
+form#partners{
+    margin-left: 0px;
+}
+
+button#partnersButton {
+    float:left;
+    margin-top: 15px;
+    margin-left: 200px;
+    background: #74ac40;
+    width: 160px;
+    height: 40px;
+    border: none;
+    color:#ffffff;
+    font-family: Calibri, Arial, sans-serif;
+    font-size: 12pt;
+    border-radius: 3px;
+    -webkit-box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
+    -moz-box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
+    box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
+
+}
+button#partnersButton:hover{
+    background: #798287;
+    color:#000000;
+}
+button#partnersButton:active{
+    -webkit-box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
+    -moz-box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
+    box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
+    color:#ffffff;
+    background: #74ac40;
+}

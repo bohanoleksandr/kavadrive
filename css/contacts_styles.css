@@ -16,9 +16,10 @@
     color: #FFF;
 }
 
-li.anchor {
+#contacts_page ul li.anchor {
     cursor: pointer;
     text-decoration: underline;
+    color: #cccccc;
 }
 
 li.anchor:hover {
