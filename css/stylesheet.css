@@ -97,7 +97,7 @@ p {
 }
 
 img#menu {
-    height: 11px;
+    height: 14px;
 }
 
 #tip_line {
@@ -173,7 +173,7 @@ img#menu {
     z-index: 0;
     font-size: 18px;
     text-align: left;
-    margin-top: 45px;
+    margin-top: 6px;
     padding: 0;
     width: 150px;
 }
@@ -194,7 +194,7 @@ img#menu {
 label[for="nav-trigger"] {
     z-index: 2;
     cursor: pointer;
-    /*font-size: 18px;*/
+    font-size: 20px;
     height: 40px;
 }
 

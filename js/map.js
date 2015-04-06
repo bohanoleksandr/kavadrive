@@ -19,7 +19,7 @@ var image = {
 function initialize() {
 
     var mapOptions = {
-        center: new google.maps.LatLng(49.0275,31.482778),
+        center: new google.maps.LatLng(49.233083,28.468217),
         zoom: 12,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };

@@ -118,7 +118,8 @@ function buildRow(order, status) {
     }
 
     var visitTime = new Date(order['visitTime']);
-    visitTime.setHours(visitTime.getHours() + 3);
+    var difference = visitTime.getTimezoneOffset()/60;
+    visitTime.setHours(visitTime.getHours() - difference);
 
     var visitTimeHour = visitTime.getHours();
     if (visitTimeHour < 10) {

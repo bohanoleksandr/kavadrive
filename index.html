@@ -13,6 +13,7 @@
         <link href="css/auth_styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/contacts_styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/partners_styles.css" rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" href="/images/favicon.jpg" type="image/jpg">
 
         <script type="text/javascript" src="http://ulogin.ru/js/ulogin.js"></script>
         <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
@@ -34,6 +35,9 @@
                 <li id="li4" class="clickNav">Кав’ярня на карті</li>
                 <li id="li5" class="clickNav">Про нас</li>
                 <li id="li6" class="clickNav">Партнерам</li>
+                <li id="divLang">
+                    <span id="ukr" class="movy">ua</span> | <span id="ang" class="movy">en</span> | <span id="rus" class="movy">ru</span>
+                </li>
             </ul>
         </div>
 
@@ -48,22 +52,20 @@
                         </a>
                     </div>
 
-                    <div id="firstHeaderLine" class="headerLines hideFromMap">
+                    <div id="firstHeaderLine" class="headerLines">
                         <!--<span id="authenticationLink" class="headerLinks" title="Перейти до авторизації">Авторизація</span>-->
                         <!--<span id="contactsLink" class="headerLinks" title="Переглянути контактні дані усіх кав’ярень">Контакти</span>-->
                         <!--<span id="mapLink" class="headerLinks" title="Подивитись карту із відміченими кав’ярнями">Обрати кав’ярню на карті</span>-->
-                        <span id="divLang">
-                            <span id="ukr" class="movy">ua</span> | <span id="ang" class="movy">en</span> | <span id="rus" class="movy">ru</span>
-                        </span>
+
+                        <div id="trigger">
+                            <label for="nav-trigger">МЕНЮ <img id="menu" src="images/navMenu.png"/></label>
+                        </div>
                     </div>
 
-                    <div class="headerLines">
+                    <div class="headerLines hideFromMap">
                         <span id="customerId">
                             <span id="customerExit"></span>
                         </span>
-                        <div id="trigger">
-                            <label for="nav-trigger">МЕНЮ <img id="menu" src="images/menu.png"/></label>
-                        </div>
                     </div>
                 </div>
 
@@ -216,14 +218,14 @@
                     <div id="addCafe">
                         <form action="" id="partners" method="post" >
                             <div class="zagolovok1">Бажаєте приєднати Ваш заклад до мережі КАВАДРАЙВ?</div>
-                            <div class="zagolovok">Назва закладу</div>  <input class="input" type="text" name="">
-                            <div class="zagolovok">Географічні координати </div><input class="input" type="text" name="">
-                            <div class="zagolovok">Електрона пошта</div> <input class="input" type="text" name="">
-                            <div class="zagolovok">Телефон робочий</div><input class="input" type="text" name="">
-                            <div class="zagolovok">Телефон мобільний </div><input class="input" type="text" name="">
-                            <div class="zagolovok">Skype</div><input class="input" type="text" name="">
-                            <div class="zagolovok">Адреса закладу</div> <input class="input" type="text" name="">
-                            <div class="zagolovok">Контактна особа</div> <input class="input" type="text" name="">
+                            <div class="zagolovok">Назва закладу:</div>  <input class="input" type="text" name="">
+                            <div class="zagolovok">Географічні координати:</div><input class="input" type="text" name="">
+                            <div class="zagolovok">Електрона пошта:</div> <input class="input" type="text" name="">
+                            <div class="zagolovok">Телефон робочий:</div><input class="input" type="text" name="">
+                            <div class="zagolovok">Телефон мобільний:</div><input class="input" type="text" name="">
+                            <div class="zagolovok">Skype:</div><input class="input" type="text" name="">
+                            <div class="zagolovok">Адреса закладу:</div> <input class="input" type="text" name="">
+                            <div class="zagolovok">Контактна особа:</div> <input class="input" type="text" name="">
                             <button id="partnersButton" type="button">Приєднатися</button>
                         </form>
                     </div>

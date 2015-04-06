@@ -21,6 +21,8 @@ var menuElems = [];
 
 var map = null;
 
+var currentLang = 'ukr';
+
 function Item(name, amount, price) {
     this.name = name;
     this.amount = amount;
@@ -51,8 +53,19 @@ ga('create', 'UA-58458963-1', 'auto');
 ga('send', 'pageview');
 
 function receiptData () {
+    defineLanguage();
+
+    var getMenuUrl = 'php/getMenu.php';
+    var authUrl = 'php/authentication.php';
+    var getShopsUrl = 'php/getShops.php';
+    if (currentLang != 'ukr') {
+        getMenuUrl = '../' + getMenuUrl;
+        authUrl = '../' + authUrl;
+        getShopsUrl = '../' + getShopsUrl;
+    }
+
     $.ajax({
-        url: 'php/getMenu.php',
+        url: getMenuUrl,
         type: 'POST',
         cache: false,
         success: function(msg){
@@ -68,7 +81,7 @@ function receiptData () {
     });
 
     $.ajax({
-        url: 'php/authentication.php',
+        url: authUrl,
         type: 'POST',
         cache: false,
         success: function (msg){
@@ -90,7 +103,7 @@ function receiptData () {
     });
 
     $.ajax({
-        url: 'php/getShops.php',
+        url: getShopsUrl,
         type: 'POST',
         cache: false,
         success: function (msg) {
@@ -264,7 +277,6 @@ function rebuildPage (new_page) {
     $('.clickNav').css('text-decoration', 'none');
     $('#li' + new_page).css ('text-decoration', 'underline');
     $('#nav' + new_page).css ('text-decoration', 'underline');
-    $('#divLang').appendTo('#firstHeaderLine');
     $('.hideFromMap').show();
 
     switch (new_page) {
@@ -293,12 +305,11 @@ function rebuildPage (new_page) {
             $('#map_canvas').fadeIn();
             $('#tip_text').text ("Оберіть кав’ярню на карті");
             $('.hideFromMap').hide();
-            $('#divLang').appendTo('#navigationMenu');
-            if (!map) {
+            //if (!map) {
                 initialize() ;
-            } else {
-                shopWasChanged();
-            }
+            //} else {
+            //    shopWasChanged();
+            //}
             break;
         case 5:
             $('#left_pointer').attr ('title', 'Перейти до карти');
@@ -401,6 +412,15 @@ function footerResponsive (){
 //            $('.footerLines')[i].css('display', 'block');
 //        }
 //    }
+}
+
+function defineLanguage () {
+    var thisFile = document.location.href;
+    if (thisFile.substr(thisFile.lastIndexOf('/') - 2, 2) == 'en') {
+        currentLang = 'eng';
+    } else if (thisFile.substr(thisFile.lastIndexOf('/') - 2, 2) == 'ru') {
+        currentLang = 'rus';
+    }
 }
 
 $(document).on('click', '#savePhone', function phone(){
@@ -764,19 +784,22 @@ $(document).on ('click', 'li.anchor', function(){
 });
 
 $(document).on ('click', '#networksLine img', function() {
-//    alert (this.src.substr(24));
-    switch (this.src.substr(24)) {
+    var lastIndexOfSlash = this.src.lastIndexOf('/');
+    var filename = this.src.slice(lastIndexOfSlash + 1);
+    switch (filename) {
         case "facebook.png":
-            window.open ('https://www.facebook.com/pages/KAVAdrive/842493369146499', '_blank');
+            window.open ('https://www.facebook.com/');
             break;
         case "googlePlus.png":
             window.open ('https://plus.google.com/');
             break;
         case "vkontakte.png":
-            window.open ('https://vk.com/kava_drive');
+            window.open ('https://vk.com/');
             break;
         case "twitter.png":
             window.open('https://twitter.com/');
+            break;
+        default:
             break;
     }
 });
