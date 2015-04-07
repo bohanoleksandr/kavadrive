@@ -13,7 +13,7 @@
         <link href="css/auth_styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/contacts_styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/partners_styles.css" rel="stylesheet" type="text/css"/>
-        <link rel="shortcut icon" href="/images/favicon.jpg" type="image/jpg">
+        <link href="/images/favicon.jpg" rel="shortcut icon" type="image/jpg">
 
         <script type="text/javascript" src="http://ulogin.ru/js/ulogin.js"></script>
         <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
@@ -29,14 +29,16 @@
     <body>
         <div id="ground">
             <ul id="navigationMenu">
-                <li id="li1" class="clickNav">Головна</li>
-                <li id="li2" class="clickNav">Авторизація</li>
-                <li id="li3" class="clickNav">Обрати кав’ярню</li>
-                <li id="li4" class="clickNav">Кав’ярня на карті</li>
-                <li id="li5" class="clickNav">Про нас</li>
-                <li id="li6" class="clickNav">Партнерам</li>
+                <li id="li1" class="clickNav textLink">Головна</li>
+                <li id="li2" class="clickNav textLink">Авторизація</li>
+                <li id="li3" class="clickNav textLink">Обрати кав’ярню</li>
+                <li id="li4" class="clickNav textLink">Кав’ярня на карті</li>
+                <li id="li5" class="clickNav textLink">Партнерам</li>
+                <li id="li6" class="clickNav textLink">Про нас</li>
                 <li id="divLang">
-                    <span id="ukr" class="movy">ua</span> | <span id="ang" class="movy">en</span> | <span id="rus" class="movy">ru</span>
+                    <span id="ukr" class="movy textLink">ua</span> |
+                    <span id="ang" class="movy textLink">en</span> |
+                    <span id="rus" class="movy textLink">ru</span>
                 </li>
             </ul>
         </div>
@@ -58,7 +60,7 @@
                         <!--<span id="mapLink" class="headerLinks" title="Подивитись карту із відміченими кав’ярнями">Обрати кав’ярню на карті</span>-->
 
                         <div id="trigger">
-                            <label for="nav-trigger">МЕНЮ <img id="menu" src="images/navMenu.png"/></label>
+                            <label for="nav-trigger" class="textLink">МЕНЮ <img id="menu" src="images/navMenu.png"/></label>
                         </div>
                     </div>
 
@@ -70,7 +72,7 @@
                 </div>
 
                 <div id="tip_line">
-                    <div id="left_pointer" class="pointers">&lsaquo;</div>
+                    <div id="left_pointer" class="pointers" title="Перейти до інформації про мережу KavaDrive">&lsaquo;</div>
                         <div id="tip_container">
                             <div id="tip_text">Зробіть замовлення</div>
                         </div>
@@ -122,7 +124,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id = "POS" class="blocks">Обрати кав’ярню <!--(<span id="changePos">обрати</span>)--></div>
+                        <div id = "POS" class="blocks textLink">Обрати кав’ярню <!--(<span id="changePos">обрати</span>)--></div>
                         <div id="thanks" class="blocks"></div>
                         <div id="magicButton">
                             <button id="saveOrder" class="greenButton" title="Відправити замовлення">Замовити</button>
@@ -162,14 +164,31 @@
                         <span>Соціальна мережа</span>
                     </div>
                     <div id="uLogin" data-ulogin="display=panel;fields=first_name,last_name;
-                        providers=vkontakte,facebook,google,yandex,mailru;
-                        hidden=other;callback=preview;redirect_uri=" hidden>
+                        providers=facebook,vkontakte,googleplus,linkedin,twitter;
+                        callback=preview;redirect_uri=" hidden>
                     </div>
                 </form>
 
                 <div id = "contacts_page" class="pages"></div>
 
                 <div id="map_canvas" class="pages"></div>
+
+                <div id="partners_page" class="pages">
+                    <div id="addCafe">
+                        <form action="" id="partners" method="post" >
+                            <div class="zagolovok1">Бажаєте приєднати Ваш заклад до мережі КАВАДРАЙВ?</div>
+                            <div class="zagolovok">Назва закладу:</div>  <input class="input" type="text" name="">
+                            <div class="zagolovok">Географічні координати:</div><input class="input" type="text" name="">
+                            <div class="zagolovok">Електрона пошта:</div> <input class="input" type="text" name="">
+                            <div class="zagolovok">Телефон робочий:</div><input class="input" type="text" name="">
+                            <div class="zagolovok">Телефон мобільний:</div><input class="input" type="text" name="">
+                            <div class="zagolovok">Skype:</div><input class="input" type="text" name="">
+                            <div class="zagolovok">Адреса закладу:</div> <input class="input" type="text" name="">
+                            <div class="zagolovok">Контактна особа:</div> <input class="input" type="text" name="">
+                            <button id="partnersButton" type="button">Приєднатися</button>
+                        </form>
+                    </div>
+                </div>
 
                 <div id="about_page" class="pages">
                     <div class="center">
@@ -214,23 +233,6 @@
                     </div>
                 </div>
 
-                <div id="partners_page" class="pages">
-                    <div id="addCafe">
-                        <form action="" id="partners" method="post" >
-                            <div class="zagolovok1">Бажаєте приєднати Ваш заклад до мережі КАВАДРАЙВ?</div>
-                            <div class="zagolovok">Назва закладу:</div>  <input class="input" type="text" name="">
-                            <div class="zagolovok">Географічні координати:</div><input class="input" type="text" name="">
-                            <div class="zagolovok">Електрона пошта:</div> <input class="input" type="text" name="">
-                            <div class="zagolovok">Телефон робочий:</div><input class="input" type="text" name="">
-                            <div class="zagolovok">Телефон мобільний:</div><input class="input" type="text" name="">
-                            <div class="zagolovok">Skype:</div><input class="input" type="text" name="">
-                            <div class="zagolovok">Адреса закладу:</div> <input class="input" type="text" name="">
-                            <div class="zagolovok">Контактна особа:</div> <input class="input" type="text" name="">
-                            <button id="partnersButton" type="button">Приєднатися</button>
-                        </form>
-                    </div>
-                </div>
-
                 <div id="appendix" class="hideFromMap"></div>
             </div>
         </div>
@@ -243,12 +245,12 @@
                 <img src="images/twitter.png">
             </div>
             <div id="navLine" class="footerLines">
-                <div id="nav1" class="clickNav">Головна</div>
-                <div id="nav2" class="clickNav">Авторизація</div>
-                <div id="nav3" class="clickNav">Обрати кав’ярню</div>
-                <div id="nav4" class="clickNav">Кав’ярня на карті</div>
-                <div id="nav5" class="clickNav">Про нас</div>
-                <div id="nav6" class="clickNav">Партнерам</div>
+                <div id="nav1" class="clickNav textLink">Головна</div>
+                <div id="nav2" class="clickNav textLink">Авторизація</div>
+                <div id="nav3" class="clickNav textLink">Обрати кав’ярню</div>
+                <div id="nav4" class="clickNav textLink">Кав’ярня на карті</div>
+                <div id="nav5" class="clickNav textLink">Партнерам</div>
+                <div id="nav6" class="clickNav textLink">Про нас</div>
             </div>
             <div id="adminData"  class="footerLines">тел. 067-431-2002, kavadrive@gmail.com, Skype: kavadrive</div>
         </div>

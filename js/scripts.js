@@ -1,5 +1,25 @@
 var page = 1;
 
+var tip_array = {
+    1: "Зробіть замовлення",
+    2: "Вкажіть контактні дані",
+    3: "Виберіть кав’ярню",
+    4: "Оберіть кав’ярню на карті",
+    5: "Заповніть анкету партнера",
+    6: "Прочитайте про сайт"
+};
+
+var pointer_title_array = {
+    0: "Перейти до інформації про мережу KavaDrive",
+    1: "Перейти до меню",
+    2: "Перейти до авторизації",
+    3: "Перейти до списку кав’ярень",
+    4: "Перейти до карти",
+    5: "Перейти до анкети для партнерів",
+    6: "Перейти до інформації про мережу KavaDrive",
+    7: "Перейти до меню"
+};
+
 var shops = [];
 
 var menu = {};
@@ -133,7 +153,7 @@ function receiptData () {
                         '<li>телефон: ' + shops[i].phone + '</li>' +
                         '<li>' + shops[i].street + ', ' + shops[i].house_number + '</li>' +
                         '<li>Вінниця</li>' +
-                        '<li class="anchor">кав’ярня на карті</li>' + '</ul>';
+                        '<li class="anchor textLink">кав’ярня на карті</li>' + '</ul>';
                     $(rows[i]).appendTo ($('#contacts_page'));
                 }
             }
@@ -278,32 +298,23 @@ function rebuildPage (new_page) {
     $('#li' + new_page).css ('text-decoration', 'underline');
     $('#nav' + new_page).css ('text-decoration', 'underline');
     $('.hideFromMap').show();
+    $('#tip_text').text (tip_array[new_page]);
+    $('#left_pointer').attr ('title', pointer_title_array[new_page-1]);
+    $('#right_pointer').attr ('title', pointer_title_array[new_page+1]);
 
     switch (new_page) {
         case 1:
-            $('#left_pointer').attr ('title', 'Перейти до інформації');
-            $('#right_pointer').attr ('title', 'Перейти до авторизації');
             $('#menu_page').fadeIn('slow');
-            $('#tip_text').text ("Зробіть замовлення");
             break;
         case 2:
-            $('#left_pointer').attr ('title', 'Перейти до меню');
-            $('#right_pointer').attr ('title', 'Перейти до списку кав’ярень');
             $('#authentication_page').fadeIn('slow');
             $('#phoneNumber').focus();
-            $('#tip_text').text ("Вкажіть контактні дані");
             break;
         case 3:
-            $('#left_pointer').attr ('title', 'Перейти до авторизації');
-            $('#right_pointer').attr ('title', 'Перейти до карти');
             $('#contacts_page').fadeIn('slow');
-            $('#tip_text').text ("Виберіть кав’ярню");
             break;
         case 4:
-            $('#left_pointer').attr ('title', 'Перейти до списку кав’ярень');
-            $('#right_pointer').attr ('title', 'Перейти до інформації');
             $('#map_canvas').fadeIn();
-            $('#tip_text').text ("Оберіть кав’ярню на карті");
             $('.hideFromMap').hide();
             //if (!map) {
                 initialize() ;
@@ -312,13 +323,11 @@ function rebuildPage (new_page) {
             //}
             break;
         case 5:
-            $('#left_pointer').attr ('title', 'Перейти до карти');
-            $('#right_pointer').attr ('title', 'Перейти до меню');
-            $('#about_page').fadeIn('slow');
-            $('#tip_text').text ("");
+            $('#partners_page').fadeIn('slow');
             break;
         case 6:
-            $('#partners_page').fadeIn('slow');
+            $('#about_page').fadeIn('slow');
+            break;
         default:
             break;
     }

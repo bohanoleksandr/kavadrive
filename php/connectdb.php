@@ -10,4 +10,5 @@ elseif(!mysql_select_db($database))
     die('Не удалось выбрать БД!');
 
 mysql_query('SET NAMES utf8');
+mysql_query("SET GLOBAL time_zone='CET'");
 ?>

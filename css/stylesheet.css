@@ -304,6 +304,10 @@ span.white {
     display: inline-block;
 }
 
+.textLink:hover {
+    color: #FFFFFF;
+}
+
 /*#footerLinksLine span:hover {*/
     /*text-decoration: underline;*/
 /*}*/

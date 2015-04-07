@@ -21,6 +21,14 @@ var statuses_array = {
     5: 'продано'
 };
 
+var status_class_array = {
+    1: 'info',
+    2: 'warning',
+    3: 'error',
+    4: 'cancelled',
+    5: 'success'
+};
+
 var statuses_to_show = [];
 
 var worker = null;
@@ -59,42 +67,31 @@ function fillTable () {
     $('.tableRow').remove();
     for (var i = 0; i < orders.length; i++) {
 
-        var status = null;
+        //var status = null;
 
-        switch (orders[i]['status']) {
-            case '1':
-                status = 'info';
-                break;
-            case '2':
-                status = 'warning';
-                break;
-            case '3':
-                status = 'error';
-                break;
-            case '4':
-                status = 'cancelled';
-                break;
-            case '5':
-                status = 'success';
-                break;
-        }
+        //switch (orders[i]['status']) {
+        //    case '1':
+        //        status = 'info';
+        //        break;
+        //    case '2':
+        //        status = 'warning';
+        //        break;
+        //    case '3':
+        //        status = 'error';
+        //        break;
+        //    case '4':
+        //        status = 'cancelled';
+        //        break;
+        //    case '5':
+        //        status = 'success';
+        //        break;
+        //}
 
-        if (statuses_to_show [orders[i]['status']]) buildRow(orders[i], status);
+        if (statuses_to_show [orders[i]['status']]) buildRow(orders[i]);
     }
 }
 
-function buildRow(order, status) {
-    var now = new Date();
-    var additionNewClass = '';
-    var tagWithOrderId = null;
-
-    if (now - orderTime < 5 * 60 * 1000 && status == 'info') {
-        additionNewClass = 'new';
-        tagWithOrderId = order['id'] + ' (нове)';
-    } else {
-        tagWithOrderId = order['id'];
-    }
-
+function buildRow (order) {
     var tagWithNameSurname = "-";
     //var tagWithSocNetworkLink = "-";
 
@@ -156,8 +153,17 @@ function buildRow(order, status) {
     if (!changeMaker) changeMaker = "дані відсутні";
     if (order['status'] == 1) changeMaker = '';
 
+    var now = new Date();
+    var additionNewClass = '';
+    var tagWithOrderId = order['id'];
+
+    if (now - orderTime < 5 * 60 * 1000 && order.status == 1) {
+        additionNewClass = 'new';
+        tagWithOrderId += ' (нове)';
+    }
+
     var htmlForTableRow =
-        '<tr class="tableRow ' + status + ' ' + additionNewClass + '">'
+        '<tr class="tableRow ' + status_class_array[order.status] + ' ' + additionNewClass + '">'
         + '<td class="td_id">' + tagWithOrderId + '</td>'
         + '<td class="td_content"><img title="Переглянути зміст замовлення № ' + order['id'] + '" ' +
             'id="content' + order['id'] + '" src="../images/paper.jpg"></td>'
@@ -191,6 +197,7 @@ function changeStatus(new_status) {
             //$('#modalWindow').modal('hide');
             selected_order.status = new_status;
             $('#current_status').children('span').text(statuses_array[new_status]);
+            $('#alarm')[0].pause();
             fillTable();
         }
     );
@@ -224,8 +231,9 @@ function alarm () {
     var visitTime = null;
     for (var i = 0; i < orders.length; i++) {
         visitTime = new Date (orders[i].visitTime);
-        visitTime.setHours(visitTime.getHours() + 3);
-        if (visitTime - now < (10*60*1000)+10000 && visitTime - now > 10*60*1000) {
+        var difference = visitTime.getTimezoneOffset()/60;
+        visitTime.setHours(visitTime.getHours() - difference);
+        if (visitTime - now < (10*60*1000)+10000 && visitTime - now > 10*60*1000 && orders[i].status == 1) {
             $('#content' + orders[i].id).trigger ('click');
             sound(2);
         }
@@ -330,7 +338,7 @@ $(document).ready (function() {
         //создание html-стр для печати накладной
         win.document.writeln('<html><head><title>Друк накладної</title>' +
         '<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>' +
-        '<link href="css/store_styles.css" rel="stylesheet" type="text/css"/>' +
+        '<link href="../css/store_styles.css" rel="stylesheet" type="text/css"/>' +
         '</head><body>' +
         '<div class="btn-group buttons"> <div class="btn btn-primary" onclick="window.print();">Друк</div>' +
         '<div class="btn" onclick="window.close();">Закрити</div></div><hr>' +
@@ -382,6 +390,10 @@ $(document).ready (function() {
         var statusId = $(this).parent()[0].id.substr(7);
         statuses_to_show [statusId] = !statuses_to_show [statusId];
         fillTable();
+    });
+
+    $('#modalWindow').on('hidden.bs.modal', function () {
+        $('#alarm')[0].pause();
     });
 
 });
