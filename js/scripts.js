@@ -432,6 +432,28 @@ function defineLanguage () {
     }
 }
 
+function sendPartnersForm () {
+    if ($('input[name="name"]').val() == '') {
+        alert ("Введіть назву закладу");
+    } else if ($('input[name="mail_p"]').val() == ''){
+        alert ("Введіть електронну пошту");
+    } else {
+        $.ajax({
+            url: "php/partners.php",
+            type: "POST",
+            dataType: "html",
+            data: $("#partners").serialize(),
+            success: function (msg) {alert ("Дані збережено. Ми розглянемо Вашу заявку")},
+            error: function (msg) {alert ("Cервіс тимчасово недоступний")}
+        });
+        $(':input','#partners')
+            .not(':button, :submit, :reset, :hidden')
+            .val('')
+            .removeAttr('checked')
+            .removeAttr('selected');
+    }
+}
+
 $(document).on('click', '#savePhone', function phone(){
     var phoneNum = $("#phoneNumber").val();
     var name = $("#optionName").val();
@@ -630,6 +652,7 @@ $(document).on ('click', '#customerExit', function() {
 
 $(function($){
     $("#phoneNumber").mask("+380 (99) 9999999");
+    $("input[name='cell_phone']").mask("+380 (99) 9999999");
 });
 
 document.onkeydown = function(e) {

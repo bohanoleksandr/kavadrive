@@ -34,7 +34,7 @@ input.input:focus {
     font-size: 14pt;
     float: left;
     height: 20px;
-    width: 200px;
+    /*width: 200px;*/
 }
 
 .zagolovok1{
