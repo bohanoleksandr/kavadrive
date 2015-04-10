@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>KavaDrive</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+        <link href="../css/stylesheet.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/time.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/menu_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/auth_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/contacts_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/partners_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="../images/favicon.jpg" rel="shortcut icon" type="image/jpg">
+
+        <script type="text/javascript" src="http://ulogin.ru/js/ulogin.js"></script>
+        <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <script type="text/javascript" src="../js/scripts_ru.js"></script>
+        <!--<script type="text/javascript" src="js/bootstrap.js"></script>-->
+        <script type="text/javascript" src="../js/time.js"></script>
+        <script type="text/javascript" src="../js/inputmask.js" ></script>
+        <script type="text/javascript" src="../js/map.js"></script>
+
+    </head>
+    <body>
+        <div id="ground">
+            <ul id="navigationMenu">
+                <li id="li1" class="clickNav textLink">Главная</li>
+                <li id="li2" class="clickNav textLink">Авторизация</li>
+                <li id="li3" class="clickNav textLink">Выбрать кафе</li>
+                <li id="li4" class="clickNav textLink">Кафе на карте</li>
+                <li id="li5" class="clickNav textLink">Партнерам</li>
+                <li id="li6" class="clickNav textLink">О нас</li>
+                <li id="divLang">
+                    <span id="ukr" class="movy textLink">ua</span> |
+                    <span id="ang" class="movy textLink">en</span> |
+                    <span id="rus" class="movy textLink">ru</span>
+                </li>
+            </ul>
+        </div>
+
+        <input type="checkbox" id="nav-trigger"/>
+
+        <div id="site-wrap">
+            <div id="main">
+                <div id="header">
+                    <div id="logoDiv" class="hideFromMap">
+                        <a href = "index.html">
+                            <img id="logo" src = "../images/logo.jpg"/>
+                        </a>
+                    </div>
+
+                    <div id="firstHeaderLine" class="headerLines">
+                        <!--<span id="authenticationLink" class="headerLinks" title="Перейти до авторизації">Авторизація</span>-->
+                        <!--<span id="contactsLink" class="headerLinks" title="Переглянути контактні дані усіх кав’ярень">Контакти</span>-->
+                        <!--<span id="mapLink" class="headerLinks" title="Подивитись карту із відміченими кав’ярнями">Обрати кав’ярню на карті</span>-->
+
+                        <div id="trigger">
+                            <label for="nav-trigger" class="textLink">МЕНЮ <img id="menu" src="../images/navMenu.png"/></label>
+                        </div>
+                    </div>
+
+                    <div class="headerLines hideFromMap">
+                        <span id="customerId">
+                            <span id="customerExit"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div id="tip_line">
+                    <div id="left_pointer" class="pointers" title="Перейти до інформації про мережу KavaDrive">&lsaquo;</div>
+                        <div id="tip_container">
+                            <div id="tip_text">Сделайте заказ</div>
+                        </div>
+                    <div id="right_pointer" class="pointers" title="Перейти до авторизації">&rsaquo;</div>
+                </div>
+
+                <div id="menu_page" class="pages">
+                    <div id="menuList">
+                        <!--<ul id="menuList"></ul>-->
+                    </div>
+                    <div id="bottom_bar">
+                        <div class="blocks" id="orderList">
+                            Содержание заказа:
+                            <div id="selected_articles_list"></div>
+                            <div id="sum">Всего к оплате:<span id="hrivnas">0 грн</span></div>
+                        </div>
+
+                        <div id="time" class="blocks">
+                            <div>Время Вашего визита:</div>
+                            <div id="order_time_menu">
+                                <div class="timeButtonsDiv">
+                                    <div id="hoursUp" class="button_time_reg_up" title="На годину пізніше"></div>
+                                    <div id="minutesUp" class="button_time_reg_up" title="На 5 хвилин пізніше"></div>
+                                </div>
+                                <div id="clockDigits">
+                                    <div id="hours"></div>
+                                    <div id="double_dot">:</div>
+                                    <div id="minutes"></div>
+                                </div>
+                                <div class="timeButtonsDiv">
+                                    <div id="hoursDown" class="button_time_reg_down" title="На годину раніше"></div>
+                                    <div id="minutesDown" class="button_time_reg_down" title="На 5 хвилин раніше"></div>
+                                </div>
+                            </div>
+
+                            <div id="order_date_menu">
+                                <div class="timeButtonsDiv">
+                                    <div id="dayUp" class="button_time_reg_up" title="Днем пізніше"></div>
+                                </div>
+                                <div>
+                                    <div id="order_date"></div>
+                                    <div id="monthAndDay">
+                                        <div id="order_day"></div>
+                                        <div id="order_month"></div>
+                                    </div>
+                                </div>
+                                <div class="timeButtonsDiv">
+                                    <div id="dayDown" class="button_time_reg_down" title="Днем раніше"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id = "POS" class="blocks textLink">Выбрать кафе <!--(<span id="changePos">обрати</span>)--></div>
+                        <div id="thanks" class="blocks"></div>
+                        <div id="magicButton">
+                            <button id="saveOrder" class="greenButton" title="Відправити замовлення">Заказать</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <form id="authentication_page" class="pages">
+                    <div id="auth-title">Авторизация</div>
+                    <div class="auth-text">
+                        <input name="auth" type="radio" value="phone" checked>
+                        <span>Телефон</span>
+                    </div>
+                    <div id="inputPhoneBlock" class="inputBlock">
+                        <input id ="phoneNumber" class="inputData" name="number">
+                        <button id="savePhone" class="savePhoneMail greenButton" type="button">Войти</button>
+                    </div>
+                    <div id="inputNameBlock" class="auth-text">
+                        <div class="nameTitleDiv" style="margin-right: 10px">Имя</div>
+                        <div class="nameTitleDiv">Фамилия</div>
+                        <div class="inputBlock">
+                            <input id="optionName" class="inputData">
+                            <input id="optionSurname" class="inputData">
+                        </div>
+                    </div>
+                    <div class="auth-text">
+                        <input name="auth" type="radio" value="mail">
+                        <span>Электронная почта</span>
+                    </div>
+                    <div id="inputMailBlock" class="inputBlock" hidden>
+                        <input id="mail" name="mail" class="inputData">
+                        <button id="saveMail" class="savePhoneMail greenButton" type="button">Войти</button>
+                    </div>
+                    <div class="auth-text">
+                        <input name="auth" type="radio" value="socNetwork">
+                        <span>Социальная сеть</span>
+                    </div>
+                    <div id="uLogin" data-ulogin="display=panel;fields=first_name,last_name;
+                        providers=facebook,vkontakte,googleplus,linkedin,twitter;
+                        callback=preview;redirect_uri=" hidden>
+                    </div>
+                </form>
+
+                <div id = "contacts_page" class="pages"></div>
+
+                <div id="map_canvas" class="pages"></div>
+
+                <div id="partners_page" class="pages">
+                    <div id="addCafe">
+                        <form action="" id="partners" method="post" >
+                            <div class="zagolovok1">Имете желание присоединить Ваше заведение к сети КАВАДРАЙВ?</div>
+                            <div class="zagolovok">Назва заведения:</div> <input class="input" type="text" name="name">
+                            <div class="zagolovok">Географические координаты:</div><input class="input" type="text" name="coords">
+                            <div class="zagolovok">Электронная почта:</div> <input class="input" type="text" name="mail_p">
+                            <div class="zagolovok">Телефон робочий:</div><input class="input" type="text" name="job_phone">
+                            <div class="zagolovok">Телефон мобильный:</div><input class="input" type="text" name="cell_phone">
+                            <div class="zagolovok">Skype:</div><input class="input" type="text" name="skype">
+                            <div class="zagolovok">Адрес заведения:</div> <input class="input" type="text" name="address">
+                            <div class="zagolovok">Контактное лицо:</div> <input class="input" type="text" name="contact_person">
+                            <button id="partnersButton" type="button" onclick="sendPartnersForm()">Присоединится</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="about_page" class="pages">
+                    <div class="center">
+                        КАВАДРАЙВ - ЗАКАЗЫВАЙ ОНЛАЙН!
+                    </div>
+                    <div class="justify">
+                        <span class="white">КАВАДРАЙВ</span> - це сервіс онлайн передзамовлень напоїв та їжі в перевірених закладах харчування.
+                        Якісні напої та їжа, вчасне, швидке та не нав'язливе обслуговування, прогнозовані і
+                        помірковані витрати - це те, що Вам варто очікувати при здійсненні замовлень в
+                        закладах-учасниках КАВАДРАЙВу.
+                    </div>
+                    <div class="justify">
+                        <span class="white">Мы гарантируем:</span>
+                    </div>
+                    <ul type="circle">
+                        <li>
+                            <span class="white">ЯКІСТЬ</span> - кожен заклад харчування обов'язково нами перевіряється перед тим, як включити його в
+                            мережу КАВАДРАЙВ. І надалі постійно наші інспектори перевіряють якість напоїв та їжі, які
+                            входять до меню КАВАДРАЙВ. Кожен замовник знає напевно, що буде смачно.
+                        </li>
+                        <li>
+                            <span class="white">ВЧАСНІСТЬ та ШВИДКІСТЬ</span> - кожен користувач сервісу впевнений, що завітавши на вказаний час до
+                            кав'ярні, ресторану, фастфуду, він не чекатиме в черзі, а відразу протягом кількох хвилин
+                            отримає своє замовлення, яке зможе забрати із собою чи пригоститись безпосередньо там (якщо
+                            зарезервує столик).
+                        </li>
+                        <li>
+                            <span class="white">ПРОГНОЗОВАНІСТЬ</span> - крім того, що Ви очікувано отримаєте якісні напої та їжу, швидке
+                            обслуговування, Ви точно знатимете скільки коштів потратите на замовлення.
+                        </li>
+                        <li>
+                            <span class="white">ЄДИНА ЦІНА</span> - якщо якість напоїв і їжі та рівень обслуговування в закладах-учасниках КАВАДРАЙВу
+                            високі і контролюються нами, то і ціни в усіх закладах теж однакові.
+                        </li>
+                        <li>
+                            <span class="white">ЗРУЧНІСТЬ</span> - здійснити замовлення Ви зможете будь-де, в будь-який час, в будь-якому закладі,
+                            який входить до мережі КАВАДРАЙВ і з будь-якого пристрою - смартфона, планшета, комп'ютера.
+                        </li>
+                    </ul>
+                    <div class="center">
+                        МІСЦЕ ЗУСТРІЧІ - КАВДРАЙВ - ЗАМОВЛЯЙ ОНЛАЙН!
+                    </div>
+                </div>
+
+                <div id="appendix" class="hideFromMap"></div>
+            </div>
+        </div>
+
+        <div id="footer" class="hideFromMap">
+            <div id="networksLine" class="footerLines">
+                <img src="../images/facebook.png">
+                <img src="../images/googlePlus.png">
+                <img src="../images/vkontakte.png">
+                <img src="../images/twitter.png">
+            </div>
+            <div id="navLine" class="footerLines">
+                <div id="nav1" class="clickNav textLink">Главная</div>
+                <div id="nav2" class="clickNav textLink">Авторизация</div>
+                <div id="nav3" class="clickNav textLink">Выбрать кафе</div>
+                <div id="nav4" class="clickNav textLink">Кафе на карте</div>
+                <div id="nav5" class="clickNav textLink">Партнерам</div>
+                <div id="nav6" class="clickNav textLink">О нас</div>
+            </div>
+            <div id="adminData"  class="footerLines">тел. 067-431-2002, kavadrive@gmail.com, Skype: kavadrive</div>
+        </div>
+    </body>
+</html>
