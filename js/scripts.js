@@ -6,7 +6,19 @@ var tip_array = {
     3: "Виберіть кав’ярню",
     4: "Оберіть кав’ярню на карті",
     5: "Заповніть анкету партнера",
-    6: "Прочитайте про сайт"
+    6: "Прочитайте про сайт",
+    7: "Make an order",
+    8: "Input contact data",
+    9: "TODO",
+    10: "TODO",
+    11: "TODO",
+    12: "Read about the site",
+    13: "Сделайте заказ",
+    14: "Укажите контактные данные",
+    15: "Выберите кафе",
+    16: "Выберите кафе на карте",
+    17: "Заполните анкету партнера",
+    18: "Прочитайте о сайте"
 };
 
 var pointer_title_array = {
@@ -17,7 +29,23 @@ var pointer_title_array = {
     4: "Перейти до карти",
     5: "Перейти до анкети для партнерів",
     6: "Перейти до інформації про мережу KavaDrive",
-    7: "Перейти до меню"
+    7: "Перейти до меню",
+    8: "Go to information about the Kavadrive network",
+    9: "Go to menu",
+    10: "Go to authorization",
+    11: "TODO",
+    12: "TODO",
+    13: "TODO",
+    14: "Go to information about the Kavadrive network",
+    15: "Go to menu",
+    16: "Перейти к информации о сети Kavadrive",
+    17: "Перейти к меню",
+    18: "TODO",
+    19: "TODO",
+    20: "TODO",
+    21: "TODO",
+    22: "Перейти к информации о сети Kavadrive",
+    23: "Перейти к меню"
 };
 
 var shops = [];
@@ -75,17 +103,8 @@ ga('send', 'pageview');
 function receiptData () {
     defineLanguage();
 
-    var getMenuUrl = 'php/getMenu.php';
-    var authUrl = 'php/authentication.php';
-    var getShopsUrl = 'php/getShops.php';
-    if (currentLang != 'ukr') {
-        getMenuUrl = '../' + getMenuUrl;
-        authUrl = '../' + authUrl;
-        getShopsUrl = '../' + getShopsUrl;
-    }
-
     $.ajax({
-        url: getMenuUrl,
+        url: 'php/getMenu.php',
         type: 'POST',
         cache: false,
         success: function(msg){
@@ -101,29 +120,26 @@ function receiptData () {
     });
 
     $.ajax({
-        url: authUrl,
+        url: 'php/authentication.php',
         type: 'POST',
         cache: false,
         success: function (msg){
             customer = JSON.parse(msg);
             if (customer['id']) {
                 if (customer['firstName']) {
-                    $('#customerId').html (customer['firstName'] + ' ' + customer['lastName']
-                    + " <span id='customerExit'>(<span>вийти</span>)</span>");
+                    $('#customerId').text(customer['firstName'] + ' ' + customer['lastName']);
                 } else if (customer['phoneNumber']){
-                    $('#customerId').html (customer['phoneNumber'] + " <span id='customerExit'>(<span>вийти</span>)</span>");
+                    $('#customerId').text(customer['phoneNumber']);
                 } else {
-                    $('#customerId').html (customer['mail'] + " <span id='customerExit'>(<span>вийти</span>)</span>");
+                    $('#customerId').text(customer['mail']);
                 }
                 $('#customerExit').css('display', 'inline');
-            } else {
-                $('#customerId').text ("");
             }
         }
     });
 
     $.ajax({
-        url: getShopsUrl,
+        url: 'php/getShops.php',
         type: 'POST',
         cache: false,
         success: function (msg) {
@@ -298,9 +314,6 @@ function rebuildPage (new_page) {
     $('#li' + new_page).css ('text-decoration', 'underline');
     $('#nav' + new_page).css ('text-decoration', 'underline');
     $('.hideFromMap').show();
-    $('#tip_text').text (tip_array[new_page]);
-    $('#left_pointer').attr ('title', pointer_title_array[new_page-1]);
-    $('#right_pointer').attr ('title', pointer_title_array[new_page+1]);
 
     switch (new_page) {
         case 1:
@@ -331,6 +344,26 @@ function rebuildPage (new_page) {
         default:
             break;
     }
+
+    switch (currentLang) {
+        case 'ukr':
+            $('#tip_text').text (tip_array[new_page]);
+            $('#left_pointer').attr ('title', pointer_title_array[new_page-1]);
+            $('#right_pointer').attr ('title', pointer_title_array[new_page+1]);
+            break;
+        case 'eng':
+            $('#tip_text').text (tip_array[new_page+6]);
+            $('#left_pointer').attr ('title', pointer_title_array[new_page+7]);
+            $('#right_pointer').attr ('title', pointer_title_array[new_page+9]);
+            break;
+        case 'rus':
+            $('#tip_text').text (tip_array[new_page+12]);
+            $('#left_pointer').attr ('title', pointer_title_array[new_page+15]);
+            $('#right_pointer').attr ('title', pointer_title_array[new_page+17]);
+            break;
+        default:
+            break;
+    }
 }
 
 function delete_cookie ( cookie_name )
@@ -357,8 +390,7 @@ function preview (token){
                     function(result){
                         customer = JSON.parse(result);
                         document.cookie = "userId=" + customer['id'];
-                        $('#customerId').html (customer['firstName'] + ' ' + customer['lastName']
-                            + " <span id='customerExit'>(<span>вийти</span>)</span>");
+                        $('#customerId').text (customer['firstName'] + ' ' + customer['lastName']);
                         $("#customerExit").css ('display', 'inline');
                         if (order.emptiness) {
                             rebuildPage(1);
@@ -425,9 +457,9 @@ function footerResponsive (){
 
 function defineLanguage () {
     var thisFile = document.location.href;
-    if (thisFile.substr(thisFile.lastIndexOf('/') - 2, 2) == 'en') {
+    if (thisFile.substr(thisFile.lastIndexOf('/') + 1) == 'eng.html') {
         currentLang = 'eng';
-    } else if (thisFile.substr(thisFile.lastIndexOf('/') - 2, 2) == 'ru') {
+    } else if (thisFile.substr(thisFile.lastIndexOf('/') + 1) == 'rus.html') {
         currentLang = 'rus';
     }
 }
@@ -473,10 +505,9 @@ $(document).on('click', '#savePhone', function phone(){
                 customer = JSON.parse(result);
                 document.cookie = "userId=" + customer['id'];
                 if (customer.firstName) {
-                    $("#customerId").html (customer.firstName + " " + customer.lastName
-                    + " <span id='customerExit'>(<span>вийти</span>)</span>");
+                    $("#customerId").text(customer.firstName + " " + customer.lastName);
                 } else {
-                    $("#customerId").html (customer['phoneNumber'] + " <span id='customerExit'>(<span>вийти</span>)</span>");
+                    $("#customerId").text (customer['phoneNumber']);
                 }
                 $("#customerExit").css ('display', 'inline');
                 if (order.emptiness) {
@@ -513,10 +544,9 @@ $(document).on('click', '#saveMail', function mail(){
                 customer = JSON.parse(result);
                 document.cookie = "userId=" + customer['id'];
                 if (customer.firstName) {
-                    $("#customerId").html (customer.firstName + " " + customer.lastName
-                    + " <span id='customerExit'>(<span>вийти</span>)</span>");
+                    $("#customerId").text (customer.firstName + " " + customer.lastName);
                 } else {
-                    $("#customerId").html (customer['mail'] + " <span id='customerExit'>(<span>вийти</span>)</span>");
+                    $("#customerId").text(customer['mail']);
                 }
                 $("#customerExit").css ('display', 'inline');
                 if (order.emptiness) {
@@ -581,7 +611,9 @@ $(document).on('click', '.delete', function(){
 
 $(document).on('click', '#saveOrder', function submit(){
     if (!$(this).hasClass('make_new_order')) {
-        if (!customer['id']){
+        if (order.emptiness){
+            rebuildPage(1);
+        } else if (!customer['id']){
             rebuildPage(2);
         } else if (!order.pos){
             rebuildPage(3);
@@ -602,19 +634,26 @@ $(document).on('click', '#saveOrder', function submit(){
                         if (visitTimeMinutes < 10) {
                             visitTimeMinutes = '0' + visitTimeMinutes;
                         }
-                        $("#thanks").html (
-                            "Дякуємо!<br/></br>" +
-                            "Замовлення № " + result + " прийнято на суму:" +
-                            "<p class='important'>" + order.sum + " грн</p><br/>" +
-                            "Заберіть його у кав’ярні:" +
-                            "<p class='important'>" + shops[order.pos].name + " - " + shops[order.pos].street + ", "
-                            + shops[order.pos].house_number + "</p><br/>" +
-                            "Час візиту до кав’ярні:<p class='important'>" +
-                            order.visitTime.getHours() + ":" + visitTimeMinutes + "<br/>" +
-                            "<sub>" + order.visitTime.getDate() + " " + month_array[order.visitTime.getMonth()] + "</sub></p><br/>" +
-                            "НОМЕР ЗАМОВЛЕННЯ:" + "<br/>" +
-                            "<p id='order_id'>" + result + "</p>"
-                        );
+                        $("#order_id_small").text(result);
+                        $("#order_sum").prepend(order.sum);
+                        $("#order_pos").text(shops[order.pos].name + " - " + shops[order.pos].street + ", "
+                            + shops[order.pos].house_number);
+                        $("#order_visit").html(order.visitTime.getHours() + ":" + visitTimeMinutes + "<br/>" +
+                            "<sub>" + order.visitTime.getDate() + " " + month_array[order.visitTime.getMonth()] + "</sub>");
+                        $("#order_id").text(result);
+                        //$("#thanks").html (
+                        //    "Дякуємо!<br/></br>" +
+                        //    "Замовлення № " + result + " прийнято на суму:" +
+                        //    "<p class='important'>" + order.sum + " грн</p><br/>" +
+                        //    "Заберіть його у кав’ярні:" +
+                        //    "<p class='important'>" + shops[order.pos].name + " - " + shops[order.pos].street + ", "
+                        //    + shops[order.pos].house_number + "</p><br/>" +
+                        //    "Час візиту до кав’ярні:<p class='important'>" +
+                        //    order.visitTime.getHours() + ":" + visitTimeMinutes + "<br/>" +
+                        //    "<sub>" + order.visitTime.getDate() + " " + month_array[order.visitTime.getMonth()] + "</sub></p><br/>" +
+                        //    "НОМЕР ЗАМОВЛЕННЯ:" + "<br/>" +
+                        //    "<p id='order_id'>" + result + "</p>"
+                        //);
                         $('#thanks').css('display', 'block');
                     } else {
                         alert ("Вибачте, проводяться сервісні роботи\r\nСпробуйте замовити пізніше");

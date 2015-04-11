@@ -7,23 +7,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!--<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
-        <link href="../css/stylesheet.css" rel="stylesheet" type="text/css"/>
-        <link href="../css/time.css" rel="stylesheet" type="text/css"/>
-        <link href="../css/menu_styles.css" rel="stylesheet" type="text/css"/>
-        <link href="../css/auth_styles.css" rel="stylesheet" type="text/css"/>
-        <link href="../css/contacts_styles.css" rel="stylesheet" type="text/css"/>
-        <link href="../css/partners_styles.css" rel="stylesheet" type="text/css"/>
-        <link href="../images/favicon.jpg" rel="shortcut icon" type="image/jpg">
+        <link href="css/stylesheet.css" rel="stylesheet" type="text/css"/>
+        <link href="css/time.css" rel="stylesheet" type="text/css"/>
+        <link href="css/menu_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="css/auth_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="css/contacts_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="css/partners_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="images/favicon.jpg" rel="shortcut icon" type="image/jpg">
 
         <script type="text/javascript" src="http://ulogin.ru/js/ulogin.js"></script>
         <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-        <script type="text/javascript" src="../js/jquery.js"></script>
-        <script type="text/javascript" src="../js/scripts_ru.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/scripts.js"></script>
         <!--<script type="text/javascript" src="js/bootstrap.js"></script>-->
-        <script type="text/javascript" src="../js/time.js"></script>
-        <script type="text/javascript" src="../js/inputmask.js" ></script>
-        <script type="text/javascript" src="../js/map.js"></script>
+        <script type="text/javascript" src="js/time.js"></script>
+        <script type="text/javascript" src="js/inputmask.js" ></script>
+        <script type="text/javascript" src="js/map.js"></script>
 
     </head>
     <body>
@@ -33,7 +33,7 @@
                 <li id="li2" class="clickNav textLink">Авторизация</li>
                 <li id="li3" class="clickNav textLink">Выбрать кафе</li>
                 <li id="li4" class="clickNav textLink">Кафе на карте</li>
-                <li id="li5" class="clickNav textLink">Партнерам</li>
+                <li id="li5" class="clickNav textLink">Партнёрам</li>
                 <li id="li6" class="clickNav textLink">О нас</li>
                 <li id="divLang">
                     <span id="ukr" class="movy textLink">ua</span> |
@@ -49,8 +49,8 @@
             <div id="main">
                 <div id="header">
                     <div id="logoDiv" class="hideFromMap">
-                        <a href = "index.html">
-                            <img id="logo" src = "../images/logo.jpg"/>
+                        <a href = "rus.html">
+                            <img id="logo" src = "images/logo.jpg"/>
                         </a>
                     </div>
 
@@ -60,23 +60,22 @@
                         <!--<span id="mapLink" class="headerLinks" title="Подивитись карту із відміченими кав’ярнями">Обрати кав’ярню на карті</span>-->
 
                         <div id="trigger">
-                            <label for="nav-trigger" class="textLink">МЕНЮ <img id="menu" src="../images/navMenu.png"/></label>
+                            <label for="nav-trigger" class="textLink">МЕНЮ <img id="menu" src="images/navMenu.png"/></label>
                         </div>
                     </div>
 
                     <div class="headerLines hideFromMap">
-                        <span id="customerId">
-                            <span id="customerExit"></span>
-                        </span>
+                        <span id="customerId"></span>
+                        <span id="customerExit">(<span>выйти</span>)</span>
                     </div>
                 </div>
 
                 <div id="tip_line">
-                    <div id="left_pointer" class="pointers" title="Перейти до інформації про мережу KavaDrive">&lsaquo;</div>
+                    <div id="left_pointer" class="pointers" title="Перейти к информации о сети Kavadrive">&lsaquo;</div>
                         <div id="tip_container">
                             <div id="tip_text">Сделайте заказ</div>
                         </div>
-                    <div id="right_pointer" class="pointers" title="Перейти до авторизації">&rsaquo;</div>
+                    <div id="right_pointer" class="pointers" title="Перейти к авторизации">&rsaquo;</div>
                 </div>
 
                 <div id="menu_page" class="pages">
@@ -125,7 +124,17 @@
                             </div>
                         </div>
                         <div id = "POS" class="blocks textLink">Выбрать кафе <!--(<span id="changePos">обрати</span>)--></div>
-                        <div id="thanks" class="blocks"></div>
+                        <div id="thanks" class="blocks">
+                            Благодарим!<br/><br/>
+                            Заказ № <span id="order_id_small"></span> принят на сумму:
+                            <p id="order_sum" class='important'> грн</p><br/>
+                            Заберите его в кафе:
+                            <p id="order_pos" class='important'></p><br/>
+                            Время визита в кафе:
+                            <p id="order_visit" class='important'></p><br/>
+                            НОМЕР ЗАКАЗА:<br/>
+                            <p id='order_id'></p>
+                        </div>
                         <div id="magicButton">
                             <button id="saveOrder" class="greenButton" title="Відправити замовлення">Заказать</button>
                         </div>
@@ -176,16 +185,16 @@
                 <div id="partners_page" class="pages">
                     <div id="addCafe">
                         <form action="" id="partners" method="post" >
-                            <div class="zagolovok1">Имете желание присоединить Ваше заведение к сети КАВАДРАЙВ?</div>
-                            <div class="zagolovok">Назва заведения:</div> <input class="input" type="text" name="name">
+                            <div class="zagolovok1">Желаете присоединить Ваше заведение к сети КАВАДРАЙВ?</div>
+                            <div class="zagolovok">Название заведения:</div> <input class="input" type="text" name="name">
                             <div class="zagolovok">Географические координаты:</div><input class="input" type="text" name="coords">
                             <div class="zagolovok">Электронная почта:</div> <input class="input" type="text" name="mail_p">
-                            <div class="zagolovok">Телефон робочий:</div><input class="input" type="text" name="job_phone">
+                            <div class="zagolovok">Телефон рабочий:</div><input class="input" type="text" name="job_phone">
                             <div class="zagolovok">Телефон мобильный:</div><input class="input" type="text" name="cell_phone">
                             <div class="zagolovok">Skype:</div><input class="input" type="text" name="skype">
                             <div class="zagolovok">Адрес заведения:</div> <input class="input" type="text" name="address">
                             <div class="zagolovok">Контактное лицо:</div> <input class="input" type="text" name="contact_person">
-                            <button id="partnersButton" type="button" onclick="sendPartnersForm()">Присоединится</button>
+                            <button id="partnersButton" type="button" onclick="sendPartnersForm()">Присоединиться</button>
                         </form>
                     </div>
                 </div>
@@ -239,17 +248,17 @@
 
         <div id="footer" class="hideFromMap">
             <div id="networksLine" class="footerLines">
-                <img src="../images/facebook.png">
-                <img src="../images/googlePlus.png">
-                <img src="../images/vkontakte.png">
-                <img src="../images/twitter.png">
+                <img src="images/facebook.png">
+                <img src="images/googlePlus.png">
+                <img src="images/vkontakte.png">
+                <img src="images/twitter.png">
             </div>
             <div id="navLine" class="footerLines">
                 <div id="nav1" class="clickNav textLink">Главная</div>
                 <div id="nav2" class="clickNav textLink">Авторизация</div>
                 <div id="nav3" class="clickNav textLink">Выбрать кафе</div>
                 <div id="nav4" class="clickNav textLink">Кафе на карте</div>
-                <div id="nav5" class="clickNav textLink">Партнерам</div>
+                <div id="nav5" class="clickNav textLink">Партнёрам</div>
                 <div id="nav6" class="clickNav textLink">О нас</div>
             </div>
             <div id="adminData"  class="footerLines">тел. 067-431-2002, kavadrive@gmail.com, Skype: kavadrive</div>

@@ -13,7 +13,7 @@
         <link href="css/auth_styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/contacts_styles.css" rel="stylesheet" type="text/css"/>
         <link href="css/partners_styles.css" rel="stylesheet" type="text/css"/>
-        <link href="/images/favicon.jpg" rel="shortcut icon" type="image/jpg">
+        <link href="images/favicon.jpg" rel="shortcut icon" type="image/jpg">
 
         <script type="text/javascript" src="http://ulogin.ru/js/ulogin.js"></script>
         <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
@@ -65,9 +65,8 @@
                     </div>
 
                     <div class="headerLines hideFromMap">
-                        <span id="customerId">
-                            <span id="customerExit"></span>
-                        </span>
+                        <span id="customerId"></span>
+                        <span id="customerExit">(<span>вийти</span>)</span>
                     </div>
                 </div>
 
@@ -125,7 +124,17 @@
                             </div>
                         </div>
                         <div id = "POS" class="blocks textLink">Обрати кав’ярню <!--(<span id="changePos">обрати</span>)--></div>
-                        <div id="thanks" class="blocks"></div>
+                        <div id="thanks" class="blocks">
+                            Дякуємо!<br/><br/>
+                            Замовлення № <span id="order_id_small"></span> прийнято на суму:
+                            <p id="order_sum" class='important'> грн</p><br/>
+                            Заберіть його у кав’ярні:
+                            <p id="order_pos" class='important'></p><br/>
+                            Час візиту до кав’ярні:
+                            <p id="order_visit" class='important'></p><br/>
+                            НОМЕР ЗАМОВЛЕННЯ:<br/>
+                            <p id='order_id'></p>
+                        </div>
                         <div id="magicButton">
                             <button id="saveOrder" class="greenButton" title="Відправити замовлення">Замовити</button>
                         </div>
