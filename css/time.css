@@ -110,5 +110,10 @@ div#double_dot {
 	margin-left: 5px;
 }
 
+@media screen and (max-width: 350px) {
+    #order_time_menu, #order_date_menu {
+        margin: 10px 0;
+    }
+}
 
 

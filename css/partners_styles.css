@@ -1,8 +1,14 @@
+#partners_page {
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
 #addCafe {
     height: 660px;
     padding: 20px;
     width: 370px;
-    margin: 40px auto 10px auto;
+    margin: 20px auto 10px auto;
     background: #792a26;
     -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
@@ -79,3 +85,9 @@ button#partnersButton:active{
     color:#ffffff;
     background: #74ac40;
 }
+
+#partners_info div {
+    margin: 0 auto 10px;
+}
+
+

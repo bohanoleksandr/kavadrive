@@ -655,6 +655,8 @@ $(document).on('click', '#saveOrder', function submit(){
                         //    "<p id='order_id'>" + result + "</p>"
                         //);
                         $('#thanks').css('display', 'block');
+                        var destination = $('#thanks').offset().top;
+                        $('html').animate({scrollTop:destination}, 200);
                     } else {
                         alert ("Вибачте, проводяться сервісні роботи\r\nСпробуйте замовити пізніше");
                     }
