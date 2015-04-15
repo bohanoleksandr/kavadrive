@@ -66,7 +66,7 @@
 
                     <div class="headerLines hideFromMap">
                         <span id="customerId"></span>
-                        <span id="customerExit">(<span>выйти</span>)</span>
+                        <span id="customerExit">(<span class="textLink">выйти</span>)</span>
                     </div>
                 </div>
 
@@ -196,18 +196,28 @@
                         </div>
                     </div>
                     <div id="addCafe">
-                        <form action="" id="partners" method="post" >
-                            <div class="zagolovok1">Желаете присоединить Ваше заведение к сети КАВАДРАЙВ?</div>
-                            <div class="zagolovok">Название заведения:</div> <input class="input" type="text" name="name">
-                            <div class="zagolovok">Географические координаты:</div><input class="input" type="text" name="coords">
-                            <div class="zagolovok">Электронная почта:</div> <input class="input" type="text" name="mail_p">
-                            <div class="zagolovok">Телефон рабочий:</div><input class="input" type="text" name="job_phone">
-                            <div class="zagolovok">Телефон мобильный:</div><input class="input" type="text" name="cell_phone">
-                            <div class="zagolovok">Skype:</div><input class="input" type="text" name="skype">
-                            <div class="zagolovok">Адрес заведения:</div> <input class="input" type="text" name="address">
-                            <div class="zagolovok">Контактное лицо:</div> <input class="input" type="text" name="contact_person">
-                            <button id="partnersButton" type="button" onclick="sendPartnersForm()">Присоединиться</button>
-                        </form>
+                        <div id="partners_header">Желаете присоединить Ваше заведение к сети КАВАДРАЙВ?</div>
+                        <div class="partners_labels">Название заведения*:</div>
+                        <input class="input" type="text" name="name">
+                        <div class="partners_labels">Географические координаты:</div>
+                        <input class="input" type="text" name="coords">
+                        <div class="partners_labels">Электронная почта*:</div>
+                        <input class="input" type="text" name="mail_p">
+                        <div class="partners_labels">Телефон рабочий:</div>
+                        <input class="input" type="text" name="job_phone">
+                        <div class="partners_labels">Телефон мобильный:</div>
+                        <input class="input" type="text" name="cell_phone">
+                        <div class="partners_labels">Skype:</div>
+                        <input class="input" type="text" name="skype">
+                        <div class="partners_labels">Адрес заведения:</div>
+                        <input class="input" type="text" name="address">
+                        <div class="partners_labels">Контактное лицо:</div>
+                        <input class="input" type="text" name="contact_person">
+                        <div id="button_wrapper">
+                            <button id="partnersButton" class="greenButton" type="button" onclick="sendPartnersForm()">
+                                Присоединиться
+                            </button>
+                        </div>
                     </div>
                 </div>
 

@@ -90,7 +90,6 @@ function Shop (name, opening_time, closing_time, street, house_number, latitude,
 }
 
 Parse.initialize("WeDR0ZQxPkgQD8eTeICgQqLGxPvUF64BXhoQkV5c", "W43O6W4YLG0VSDH9EDqLaSFxOCdCAr23ZFvjmvvD");
-$(document).ready (receiptData(), preventSelection(document));
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -101,6 +100,7 @@ ga('create', 'UA-58458963-1', 'auto');
 ga('send', 'pageview');
 
 function receiptData () {
+    //alert (1);
     defineLanguage();
 
     $.ajax({
@@ -208,7 +208,7 @@ function create( name, attributes ) {
 
 function addDivSelectArticle (productId) {
     var bigDiv = '<div class="selected_articles" id="menu_content_article-' + productId + '">';
-    var name = menu[productId].name;
+    var name = '<div class="selected_names">' + menu[productId].name + '</div>';
     //var counter = '<div class="counter" id="counterOfProduct'+productId+'" title="Кількість замовлених «' +
     //    menu[productId].name + '»"> ' + order.content[productId] + '</div>';
     var counter = '<input class="counter" id="counterOfProduct' + productId + '" title="Кількість замовлених «' +
@@ -219,8 +219,19 @@ function addDivSelectArticle (productId) {
         '»"><strong> - </strong></div>';
     var eliminator = '<div class="delete" id="deleteProduct'+productId+'" title="Прибрати «' + menu[productId].name +
         '» із замовлення"><strong> × </strong></div>';
-    var divButtons = '<div class="orderList_buttons">' + counter + plus + minus + eliminator + '</div></div>';
+    var divButtons = counter + '<div class="orderList_buttons">' +  plus + minus + eliminator + '</div></div>';
     $('#selected_articles_list').append (bigDiv + name + divButtons);
+    //alert($("#menu_content_article-" + productId)[0].offsetHeight);
+    var elementHeight = null;
+    setTimeout('var elementHeight = $("#menu_content_article-' + productId + '")[0].offsetHeight', 1000);
+    alert (elementHeight);
+}
+
+function selectedArticlesResponsive (productId) {
+    $("#menu_content_article-" + productId).ready(function(){
+        var elementHeight = $("#menu_content_article-" + productId)[0].offsetHeight;
+        alert (elementHeight);
+    });
 }
 
 function estimateSum(){
@@ -230,6 +241,7 @@ function estimateSum(){
     {
         tempSum  += parseFloat(menu[key].price)*order.content[key];
         order.emptiness = false;
+        orderListResponsive();
     }
     order.sum = tempSum;
     document.getElementById('hrivnas').innerHTML = order.sum+" грн";
@@ -446,13 +458,12 @@ function footerResponsive (){
     var appendix = footerHeight + 10;
     $('#footer').css ('margin-top', margin);
     $('#appendix').css ('height', appendix);
-//    for (var i=0; i < 3; i++) {
-//        if ($('.footerLines')[i].offsetHeight > 50) {
-//            $('.footerLines')[i].css('display', 'none');
-//        } else {
-//            $('.footerLines')[i].css('display', 'block');
-//        }
-//    }
+}
+
+function orderListResponsive () {
+    var contentArticleWidth = $('#selected_articles_list')[0].offsetWidth;
+    var spaceAllowedForText = contentArticleWidth - 170;
+    $('.selected_names').css ('max-width', spaceAllowedForText);
 }
 
 function defineLanguage () {
@@ -574,7 +585,8 @@ $(document).on("click", 'div.menu_buttons', function(){
         order.content[articleId]++;
         updateQuantity(articleId);
     }
-    estimateSum()
+    estimateSum();
+
 });
 
 $(document).on('click', '.plus', function(){
@@ -703,14 +715,6 @@ document.onkeydown = function(e) {
     }
 };
 
-$(document).ready(function(){
-    $("#phoneNumber").keypress(function(e){
-        if(e.keyCode==13){
-            $("#savePhone").trigger('click');
-        }
-    });
-});
-
 $(document).on ('click', '#authenticationLink', function() {
     rebuildPage(2);
 });
@@ -816,6 +820,8 @@ $(document).on ('change', '#mail', function() {
 });
 
 $(document).ready (function(){
+    receiptData();
+    preventSelection(document);
     $("#authentication_page").trigger('reset');
     $("#nav-trigger")[0].checked = false;
     footerResponsive();
@@ -879,4 +885,5 @@ $(document).on ('click', '#networksLine img', function() {
 
 $(window).resize(function(){
     footerResponsive();
+    orderListResponsive ();
 });

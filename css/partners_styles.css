@@ -4,46 +4,21 @@
     line-height: 1.7;
 }
 
+#partners_info div {
+    margin: 0 auto 20px;
+}
+
 #addCafe {
-    height: 660px;
-    padding: 20px;
-    width: 370px;
-    margin: 20px auto 10px auto;
-    background: #792a26;
+    padding: 10px;
+    width: 290px;
+    margin: 0 auto 10px;
     -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    text-shadow: #000000 0 1px 0;
 }
 
-input.input {
-    margin-top: 0px;
-    margin-bottom: 10px;
-    width: 360px;
-    float: left;
-    height: 30px;
-    border-radius: 2px;
-    background: #ebca90;
-    border: solid 1px #ffffff;
-    font-size: 18px;
-}
-
-input.input:focus {
-    background: #ffffff;
-}
-
-.zagolovok{
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-bottom: 3px;
-    color:#cccccc;
-    font-family: Calibri, Arial, sans-serif;
-    font-size: 14pt;
-    float: left;
-    height: 20px;
-    /*width: 200px;*/
-}
-
-.zagolovok1{
+#partners_header{
     margin-top: 0px;
     margin-left: 0px;
     margin-bottom: 10px;
@@ -53,41 +28,33 @@ input.input:focus {
     text-align: center;
 }
 
-form#partners{
-    margin-left: 0px;
+input.input {
+    margin: 0;
+    width: 270px;
+    height: 30px;
+    background: #ebca90;
+    border:  0 solid #f7f7f7;
+    font-size: 16px;
+    padding: 3px 10px;
+    color: #4f4942;
+    -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
+    -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
+    box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 1px 1px;
+}
+
+input.input:focus {
+    background: #EEEEEE;
+}
+
+.partners_labels {
+    margin: 10px 0 5px;
+    font-size: 18px;
+}
+
+#button_wrapper {
+    text-align: center;
 }
 
 button#partnersButton {
-    float:left;
-    margin-top: 15px;
-    margin-left: 200px;
-    background: #74ac40;
-    width: 160px;
-    height: 40px;
-    border: none;
-    color:#ffffff;
-    font-family: Calibri, Arial, sans-serif;
-    font-size: 12pt;
-    border-radius: 3px;
-    -webkit-box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
-    -moz-box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
-    box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
-
+    margin: 25px 0 15px 0;
 }
-button#partnersButton:hover{
-    background: #798287;
-    color:#000000;
-}
-button#partnersButton:active{
-    -webkit-box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
-    -moz-box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
-    box-shadow: rgba(255, 255, 255, 0) 0 2px 3px, inset rgba(255,255,255,0.4) 0 2px 0;
-    color:#ffffff;
-    background: #74ac40;
-}
-
-#partners_info div {
-    margin: 0 auto 10px;
-}
-
-

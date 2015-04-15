@@ -70,34 +70,51 @@ div.blocks {
 }
 
 .selected_articles {
-    height: 25px;
+    min-height: 25px;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
     margin: 10px 0;
     padding: 4px;
     text-align: left;
-    font-size: 16px;
+    /*font-size: 16px;*/
     background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    position: relative;
+    vertical-align: middle;
+}
+
+.selected_names {
+    display: inline-block;
 }
 
 .orderList_buttons {
-    float: right;
-    height: inherit;
+    /*float: right;*/
+    /*height: inherit;*/
+    width: 125px;
+    display: inline-block;
+    right: 0;
+    position: absolute;
+}
+
+div.input {
+    display: inline-block;
+    height: 24px;
 }
 
 input.counter  {
     display: inline-block;
     width: 25px;
-    height: 18px;
+    height: 19px;
     font-size: 18px;
     text-align: center;
-    font-family: Calibri;
     background: #ebca90;
     color: #4F4942;
-    margin: 0 8px 2px 0;
+    margin: 0;
+    font-family: Calibri, Arial, sans-serif;
+    position: absolute;
+    right: 133px;
 }
 
 input.counter:focus {
@@ -160,4 +177,10 @@ input.counter:focus {
     color: #AD7B05;
     font-size: 2em;
     margin: 5px;
+}
+
+@media screen and (max-width: 400px) {
+    #orderList {
+        padding: 10px;
+    }
 }
