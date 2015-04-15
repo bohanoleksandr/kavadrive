@@ -221,17 +221,7 @@ function addDivSelectArticle (productId) {
         '» із замовлення"><strong> × </strong></div>';
     var divButtons = counter + '<div class="orderList_buttons">' +  plus + minus + eliminator + '</div></div>';
     $('#selected_articles_list').append (bigDiv + name + divButtons);
-    //alert($("#menu_content_article-" + productId)[0].offsetHeight);
-    var elementHeight = null;
-    setTimeout('var elementHeight = $("#menu_content_article-' + productId + '")[0].offsetHeight', 1000);
-    alert (elementHeight);
-}
-
-function selectedArticlesResponsive (productId) {
-    $("#menu_content_article-" + productId).ready(function(){
-        var elementHeight = $("#menu_content_article-" + productId)[0].offsetHeight;
-        alert (elementHeight);
-    });
+    setTimeout(selectedArticlesResponsive, 10);
 }
 
 function estimateSum(){
@@ -464,6 +454,20 @@ function orderListResponsive () {
     var contentArticleWidth = $('#selected_articles_list')[0].offsetWidth;
     var spaceAllowedForText = contentArticleWidth - 170;
     $('.selected_names').css ('max-width', spaceAllowedForText);
+}
+
+function selectedArticlesResponsive () {
+    var blocksArray = $(".selected_articles");
+    for (var i = 0; i < blocksArray.length; i++) {
+        var elementHeight = blocksArray[i].offsetHeight;
+        if (elementHeight > 50) {
+            $(blocksArray[i]).children(".orderList_buttons").css("margin-top", "10px");
+            $(blocksArray[i]).children("input").css("margin-top", "10px");
+        } else {
+            $(blocksArray[i]).children(".orderList_buttons").css("margin-top", "0");
+            $(blocksArray[i]).children("input").css("margin-top", "0");
+        }
+    }
 }
 
 function defineLanguage () {
@@ -886,4 +890,5 @@ $(document).on ('click', '#networksLine img', function() {
 $(window).resize(function(){
     footerResponsive();
     orderListResponsive ();
+    selectedArticlesResponsive();
 });
