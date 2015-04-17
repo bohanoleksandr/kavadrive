@@ -112,8 +112,21 @@ function receiptData () {
 
             for(var i in response){
                 var row = response[i];
-                menu[row[0]] = new Item(row[1], row[2], row[3]);
-                divForItem(row[0], row[1], row[2], row[3]);
+                switch (currentLang) {
+                    case "ukr":
+                        menu[row[0]] = new Item(row[1], row[4], row[5]);
+                        break;
+                    case "eng":
+                        menu[row[0]] = new Item(row[2], row[4], row[5]);
+                        break;
+                    case "rus":
+                        menu[row[0]] = new Item(row[3], row[4], row[5]);
+                        break;
+                    default:
+                        menu[row[0]] = new Item(row[1], row[4], row[5]);
+                        break;
+                }
+                divForItem(row[0], menu[row[0]]['name'], menu[row[0]]['amount'], menu[row[0]]['price']);
                 $(menuElems[row[0]]).appendTo ($('#menuList'));
             }
         }

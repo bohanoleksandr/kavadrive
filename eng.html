@@ -172,9 +172,12 @@
                 <input name="auth" type="radio" value="socNetwork">
                 <span>Соціальна мережа</span>
             </div>
-            <div id="uLogin" data-ulogin="display=panel;fields=first_name,last_name;
-                        providers=facebook,vkontakte,googleplus,linkedin,twitter;
+            <div id="uLogin" x-ulogin-params="display=buttons;fields=first_name,last_name;
                         callback=preview;redirect_uri=" hidden>
+                <img src="images/vkontakte.png" x-ulogin-button = "vkontakte"/>
+                <img src="images/facebook.png" x-ulogin-button = "facebook"/>
+                <img src="images/googlePlus.png" x-ulogin-button = "googleplus"/>
+                <img src="images/twitter.png" x-ulogin-button = "twitter"/>
             </div>
         </form>
 
