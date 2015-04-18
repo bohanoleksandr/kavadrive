@@ -65,7 +65,7 @@ var order = {
     emptiness: true
 };
 
-var menuElems = [];
+//var menuElems = [];
 
 var map = null;
 
@@ -110,6 +110,8 @@ function receiptData () {
         success: function(msg){
             var response=JSON.parse(msg);
 
+            var dummy = $("#article-dummy");
+
             for(var i in response){
                 var row = response[i];
                 switch (currentLang) {
@@ -126,9 +128,23 @@ function receiptData () {
                         menu[row[0]] = new Item(row[1], row[4], row[5]);
                         break;
                 }
-                divForItem(row[0], menu[row[0]]['name'], menu[row[0]]['amount'], menu[row[0]]['price']);
-                $(menuElems[row[0]]).appendTo ($('#menuList'));
+
+                dummy.clone()
+                    .attr({"id": "article-" + row[0], "title": function(){
+                        var positionToInject = this.title.indexOf('«') + 1;
+                        return this.title.substr(0, positionToInject) + menu[row[0]]['name'] + this.title.substr(positionToInject);
+                    }})
+                    .appendTo("#menuList")
+                    .children("p.name").text (menu[row[0]]['name'])
+                    .parent().children("p.amount").prepend(menu[row[0]]['amount'])
+                    .parent().children("p.price").prepend(parseInt(menu[row[0]]['price']))
+                ;
+                //divForItem(row[0], menu[row[0]]['name'], menu[row[0]]['amount'], menu[row[0]]['price']);
+                //$(menuElems[row[0]]).appendTo ($('#menuList'));
             }
+
+            dummy.remove();
+
         }
     });
 
@@ -190,34 +206,34 @@ function receiptData () {
     });
 }
 
-function divForItem (id, name, amount, price){
-    menuElems [id] = create("div", {Class:'menu_buttons not_pressed_button',id:'article-'+id,title:"Додати «" + name +
-        "» до замовлення"},create("p",{},name),create("p", {class:'amount'},amount),
-        create("p",{class:'price'},parseInt(price)+' грн'));
-}
+//function divForItem (id, name, amount, price){
+//    menuElems [id] = create("div", {Class:'menu_buttons not_pressed_button',id:'article-'+id,title:"Додати «" + name +
+//        "» до замовлення"},create("p",{},name),create("p", {class:'amount'},amount),
+//        create("p",{class:'price'},parseInt(price)+' грн'));
+//}
 
-function create( name, attributes ) {
-    var el = document.createElement( name );
-
-    if ( typeof attributes == 'object' ) {
-        for ( var i in attributes ) {
-            el.setAttribute( i, attributes[i] );
-
-            if ( i.toLowerCase() == 'class' ) {
-                el.className = attributes[i]; // for IE compatibility
-
-            } else if ( i.toLowerCase() == 'style' ) {
-                el.style.cssText = attributes[i]; // for IE compatibility
-            }
-        }
-    }
-    for ( var j = 2; j < arguments.length; j++ ) {
-        var val = arguments[j];
-        if ( typeof val == 'string' ) val = document.createTextNode( val );
-        el.appendChild( val );
-    }
-    return el;
-}
+//function create( name, attributes ) {
+//    var el = document.createElement( name );
+//
+//    if ( typeof attributes == 'object' ) {
+//        for ( var i in attributes ) {
+//            el.setAttribute( i, attributes[i] );
+//
+//            if ( i.toLowerCase() == 'class' ) {
+//                el.className = attributes[i]; // for IE compatibility
+//
+//            } else if ( i.toLowerCase() == 'style' ) {
+//                el.style.cssText = attributes[i]; // for IE compatibility
+//            }
+//        }
+//    }
+//    for ( var j = 2; j < arguments.length; j++ ) {
+//        var val = arguments[j];
+//        if ( typeof val == 'string' ) val = document.createTextNode( val );
+//        el.appendChild( val );
+//    }
+//    return el;
+//}
 
 function addDivSelectArticle (productId) {
     var bigDiv = '<div class="selected_articles" id="menu_content_article-' + productId + '">';
@@ -237,6 +253,26 @@ function addDivSelectArticle (productId) {
     setTimeout(selectedArticlesResponsive, 10);
 }
 
+function qwerty(id) {
+    var dummy =  $("#menu_content_article-dummy");
+    dummy.clone()
+        .attr("id", "menu_content_article-" + id)
+        .appendTo($("#selected_articles_list"))
+        .children("div.selected_names").text(menu[id]['name'])
+        .parent().children("input").attr("title", injection(this.title, id))
+        .parent().children("div.orderList_buttons").children("div.plus").attr("title", function(){
+            var positionToInject = this.title.indexOf('«') + 1;
+            return this.title.substr(0, positionToInject) + menu[id]['name'] + this.title.substr(positionToInject);
+        })
+        ;
+}
+
+function injection (title, id) {
+    console.log (title);
+    var positionToInject = title.indexOf('«') + 1;
+    return title.substr(0, positionToInject) + menu[id]['name'] + title.substr(positionToInject);
+}
+
 function estimateSum(){
     order.emptiness = true;
     var tempSum = 0;
@@ -247,7 +283,7 @@ function estimateSum(){
         orderListResponsive();
     }
     order.sum = tempSum;
-    document.getElementById('hrivnas').innerHTML = order.sum+" грн";
+    $('#hrivnas').text(order.sum);
 }
 
 function updateQuantity(productId) {
@@ -597,7 +633,8 @@ $(document).on("click", 'div.menu_buttons', function(){
     var articleId = parseInt(this.id.substr(8));
     if (!order.content[articleId]){
         order.content[articleId] = 1;
-        addDivSelectArticle(articleId);
+        qwerty(articleId);
+        //addDivSelectArticle(articleId);
     } else if (order.content[articleId] < 99){
         order.content[articleId]++;
         updateQuantity(articleId);

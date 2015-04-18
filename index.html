@@ -80,13 +80,33 @@
 
                 <div id="menu_page" class="pages">
                     <div id="menuList">
-                        <!--<ul id="menuList"></ul>-->
+                        <div id="article-dummy" class="menu_buttons not_pressed_button" title="Додати «» до замовлення">
+                            <p class="name"></p>
+                            <p class="amount"> мл</p>
+                            <p class="price"> грн</p>
+                        </div>
                     </div>
                     <div id="bottom_bar">
                         <div class="blocks" id="orderList">
                             Зміст замовлення:
-                            <div id="selected_articles_list"></div>
-                            <div id="sum">Всього до сплати:<span id="hrivnas">0 грн</span></div>
+                            <div id="selected_articles_list">
+                                <div id="menu_content_article-dummy" class="selected_articles">
+                                    <div class="selected_names"></div>
+                                    <input class="counter" title="Кількість замовлених «»" value="1">
+                                    <div class="orderList_buttons">
+                                        <div class="plus" title="Додати ще один «» до замовлення"><strong> + </strong></div>
+                                        <div class="minus" title="Зменшити на один «»"><strong> - </strong></div>
+                                        <div class="delete" title="Прибрати «» із замовлення"><strong> × </strong></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sum">
+                                Всього до сплати:
+                                <span id="money">
+                                    <span id="hrivnas">0</span>
+                                    <span> грн</span>
+                                </span>
+                            </div>
                         </div>
 
                         <div id="time" class="blocks">

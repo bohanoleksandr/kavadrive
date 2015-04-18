@@ -126,6 +126,10 @@ input[type='radio'] {
     text-align: center;
 }
 
+#uLogin img {
+    margin: 0 5px;
+}
+
 /*@media screen and (max-width: 400px) {*/
     /*#authentication_page {*/
         /*padding: 20px 5px;*/
