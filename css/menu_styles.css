@@ -19,6 +19,9 @@
     cursor: pointer;
     text-align: center;
 }
+.menu_buttons:hover{
+    color:#ffffff;
+}
 
 .not_pressed_button {
     background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
