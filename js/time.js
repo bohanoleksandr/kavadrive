@@ -23,7 +23,31 @@ var month_array = {
     8: 'вересня',
     9: 'жовтня',
     10: 'листопада',
-    11: 'грудня'
+    11: 'грудня',
+    12: 'January',
+    13: 'February',
+    14: 'March',
+    15: 'April',
+    16: 'May',
+    17: 'June',
+    18: 'July',
+    19: 'August',
+    20: 'September',
+    21: 'October',
+    22: 'November',
+    23: 'December',
+    24: 'января',
+    25: 'февраля',
+    26: 'марта',
+    27: 'апреля',
+    28: 'мая',
+    29: 'июня',
+    30: 'июля',
+    31: 'августа',
+    32: 'сентября',
+    33: 'октября',
+    34: 'ноября',
+    35: 'декабря'
 };
 
 var day_array = {
@@ -33,7 +57,21 @@ var day_array = {
     3: 'середа',
     4: 'четвер',
     5: 'п’ятниця',
-    6: 'субота'
+    6: 'субота',
+    7: 'Sunday',
+    8: 'Monday',
+    9: 'Tuesday',
+    10: 'Wednesday',
+    11: 'Thursday',
+    12: 'Friday',
+    13: 'Saturday',
+    14: 'воскресенье',
+    15: 'понедельник',
+    16: 'вторник',
+    17: 'среда',
+    18: 'четверг',
+    19: 'пятница',
+    20: 'суббота'
 };
 
 function addZero(n) {
@@ -159,8 +197,25 @@ function updateClock() {
     $("#hours").text (addZero(visitTime.getHours()));
     $("#minutes").text (addZero(visitTime.getMinutes()));
     $("#order_date").html(visitTime.getDate());
-    $("#order_month").html(month_array[visitTime.getMonth()]);
-    $("#order_day").html(day_array[visitTime.getDay()]);
+    var month_place = $("#order_month");
+    var day_place = $("#order_day");
+    switch (currentLang) {
+        case "ukr":
+            month_place.html(month_array[visitTime.getMonth()]);
+            day_place.html(day_array[visitTime.getDay()]);
+            break;
+        case "eng":
+            month_place.html(month_array[visitTime.getMonth() + 12]);
+            day_place.html(day_array[visitTime.getDay() + 7]);
+            break;
+        case "rus":
+            month_place.html(month_array[visitTime.getMonth() + 24]);
+            day_place.html(day_array[visitTime.getDay() + 14]);
+            break;
+        default:
+            break;
+    }
+
 }
 
 function buttonActivator () {

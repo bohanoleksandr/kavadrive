@@ -9,9 +9,9 @@ var tip_array = {
     6: "Прочитайте про сайт",
     7: "Make an order",
     8: "Input contact data",
-    9: "TODO",
-    10: "TODO",
-    11: "TODO",
+    9: "Choose a cafe",
+    10: "Choose a cafe on the map",
+    11: "Fill partner's form",
     12: "Read about the site",
     13: "Сделайте заказ",
     14: "Укажите контактные данные",
@@ -33,17 +33,17 @@ var pointer_title_array = {
     8: "Go to information about the Kavadrive network",
     9: "Go to menu",
     10: "Go to authorization",
-    11: "TODO",
-    12: "TODO",
-    13: "TODO",
+    11: "Go to cafe list",
+    12: "Go to map",
+    13: "Go to partner's form",
     14: "Go to information about the Kavadrive network",
     15: "Go to menu",
     16: "Перейти к информации о сети Kavadrive",
     17: "Перейти к меню",
-    18: "TODO",
-    19: "TODO",
-    20: "TODO",
-    21: "TODO",
+    18: "Перейти к авторизации",
+    19: "Перейти к списку кафе",
+    20: "Перейти к карте",
+    21: "Перейти к анкете для партнёров",
     22: "Перейти к информации о сети Kavadrive",
     23: "Перейти к меню"
 };
@@ -641,14 +641,14 @@ $(document).on("click", 'div.menu_buttons', function(){
 });
 
 $(document).on('click', '.plus', function(){
-    var productId = parseInt(this.parentElement.parentElement.id.substr(11));
+    var productId = parseInt(this.parentElement.parentElement.id.substr(21));
     if (order.content[productId] < 99) order.content[productId]++;
     updateQuantity(productId);
     estimateSum();
 });
 
 $(document).on('click', '.minus', function(){
-    var productId = parseInt(this.id.substr(12));
+    var productId = parseInt(this.parentElement.parentElement.id.substr(21));
     order.content[productId]--;
     if(order.content[productId]){
         updateQuantity(productId);
@@ -664,7 +664,7 @@ $(document).on('click', '.minus', function(){
 });
 
 $(document).on('click', '.delete', function(){
-    var productId = parseInt(this.id.substring(13));
+    var productId = parseInt(this.parentElement.parentElement.id.substring(21));
     removeArticleFromOrder(productId);
     estimateSum();
     if (order.emptiness) {
