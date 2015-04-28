@@ -69,6 +69,10 @@ div.blocks {
     text-decoration: underline;
 }
 
+#menu_content_article-dummy {
+    display: none;
+}
+
 .selected_articles {
     min-height: 25px;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;

@@ -253,22 +253,20 @@ function addDivSelectArticle (productId) {
     setTimeout(selectedArticlesResponsive, 10);
 }
 
-function qwerty(id) {
+function titleGeneration(id) {
     var dummy =  $("#menu_content_article-dummy");
     dummy.clone()
         .attr("id", "menu_content_article-" + id)
         .appendTo($("#selected_articles_list"))
         .children("div.selected_names").text(menu[id]['name'])
-        .parent().children("input").attr("title", injection(this.title, id))
-        .parent().children("div.orderList_buttons").children("div.plus").attr("title", function(){
-            var positionToInject = this.title.indexOf('«') + 1;
-            return this.title.substr(0, positionToInject) + menu[id]['name'] + this.title.substr(positionToInject);
-        })
+        .parent().children("input").attr("title", injection(dummy.children("input")[0].title, id))
+        .parent().children("div.orderList_buttons").children("div.plus").attr("title", injection(dummy.children("div.orderList_buttons").children("div.plus")[0].title, id))
+        .parent().children("div.minus").attr("title", injection(dummy.children("div.orderList_buttons").children("div.minus")[0].title, id))
+        .parent().children("div.delete").attr("title", injection(dummy.children("div.orderList_buttons").children("div.delete")[0].title, id))
         ;
 }
 
 function injection (title, id) {
-    console.log (title);
     var positionToInject = title.indexOf('«') + 1;
     return title.substr(0, positionToInject) + menu[id]['name'] + title.substr(positionToInject);
 }
@@ -287,7 +285,7 @@ function estimateSum(){
 }
 
 function updateQuantity(productId) {
-    $('#counterOfProduct'+productId).val(order.content[productId]);
+    $('#menu_content_article-' + productId + ' input').val(order.content[productId]);
 }
 
 function removeArticleFromOrder (productId){
@@ -633,8 +631,7 @@ $(document).on("click", 'div.menu_buttons', function(){
     var articleId = parseInt(this.id.substr(8));
     if (!order.content[articleId]){
         order.content[articleId] = 1;
-        qwerty(articleId);
-        //addDivSelectArticle(articleId);
+        titleGeneration(articleId);
     } else if (order.content[articleId] < 99){
         order.content[articleId]++;
         updateQuantity(articleId);
@@ -644,7 +641,7 @@ $(document).on("click", 'div.menu_buttons', function(){
 });
 
 $(document).on('click', '.plus', function(){
-    var productId = parseInt(this.id.substr(11));
+    var productId = parseInt(this.parentElement.parentElement.id.substr(11));
     if (order.content[productId] < 99) order.content[productId]++;
     updateQuantity(productId);
     estimateSum();
