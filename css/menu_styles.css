@@ -69,7 +69,8 @@ div.blocks {
 }
 
 #changePos {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
+    display: none;
 }
 
 #menu_content_article-dummy {
@@ -158,17 +159,15 @@ input.counter:focus {
 
 #magicButton {
     text-align: center;
+}
+
+#saveOrder {
     display: none;
 }
 
-/*#saveOrder {*/
-    /*background: none repeat scroll 0 0 #AD7B05; color:#FFFFFF;*/
-    /*font-size: 1.1em;*/
-    /*margin: 20px 0;*/
-    /*padding: 10px;*/
-    /*cursor: pointer;*/
-    /*width: 150px;*/
-/*}*/
+#create_new_order {
+    display: none;
+}
 
 #thanks {
     display: none;

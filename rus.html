@@ -90,7 +90,7 @@
                         <div class="blocks" id="orderList">
                             Содержание заказа:
                             <div id="selected_articles_list">
-                                <div id="menu_content_article-dummy" class="selected_articles">
+                                <div id="menu_content_article-dummy">
                                     <div class="selected_names"></div>
                                     <input class="counter" title="Количество заказанных «»" value="1">
                                     <div class="orderList_buttons">
@@ -143,11 +143,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div id = "POS" class="blocks textLink">Выбрать кафе <!--(<span id="changePos">обрати</span>)--></div>
+                        <div id = "POS" class="blocks textLink">
+                            <span id="noPos">Выберите кафе</span>
+                            <span id="namePos"></span>
+                            <span id="changePos">(изменить)</span>
+                        </div>
                         <div id="thanks" class="blocks">
                             Спасибо за заказ!<br/><br/>
                             Заказ № <span id="order_id_small"></span> принят на сумму:
-                            <p id="order_sum" class='important'> грн</p><br/>
+                            <p id="order_sum" class='important'><span></span> грн</p><br/>
                             Заберите его в кафе:
                             <p id="order_pos" class='important'></p><br/>
                             Время визита в кафе:
@@ -156,7 +160,8 @@
                             <p id='order_id'></p>
                         </div>
                         <div id="magicButton">
-                            <button id="saveOrder" class="greenButton" title="Відправити замовлення">Заказать</button>
+                            <button id="saveOrder" class="greenButton" title="Отправить заказ">Заказать</button>
+                            <button id="create_new_order" class="greenButton">Сформировать новый заказ</button>
                         </div>
 
                     </div>

@@ -90,7 +90,7 @@
                         <div class="blocks" id="orderList">
                             Зміст замовлення:
                             <div id="selected_articles_list">
-                                <div id="menu_content_article-dummy" class="selected_articles">
+                                <div id="menu_content_article-dummy">
                                     <div class="selected_names"></div>
                                     <input class="counter" title="Кількість замовлених «»" value="1">
                                     <div class="orderList_buttons">
@@ -143,11 +143,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div id = "POS" class="blocks textLink">Обрати кав’ярню <!--(<span id="changePos">обрати</span>)--></div>
+                        <div id = "POS" class="blocks textLink">
+                            <span id="noPos">Оберіть кав’ярню</span>
+                            <span id="namePos"></span>
+                            <span id="changePos">(змінити)</span>
+                        </div>
                         <div id="thanks" class="blocks">
                             Дякуємо!<br/><br/>
                             Замовлення № <span id="order_id_small"></span> прийнято на суму:
-                            <p id="order_sum" class='important'> грн</p><br/>
+                            <p id="order_sum" class='important'><span></span> грн</p><br/>
                             Заберіть його у кав’ярні:
                             <p id="order_pos" class='important'></p><br/>
                             Час візиту до кав’ярні:
@@ -157,6 +161,7 @@
                         </div>
                         <div id="magicButton">
                             <button id="saveOrder" class="greenButton" title="Відправити замовлення">Замовити</button>
+                            <button id="create_new_order" class="greenButton">Зробити нове замовлення</button>
                         </div>
 
                     </div>

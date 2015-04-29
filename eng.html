@@ -90,7 +90,7 @@
                         <div class="blocks" id="orderList">
                             Order content:
                             <div id="selected_articles_list">
-                                <div id="menu_content_article-dummy" class="selected_articles">
+                                <div id="menu_content_article-dummy">
                                     <div class="selected_names"></div>
                                     <input class="counter" title="Number of «» ordered" value="1">
                                     <div class="orderList_buttons">
@@ -143,38 +143,43 @@
                                 </div>
                             </div>
                         </div>
-                        <div id = "POS" class="blocks textLink">Choose a cafe <!--(<span id="changePos">обрати</span>)--></div>
+                        <div id = "POS" class="blocks textLink">
+                            <span id="noPos">Choose a cafe</span>
+                            <span id="namePos"></span>
+                            <span id="changePos">(change)</span>
+                        </div>
                         <div id="thanks" class="blocks">
-                            Дякуємо!<br/><br/>
-                            Замовлення № <span id="order_id_small"></span> прийнято на суму:
-                            <p id="order_sum" class='important'> грн</p><br/>
-                            Заберіть його у кав’ярні:
+                            Thanks!<br/><br/>
+                            The order # <span id="order_id_small"></span> is accepted in the amount of:
+                            <p id="order_sum" class='important'><span></span> UAH</p><br/>
+                            Get it in the cafe:
                             <p id="order_pos" class='important'></p><br/>
-                            Час візиту до кав’ярні:
+                            Your visit time:
                             <p id="order_visit" class='important'></p><br/>
-                            НОМЕР ЗАМОВЛЕННЯ:<br/>
+                            ORDER ID:<br/>
                             <p id='order_id'></p>
                         </div>
                         <div id="magicButton">
-                            <button id="saveOrder" class="greenButton" title="Відправити замовлення">Make order</button>
+                            <button id="saveOrder" class="greenButton" title="Send the order">Make order</button>
+                            <button id="create_new_order" class="greenButton">Make new order</button>
                         </div>
 
                     </div>
                 </div>
 
                 <form id="authentication_page" class="pages">
-                    <div id="auth-title">Авторизація</div>
+                    <div id="auth-title">Authorization</div>
                     <div class="auth-text">
                         <input name="auth" type="radio" value="phone" checked>
-                        <span>Телефон</span>
+                        <span>Cell phone</span>
                     </div>
                     <div id="inputPhoneBlock" class="inputBlock">
                         <input id ="phoneNumber" class="inputData" name="number">
-                        <button id="savePhone" class="savePhoneMail greenButton" type="button">Увійти</button>
+                        <button id="savePhone" class="savePhoneMail greenButton" type="button">Sign in</button>
                     </div>
                     <div id="inputNameBlock" class="auth-text">
-                        <div class="nameTitleDiv" style="margin-right: 10px">Ім’я</div>
-                        <div class="nameTitleDiv">Прізвище</div>
+                        <div class="nameTitleDiv" style="margin-right: 10px">First name</div>
+                        <div class="nameTitleDiv">Last name</div>
                         <div class="inputBlock">
                             <input id="optionName" class="inputData">
                             <input id="optionSurname" class="inputData">
@@ -182,15 +187,15 @@
                     </div>
                     <div class="auth-text">
                         <input name="auth" type="radio" value="mail">
-                        <span>Електронна пошта</span>
+                        <span>Electronic mail</span>
                     </div>
                     <div id="inputMailBlock" class="inputBlock" hidden>
                         <input id="mail" name="mail" class="inputData">
-                        <button id="saveMail" class="savePhoneMail greenButton" type="button">Увійти</button>
+                        <button id="saveMail" class="savePhoneMail greenButton" type="button">Sign in</button>
                     </div>
                     <div class="auth-text">
                         <input name="auth" type="radio" value="socNetwork">
-                        <span>Соціальна мережа</span>
+                        <span>Social network</span>
                     </div>
                     <div id="uLogin" x-ulogin-params="display=buttons;fields=first_name,last_name;
                                 callback=preview;redirect_uri=" hidden>

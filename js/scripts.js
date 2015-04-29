@@ -176,7 +176,18 @@ function receiptData () {
 
             for (var r in response) {
                 var row = response[r];
-                shops[row[0]] = new Shop(row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]);
+                switch (currentLang) {
+                    case "ukr":
+                    case "rus":
+                        shops[row[0]] = new Shop(row[1], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]);
+                        break;
+                    case "eng":
+                        shops[row[0]] = new Shop(row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]);
+                        break;
+                    default:
+                        break;
+                }
+
                 if (shops[row[0]].opening_time == null && shops[row[0]].closing_time == null) shops[row[0]].round_the_clock = true;
                 if (shops[row[0]].opening_time == null) shops[row[0]].opening_time = "00:00:00";
                 if (shops[row[0]].closing_time == null) shops[row[0]].closing_time = "24:00:00";
@@ -238,8 +249,6 @@ function receiptData () {
 function addDivSelectArticle (productId) {
     var bigDiv = '<div class="selected_articles" id="menu_content_article-' + productId + '">';
     var name = '<div class="selected_names">' + menu[productId].name + '</div>';
-    //var counter = '<div class="counter" id="counterOfProduct'+productId+'" title="Кількість замовлених «' +
-    //    menu[productId].name + '»"> ' + order.content[productId] + '</div>';
     var counter = '<input class="counter" id="counterOfProduct' + productId + '" title="Кількість замовлених «' +
         menu[productId].name + '»" value="1">';
     var plus = '<div class="plus" id="plusProduct' + productId + '" title="Додати ще один «' + menu[productId].name +
@@ -256,7 +265,7 @@ function addDivSelectArticle (productId) {
 function titleGeneration(id) {
     var dummy =  $("#menu_content_article-dummy");
     dummy.clone()
-        .attr("id", "menu_content_article-" + id)
+        .attr({id: "menu_content_article-" + id, class: "selected_articles"})
         .appendTo($("#selected_articles_list"))
         .children("div.selected_names").text(menu[id]['name'])
         .parent().children("input").attr("title", injection(dummy.children("input")[0].title, id))
@@ -446,7 +455,7 @@ function preview (token){
                         } else {
                             if (order.pos) {
                                 rebuildPage(1);
-                                $("#saveOrder").trigger('click');
+                                //$("#saveOrder").trigger('click');
                             } else {
                                 rebuildPage(3);
                             }
@@ -460,7 +469,10 @@ function preview (token){
 
 function changePOS (shopId) {
     order.pos = shopId;
-    $('#POS').html(shops[order.pos].name + ' (<span id="changePos">змінити</span>)');
+    $('#noPos').hide();
+    $('#namePos').text(shops[order.pos].name);
+    $('#changePos').show();
+    //$('#POS').html(shops[order.pos].name + ' (<span id="changePos">змінити</span>)');
     updateClock();
 }
 
@@ -577,7 +589,7 @@ $(document).on('click', '#savePhone', function phone(){
                 } else {
                     if (order.pos) {
                         rebuildPage(1);
-                        $("#saveOrder").trigger('click');
+                        //$("#saveOrder").trigger('click');
                     } else {
                         rebuildPage(3);
                     }
@@ -616,7 +628,7 @@ $(document).on('click', '#saveMail', function mail(){
                 } else {
                     if (order.pos) {
                         rebuildPage(1);
-                        $("#saveOrder").trigger('click');
+                        //$("#saveOrder").trigger('click');
                     } else {
                         rebuildPage(3);
                     }
@@ -627,7 +639,7 @@ $(document).on('click', '#saveMail', function mail(){
 });
 
 $(document).on("click", 'div.menu_buttons', function(){
-    $('#magicButton').css ('display', 'block');
+    if (order.emptiness) $('#saveOrder').show();
     var articleId = parseInt(this.id.substr(8));
     if (!order.content[articleId]){
         order.content[articleId] = 1;
@@ -659,7 +671,7 @@ $(document).on('click', '.minus', function(){
     estimateSum();
 
     if (order.emptiness) {
-        $('#magicButton').css ('display', 'none');
+        $('#saveOrder').hide();
     }
 });
 
@@ -668,75 +680,72 @@ $(document).on('click', '.delete', function(){
     removeArticleFromOrder(productId);
     estimateSum();
     if (order.emptiness) {
-        $('#magicButton').css ('display', 'none');
+        $('#saveOrder').hide();
     }
 });
 
 $(document).on('click', '#saveOrder', function submit(){
-    if (!$(this).hasClass('make_new_order')) {
-        if (order.emptiness){
-            rebuildPage(1);
-        } else if (!customer['id']){
-            rebuildPage(2);
-        } else if (!order.pos){
-            rebuildPage(3);
-        } else {
-            order.visitTime = visitTime;
-            $.post(
-                "php/orderRecording.php",
-                {
-                    order: JSON.stringify(order),
-                    customerId: customer ['id']
-                },
-                function(result){
-                    if (result) {
-                        $(".blocks").css ('display', 'none');
-                        $("#saveOrder").addClass ('make_new_order');
-                        $("#saveOrder").text ('Зробити нове замовлення');
-                        var visitTimeMinutes = order.visitTime.getMinutes();
-                        if (visitTimeMinutes < 10) {
-                            visitTimeMinutes = '0' + visitTimeMinutes;
-                        }
-                        $("#order_id_small").text(result);
-                        $("#order_sum").prepend(order.sum);
-                        $("#order_pos").text(shops[order.pos].name + " - " + shops[order.pos].street + ", "
-                            + shops[order.pos].house_number);
-                        $("#order_visit").html(order.visitTime.getHours() + ":" + visitTimeMinutes + "<br/>" +
-                            "<sub>" + order.visitTime.getDate() + " " + month_array[order.visitTime.getMonth()] + "</sub>");
-                        $("#order_id").text(result);
-                        //$("#thanks").html (
-                        //    "Дякуємо!<br/></br>" +
-                        //    "Замовлення № " + result + " прийнято на суму:" +
-                        //    "<p class='important'>" + order.sum + " грн</p><br/>" +
-                        //    "Заберіть його у кав’ярні:" +
-                        //    "<p class='important'>" + shops[order.pos].name + " - " + shops[order.pos].street + ", "
-                        //    + shops[order.pos].house_number + "</p><br/>" +
-                        //    "Час візиту до кав’ярні:<p class='important'>" +
-                        //    order.visitTime.getHours() + ":" + visitTimeMinutes + "<br/>" +
-                        //    "<sub>" + order.visitTime.getDate() + " " + month_array[order.visitTime.getMonth()] + "</sub></p><br/>" +
-                        //    "НОМЕР ЗАМОВЛЕННЯ:" + "<br/>" +
-                        //    "<p id='order_id'>" + result + "</p>"
-                        //);
-                        $('#thanks').css('display', 'block');
-                        var destination = $('#thanks').offset().top;
-                        $('html').animate({scrollTop:destination}, 200);
-                    } else {
-                        alert ("Вибачте, проводяться сервісні роботи\r\nСпробуйте замовити пізніше");
-                    }
-                }
-            )
-        }
+
+    if (!customer['id']){
+        rebuildPage(2);
+    } else if (!order.pos){
+        rebuildPage(3);
     } else {
-        $("#saveOrder").removeClass ('make_new_order');
-        $("#saveOrder").text ('Замовити');
-        $(".blocks").css ('display', 'block');
-        $("#thanks").css ('display', 'none');
-        $("#hrivnas").text ('0 грн');
-        $("#magicButton").css ('display', 'none');
-        order.content = {};
-        updateClock();
-        $(".selected_articles").remove();
+        order.visitTime = visitTime;
+        $.post(
+            "php/orderRecording.php",
+            {
+                order: JSON.stringify(order),
+                customerId: customer ['id']
+            },
+            function(result){
+                if (result) {
+                    $(".blocks").hide();
+                    $("#saveOrder").hide();
+                    $("#create_new_order").show();
+                    var visitTimeMinutes = order.visitTime.getMinutes();
+                    if (visitTimeMinutes < 10) {
+                        visitTimeMinutes = '0' + visitTimeMinutes;
+                    }
+                    $("#order_id_small").text(result);
+                    $("p#order_sum span").text(order.sum);
+                    $("#order_pos").text(shops[order.pos].name + " - " + shops[order.pos].street + ", "
+                        + shops[order.pos].house_number);
+                    var month = null;
+                    switch (currentLang) {
+                        case "ukr":
+                            month = month_array[order.visitTime.getMonth()];
+                            break;
+                        case "eng":
+                            month = month_array[order.visitTime.getMonth() + 12];
+                            break;
+                        case "rus":
+                            month = month_array[order.visitTime.getMonth() + 24];
+                            break;
+                        default:
+                            break;
+                    }
+                    $("#order_visit").html(order.visitTime.getHours() + ":" + visitTimeMinutes + "<br/>" +
+                        "<sub>" + order.visitTime.getDate() + " " + month + "</sub>");
+                    $("#order_id").text(result);
+                    $('#thanks').css('display', 'block');
+                    var destination = $('#thanks').offset().top;
+                    $('html').animate({scrollTop:destination}, 200);
+                } else {
+                    alert ("Вибачте, проводяться сервісні роботи\r\nСпробуйте замовити пізніше");
+                }
+            }
+        )
     }
+});
+
+$(document).on ('click', '#create_new_order', function(){
+    order.content = {};
+    estimateSum();
+    $(".blocks").show();
+    $("#thanks").hide();
+    $(this).hide();
+    $(".selected_articles").remove();
 });
 
 $(document).on ('click', '#POS', function (){
@@ -806,7 +815,7 @@ $(document).on ('click', 'div.shops span', function() {
     } else {
         if (customer['id']) {
             rebuildPage(1);
-            $("#saveOrder").trigger('click');
+            //$("#saveOrder").trigger('click');
         } else {
             rebuildPage(2);
         }
