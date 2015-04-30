@@ -16,56 +16,22 @@
     color: #FFF;
 }
 
-#contacts_page ul li.anchor {
+#contacts_page ul li.mapLinkShop {
     cursor: pointer;
     text-decoration: underline;
     color: #cccccc;
 }
 
-li.anchor:hover {
+li.mapLinkShop:hover {
     text-decoration: none;
 }
 
-.shops span {
+span.linkSelect {
     float: right;
     text-decoration: underline;
     cursor: pointer;
 }
 
-/*table {*/
-    /*font-size: 18px;*/
-    /*text-align: left;*/
-    /*margin: 20px auto;*/
-/*}*/
-
-/*tr {*/
-    /*height: 35px;*/
-/*}*/
-
-/*th {*/
-    /*font-size: 20px;*/
-    /*color: #808080;*/
-    /*padding-bottom: 30px;*/
-/*}*/
-
-/*#th1 {*/
-    /*width: 220px;*/
-/*}*/
-/*#th2 {*/
-    /*text-align: center;*/
-    /*width: 260px;*/
-/*}*/
-/*#th3 {*/
-    /*text-align: center;*/
-    /*width: 160px;*/
-/*}*/
-
-/*td {*/
-    /*border-bottom: 1px solid #622;*/
-    /*color: #F5F5F5;*/
-/*}*/
-
-/*span.shopNames {*/
-    /*text-decoration: underline;*/
-    /*cursor: pointer;*/
-/*}*/
+div#shop-dummy {
+    display: none;
+}

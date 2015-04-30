@@ -89,8 +89,24 @@ function initialize() {
                 }
             });
 
-            infoMessages[i] = '<b>' + shops[i].name + '</b><br/><a class="createOrderInfoMessage">Зробити замовлення</a>'
-                + '<br/>Час роботи: ' + shops[i].opening_time.substring(0, 5) + ' - ' + shops[i].closing_time.substring(0, 5)
+            var makeAnOrder = null;
+            switch (currentLang) {
+                case "ukr":
+                    makeAnOrder = "Зробити замовлення";
+                    break;
+                case "eng":
+                    makeAnOrder = "Make an order";
+                    break;
+                case "rus":
+                    makeAnOrder = "Сделать заказ";
+                    break;
+                default:
+                    break;
+            }
+
+            infoMessages[i] = '<b>' + shops[i].name + '</b><br/><a class="createOrderInfoMessage">' + makeAnOrder + '</a>'
+                //+ '<br/>Час роботи: ' + shops[i].opening_time.substring(0, 5) + ' - ' + shops[i].closing_time.substring(0, 5)
+                + '<br/>' + $("div#shop" + i + " li.timeShop").text()
                 + '<br/>' + shops[i].phone + '<br/>' + shops[i].street + ', ' + shops[i].house_number;
         }
     }
@@ -137,8 +153,23 @@ function createMyMarker ()
 
     if (infoWindow) infoWindow.close();
 
+    var youAreHere = null;
+    switch (currentLang) {
+        case "ukr":
+            youAreHere = "<b>Ви тут</b>";
+            break;
+        case "eng":
+            youAreHere = "<b>You are here</b>";
+            break;
+        case "rus":
+            youAreHere = "<b>Вы здесь</b>";
+            break;
+        default:
+            break;
+    }
+
     infoWindow = new google.maps.InfoWindow({
-        content: '<b>Ви тут</b>'
+        content: youAreHere
     });
 
     infoWindow.open (map, myMarker);

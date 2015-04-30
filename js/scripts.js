@@ -178,11 +178,13 @@ function receiptData () {
                 var row = response[r];
                 switch (currentLang) {
                     case "ukr":
-                    case "rus":
-                        shops[row[0]] = new Shop(row[1], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]);
+                        shops[row[0]] = new Shop(row[1], row[4], row[5], row[6], row[9], row[10], row[11], row[12], row[13]);
                         break;
                     case "eng":
-                        shops[row[0]] = new Shop(row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]);
+                        shops[row[0]] = new Shop(row[2], row[4], row[5], row[7], row[9], row[10], row[11], row[12], row[13]);
+                        break;
+                    case "rus":
+                        shops[row[0]] = new Shop(row[1], row[4], row[5], row[8], row[9], row[10], row[11], row[12], row[13]);
                         break;
                     default:
                         break;
@@ -203,14 +205,24 @@ function receiptData () {
                     //rows[i] = '<tr>' + shopNameTd + shopAddressTd + phoneTd + '</tr>';
                     //
                     //$(rows[i]).appendTo ($('tbody'));
-                    rows[i] = '<div id="shop' + i + '" class="shops">' + shops[i].name + '<span>обрати</span></div>' +
-                        '<ul id="infoShop' + i + '">' +
-                        '<li>години роботи: ' + shops[i].opening_time.substring(0, 5) + ' - ' + shops[i].closing_time.substring(0, 5) + '</li>' +
-                        '<li>телефон: ' + shops[i].phone + '</li>' +
-                        '<li>' + shops[i].street + ', ' + shops[i].house_number + '</li>' +
-                        '<li>Вінниця</li>' +
-                        '<li class="anchor textLink">кав’ярня на карті</li>' + '</ul>';
-                    $(rows[i]).appendTo ($('#contacts_page'));
+                    //rows[i] = '<div id="shop' + i + '" class="shops">' + shops[i].name + '<span>обрати</span></div>' +
+                    //    '<ul id="infoShop' + i + '">' +
+                    //    '<li>години роботи: ' + shops[i].opening_time.substring(0, 5) + ' - ' + shops[i].closing_time.substring(0, 5) + '</li>' +
+                    //    '<li>телефон: ' + shops[i].phone + '</li>' +
+                    //    '<li>' + shops[i].street + ', ' + shops[i].house_number + '</li>' +
+                    //    '<li>Вінниця</li>' +
+                    //    '<li class="anchor textLink">кав’ярня на карті</li>' + '</ul>';
+                    //$(rows[i]).appendTo ($('#contacts_page'));
+
+                    var dummy = $("div#shop-dummy");
+                    dummy.clone()
+                        .attr({id: "shop" + i, class: "shops"})
+                        .appendTo("#contacts_page")
+                        .children("div.shopHeaders").children("span.shopName").text(shops[i].name)
+                        .parent().parent().children("ul.infoShop").children("li.timeShop")
+                        .append(shops[i].opening_time.substring(0, 5) + " - " + shops[i].closing_time.substring(0, 5))
+                        .parent().children("li.phoneShop").append(shops[i].phone)
+                        .parent().children("li.addressShop").text(shops[i].street + ", " + shops[i].house_number)
                 }
             }
         }
@@ -807,8 +819,8 @@ $(document).on ('mouseout', '.plus, .minus, .delete, div.menu_buttons', function
     $(this).removeClass ('pressed_button');
 });
 
-$(document).on ('click', 'div.shops span', function() {
-    changePOS(parseInt(this.parentNode.id.substr(4)));
+$(document).on ('click', 'span.linkSelect', function() {
+    changePOS(parseInt(this.parentNode.parentNode.id.substr(4)));
 
     if (order.emptiness) {
         rebuildPage(1);
@@ -916,8 +928,8 @@ $(document).on ('click', '.clickNav', function() {
     rebuildPage (new_page);
 });
 
-$(document).on ('click', 'li.anchor', function(){
-    changePOS(this.parentNode.id.substr(8));
+$(document).on ('click', 'li.mapLinkShop', function(){
+    changePOS(this.parentNode.parentNode.id.substr(4));
     //shopWasChanged();
     rebuildPage(4);
 });
