@@ -499,7 +499,7 @@ function checkMail (mail) {
 }
 
 function manualChangeOfQuantity (input){
-    var itemId = parseInt(input.id.substr(16));
+    var itemId = parseInt(input.parentNode.id.substr(21));
     var newValue = parseInt(input.value);
     if (typeof newValue == "number" && newValue > 0 && newValue < 100) {
         order.content[itemId] = newValue;
@@ -511,6 +511,7 @@ function manualChangeOfQuantity (input){
         $(input).val(order.content[itemId]);
     }
     input.blur();
+    //alert (newValue);
 }
 
 function footerResponsive (){
@@ -952,6 +953,15 @@ $(document).on ('click', '#networksLine img', function() {
             break;
         default:
             break;
+    }
+});
+
+$(document).on ('click', 'li#languages span', function(){
+    if (this.id != currentLang){
+        var thisId = this.id;
+        if (thisId == "ukr") thisId = "index";
+        var url = document.URL.substr(0, (document.URL.lastIndexOf("/") + 1)) + thisId + ".html";
+        $(location).attr('href', url);
     }
 });
 
