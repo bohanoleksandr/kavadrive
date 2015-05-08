@@ -573,6 +573,16 @@ function sendPartnersForm () {
     }
 }
 
+function slip () {
+    var right = null;
+    if ($("#nav-trigger")[0].checked) {
+        right = '165px';
+    } else {
+        right = '5px';
+    }
+    $("img#menu").css('right', right);
+}
+
 $(document).on('click', '#savePhone', function phone(){
     var phoneNum = $("#phoneNumber").val();
     var name = $("#optionName").val();
@@ -859,7 +869,14 @@ $(document).on ('change', 'input:radio', function() {
             $('#inputNameBlock').hide();
             $('#uLogin').fadeIn();
             break;
+        default:
+            break;
     }
+});
+
+$(document).on ('click', 'div.auth-text span', function(){
+    console.log (this.parentNode.children[0]);
+    $(this).parent().children("input").attr("checked", true);
 });
 
 $(document).on ('change', '#phoneNumber', function() {
@@ -897,6 +914,7 @@ $(document).ready (function(){
     preventSelection(document);
     $("#authentication_page").trigger('reset');
     $("#nav-trigger")[0].checked = false;
+    $(document).on ('change', "#nav-trigger", slip);
     footerResponsive();
 });
 
@@ -920,6 +938,7 @@ $(document).on ('keyup', 'input.counter', function(e) {
 
 $(document).on ('click', '.clickNav', function() {
     $("#nav-trigger")[0].checked = false;
+    slip();
     var new_page = null;
     if (this.parentNode.id == "navigationMenu") {
         new_page = parseInt(this.id.substr(2));
@@ -970,3 +989,4 @@ $(window).resize(function(){
     orderListResponsive ();
     selectedArticlesResponsive();
 });
+

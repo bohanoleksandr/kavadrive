@@ -72,12 +72,31 @@ function initialize() {
 
     for (var i = 1; i < shops.length; i++) {
         if (shops[i]) {
+            var makeAnOrder = null;
+            var press = null;
+            switch (currentLang) {
+                case "ukr":
+                    makeAnOrder = "Зробити замовлення";
+                    press = "Натисніть, щоб обрати кав’ярню ";
+                    break;
+                case "eng":
+                    makeAnOrder = "Make an order";
+                    press = "Press to choose the cafe ";
+                    break;
+                case "rus":
+                    makeAnOrder = "Сделать заказ";
+                    press = "Нажмите, чтобы выбрать кафе ";
+                    break;
+                default:
+                    break;
+            }
+
             markers[i] = new google.maps.Marker
             ({
                 position: shops[i].place,
                 map: map,
                 icon: image,
-                title: "Натисніть, щоб обрати кав’ярню " + shops[i]['name']
+                title: press + '"' + shops[i]['name'] + '"'
             });
 
             google.maps.event.addListener (markers[i], 'click', function () {
@@ -89,20 +108,7 @@ function initialize() {
                 }
             });
 
-            var makeAnOrder = null;
-            switch (currentLang) {
-                case "ukr":
-                    makeAnOrder = "Зробити замовлення";
-                    break;
-                case "eng":
-                    makeAnOrder = "Make an order";
-                    break;
-                case "rus":
-                    makeAnOrder = "Сделать заказ";
-                    break;
-                default:
-                    break;
-            }
+
 
             infoMessages[i] = '<b>' + shops[i].name + '</b><br/><a class="createOrderInfoMessage">' + makeAnOrder + '</a>'
                 //+ '<br/>Час роботи: ' + shops[i].opening_time.substring(0, 5) + ' - ' + shops[i].closing_time.substring(0, 5)

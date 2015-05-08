@@ -310,6 +310,10 @@ $(document).ready (function() {
         $('#modalWindow').modal();
     });
 
+    $(document).on ('click', 'span#help', function(){
+        $("#instruction").modal();
+    });
+
     //$('.status').change(function () {
     //    changeStatus(this.value);
     //});
