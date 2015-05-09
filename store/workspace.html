@@ -11,56 +11,60 @@
 		<script src="../js/storeScripts.js" type="text/javascript"></script>
     </head>
     <body>
-		<div class="navbar">
-		  <div class="navbar-inner">
-		  <ul class ="nav">
-				<a class="brand" href="#">KavaDrive</a>
-				<li class="divider-vertical">
-				</li>
-				<li>
-					<p class="navbar-text"><strong>Продавець:</strong><span id="seller"></span></p>
-				</li>
-				<li class="divider-vertical">
-				</li>
-				<li>
-					<p class="navbar-text"><strong>Kав’ярня:</strong><span id="shop"></span></p>
-				</li>
-				<li class="divider-vertical">
-				</li>
-			</ul>
-			<ul class="nav pull-right">
-                <!--<li>-->
-                    <!--<p class="navbar-text"><strong>Сортування: </strong></p>-->
-                <!--</li>-->
-                <li>
-                    <p class="navbar-text">
-                        <span id="help">? </span>
-                        <strong>Сортування: </strong>
-                        <span class="sorting" id="sorting1"><input type="checkbox" class="sorting_checkbox" checked>відкриті</span>
-                        <span class="sorting" id="sorting2"><input type="checkbox" class="sorting_checkbox" checked>підготовлені</span>
-                        <span class="sorting" id="sorting3"><input type="checkbox" class="sorting_checkbox" checked>неявки</span>
-                        <span class="sorting" id="sorting4"><input type="checkbox" class="sorting_checkbox" checked>скасовані</span>
-                        <span class="sorting" id="sorting5"><input type="checkbox" class="sorting_checkbox" checked>продані</span>
-                    </p>
-                </li>
+        <div class="navbar">
+		    <div class="navbar-inner">
+                <ul class ="nav">
+                    <a class="brand" href="#">KavaDrive</a>
+                    <li class="divider-vertical">
+                    </li>
+                    <li>
+                        <p class="navbar-text"><strong>Продавець:</strong><span id="seller"></span></p>
+                    </li>
+                    <li class="divider-vertical">
+                    </li>
+                    <li>
+                        <p class="navbar-text"><strong>Kав’ярня:</strong><span id="shop"></span></p>
+                    </li>
+                    <li class="divider-vertical">
+                    </li>
+                </ul>
+                <ul class="nav">
+                    <li><p class="navbar-text"><span id="help"><strong>Інформація</strong></span></p></li>
+                    <li class="divider-vertical"></li>
+                </ul>
+			    <ul class="nav pull-right">
+                    <!--<li>-->
+                        <!--<p class="navbar-text"><strong>Сортування: </strong></p>-->
+                    <!--</li>-->
+                    <li>
+                        <p class="navbar-text">
 
-				<!--<li class="divider-vertical">-->
-				<!--</li>-->
-				<!--<li>-->
-					<!--<select class = "input-block-level sort">-->
-						<!--<option value="1">Всі замовлення</option>-->
-						<!--<option value="2">Відкриті</option>-->
-						<!--<option value="3">Продані</option>-->
-						<!--<option value="4">Відхилені</option>-->
-					<!--</select>-->
-				<!--</li>-->
-				<li class="divider-vertical">
-				</li>
-				<li>					
-					<div class="btn btn-primary exit">Вихід</div>
-				</li>
-			</ul>			
-		  </div>
+                            <!--<strong>Сортування: </strong>-->
+                            <span class="sorting" id="sorting1"><input type="checkbox" class="sorting_checkbox" checked>відкриті</span>
+                            <span class="sorting" id="sorting2"><input type="checkbox" class="sorting_checkbox" checked>підготовлені</span>
+                            <span class="sorting" id="sorting3"><input type="checkbox" class="sorting_checkbox" checked>неявки</span>
+                            <span class="sorting" id="sorting4"><input type="checkbox" class="sorting_checkbox" checked>скасовані</span>
+                            <span class="sorting" id="sorting5"><input type="checkbox" class="sorting_checkbox" checked>продані</span>
+                        </p>
+                    </li>
+
+                    <!--<li class="divider-vertical">-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<select class = "input-block-level sort">-->
+                            <!--<option value="1">Всі замовлення</option>-->
+                            <!--<option value="2">Відкриті</option>-->
+                            <!--<option value="3">Продані</option>-->
+                            <!--<option value="4">Відхилені</option>-->
+                        <!--</select>-->
+                    <!--</li>-->
+                    <li class="divider-vertical">
+                    </li>
+                    <li>
+                        <div class="btn btn-primary exit">Вихід</div>
+                    </li>
+			    </ul>
+		    </div>
 		</div>
 
 		<table class="table table-bordered table-hover">
@@ -142,24 +146,44 @@
 		</div>
 
         <div id="instruction" class="modal hide fade">
-            При появі в таблиці нового замовлення:
-            - переглянути зміст замовлення
-            - зв'язатись із замовником та уточнити зміст замовлення і час візиту до кав'ярні, якщо замовник спілкується охоче, то запропонувати що додатково чи розповісти про акцію (якщо така є)
-            - подготувати усі необхідні інгредієнти та витратні матеріали для приготування замовлення, але не готувати!
-            - наклеїти брендову наклейку на кришечку
-            - підписати підготовлені витратні матеріали номером, під яким прийшло замовлення в таблицю
-            - відмітити в таблиці, як "підготовлене" замовлення
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Інструкція для продавця</h3>
+            </div>
+            <div class="modal-body">
+                <div id="left_modal">
+                    <h6>При появі в таблиці нового замовлення:</h6>
+                    <ul>
+                        <li>переглянути зміст замовлення</li>
+                        <li>зв’язатись із замовником та уточнити зміст замовлення і час візиту до кав’ярні, якщо
+                            замовник спілкується охоче, то запропонувати що додатково чи розповісти про акцію (якщо
+                            є)</li>
+                        <li>підготувати усі необхідні інгредієнти та витратні матеріали для приготування замовлення,
+                            але не готувати!</li>
+                        <li>наклеїти брендову наклейку на кришечку</li>
+                        <li>підписати підготовлені витратні матеріали номером, під яким прийшло замовлення в таблицю</li>
+                        <li>відмітити в таблиці, як "підготовлене" замовлення</li>
 
-            При зустрічі замовника:
-            - вияснити номер замовлення
-            - уточнити замовлення
-            - запропонувати щось замовити додатково
-            - приготувати усі пункти замовлення
-            - видати картку на знижки
-            - запропонувати прийняти участь в акції (якщо така є)
-            - отримати кошти за замовлення
-            - відмітити замовлення в таблиці, як "продане"
-            - побажати гарного дня замовнику
+                    </ul>
+                </div>
+
+                <div id="right_modal">
+                    <h6>При зустрічі замовника:</h6>
+                    <ul>
+                        <li>вияснити номер замовлення</li>
+                        <li>уточнити замовлення</li>
+                        <li>запропонувати щось замовити додатково</li>
+                        <li>приготувати усі пункти замовлення</li>
+                        <li>видати картку на знижки</li>
+                        <li>запропонувати прийняти участь в акції (якщо така є)</li>
+                        <li>отримати кошти за замовлення</li>
+                        <li>відмітити замовлення в таблиці, як "продане"</li>
+                        <li>побажати гарного дня замовнику</li>
+
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
 		<audio id="notifyAudio"><source src="notify.mp3" type="audio/mpeg"></audio>
