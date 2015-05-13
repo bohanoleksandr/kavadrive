@@ -259,3 +259,8 @@ div.blocks_custom {
     background:-webkit-linear-gradient(center top , #8DC059, #6AA436) repeat scroll 0% 0% transparent;
 
 }
+.radio{
+    padding-top:10px;
+    font-size: 14px;
+    color: #FFF;
+}
