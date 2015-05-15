@@ -8,10 +8,10 @@ var tip_array = {
     5: "Заповніть анкету партнера",
     6: "Прочитайте про сайт",
     7: "Make an order",
-    8: "Input contact data",
+    8: "Add contact details",
     9: "Choose a cafe",
     10: "Choose a cafe on the map",
-    11: "Fill partner's form",
+    11: "Fill out the partnership form",
     12: "Read about the site",
     13: "Сделайте заказ",
     14: "Укажите контактные данные",
@@ -30,13 +30,13 @@ var pointer_title_array = {
     5: "Перейти до анкети для партнерів",
     6: "Перейти до інформації про мережу KavaDrive",
     7: "Перейти до меню",
-    8: "Go to information about the Kavadrive network",
+    8: "Click to read the information about Kavadrive",
     9: "Go to menu",
-    10: "Go to authorization",
-    11: "Go to cafe list",
-    12: "Go to map",
+    10: "Click here to authorize",
+    11: "Click here to see the cafes",
+    12: "Go to the map",
     13: "Go to partner's form",
-    14: "Go to information about the Kavadrive network",
+    14: "Click to read the information about Kavadrive",
     15: "Go to menu",
     16: "Перейти к информации о сети Kavadrive",
     17: "Перейти к меню",
@@ -817,6 +817,7 @@ $(document).on ('click', '#right_pointer', function() {
 });
 
 $(document).on ('click', '#left_pointer', function() {
+    page -= 1;
     page -= 1;
     if (page < 1) page = 6;
     rebuildPage(page);
