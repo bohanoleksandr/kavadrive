@@ -169,7 +169,7 @@ input.counter:focus {
     display: none;
 }
 
-#thanks {
+#thanks, #order_urgent {
     display: none;
 }
 

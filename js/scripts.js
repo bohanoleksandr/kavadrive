@@ -714,6 +714,15 @@ $(document).on('click', '#saveOrder', function submit(){
     } else if (!order.pos){
         rebuildPage(3);
     } else {
+        $(".blocks").hide();
+        $("#saveOrder").hide();
+        $("#order_urgent").show();
+
+
+    }
+});
+
+$(document).on ('click', '#order_confirm', function() {
         order.visitTime = visitTime;
         $.post(
             "php/orderRecording.php",
@@ -759,7 +768,17 @@ $(document).on('click', '#saveOrder', function submit(){
                 }
             }
         )
-    }
+});
+
+$(document).on ('click', '#order_edit', function() {
+    $(".blocks").show();
+    $("#order_urgent").hide();
+    $("#thanks").hide();
+    $("#saveOrder").show();
+});
+
+$(document).on ('click', '#order_cancel', function() {
+
 });
 
 $(document).on ('click', '#create_new_order', function(){
@@ -767,6 +786,7 @@ $(document).on ('click', '#create_new_order', function(){
     estimateSum();
     $(".blocks").show();
     $("#thanks").hide();
+    $("#order_urgent").hide();
     $(this).hide();
     $(".selected_articles").remove();
 });
