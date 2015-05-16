@@ -1010,4 +1010,26 @@ $(window).resize(function(){
     orderListResponsive ();
     selectedArticlesResponsive();
 });
+/* Функція для вертикального меню*/
+$(function(){
+    $("#verticalMenu > .positionsMenu").on('click', function () {
+        $("#verticalMenu > .positionsMenu").removeClass ("positionsMenuClick");
+        $(this). addClass("positionsMenuClick");
+        var index=$("#verticalMenu").children().index(this);
+        switch (index){
+            case 0:
+               $('#action, #dishes').hide();
+               $("#menuList").show();
+                break;
+            case 1:
+               $('#action, #menuList').hide();
+               $("#dishes").show();
+                break;
+            case 2:
+               $('#menuList, #dishes').hide();
+               $("#action").show();
+                break;
+        }
+});
 
+});

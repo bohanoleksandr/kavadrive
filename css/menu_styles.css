@@ -264,3 +264,33 @@ div.blocks_custom {
     font-size: 14px;
     color: #FFF;
 }
+#verticalMenu{
+height: 40px;
+}
+.positionsMenu{
+    float: left;
+    margin-left: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 125px;
+    text-align: center;
+    -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+    color: #ccc;
+}
+.positionsMenu:hover{
+    color: #fff;
+    cursor: pointer;
+
+}
+.positionsMenuClick{
+    -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 7px, inset rgba(255,255,255,0.4) 0 1px 0;
+    -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 7px, inset rgba(255,255,255,0.4) 0 1px 0;
+    box-shadow: rgba(000,000,000,0.9) 0 1px 7px, inset rgba(255,255,255,0.4) 0 1px 0;
+}
+#action, #dishes{
+    height: 105px;
+    text-align: center;
+    display: none;
+}
