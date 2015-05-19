@@ -778,7 +778,12 @@ $(document).on ('click', '#order_edit', function() {
 });
 
 $(document).on ('click', '#order_cancel', function() {
-
+    order.content = {};
+    estimateSum();
+    $(".blocks").show();
+    $("#thanks").hide();
+    $("#order_urgent").hide();
+    $(".selected_articles").remove();
 });
 
 $(document).on ('click', '#create_new_order', function(){
