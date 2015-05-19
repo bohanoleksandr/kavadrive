@@ -79,6 +79,11 @@
                 </div>
 
                 <div id="menu_page" class="pages">
+                    <div id="bookmarks">
+                        <div class="bookmark">Напої</div>
+                        <div class="bookmark">Їжа</div>
+                        <div class="bookmark">Акція</div>
+                    </div>
                     <div id="menuList">
                         <div id="article-dummy" class="menu_buttons not_pressed_button" title="Додати «» до замовлення">
                             <p class="name"></p>
@@ -88,11 +93,6 @@
                     </div>
                     <div id="dishes">Страви</div>
                     <div id="action">Акції</div>
-                    <div id="verticalMenu">
-                        <div class="positionsMenu">Напої</div>
-                        <div class="positionsMenu">Страви</div>
-                        <div class="positionsMenu">Акції</div>
-                    </div>
                     <div id="bottom_bar">
                         <div class="blocks" id="orderList">
                             Зміст замовлення:
@@ -157,8 +157,14 @@
                         </div>
                         <div id="order_urgent" class="blocks">
                             <div class="title">Ви замовили:</div>
-                            <div class="position">Чорний чай - 1</div>
-                            <div class="for_payment">До оплати 120 грн</div>
+                            <div id="ordered_articles_list">
+                                <div id="ordered_articles_list-dummy">
+                                    <span class="oal-name"></span>
+                                     -
+                                    <span class="oal-amount"></span>
+                                </div>
+                            </div>
+                            <div id="oa-total">До оплати <span></span> грн</div>
                                 <form class="radio">
                                     <input type="radio" ><span>Замовлення з собою</span>
                                     <input type="radio" ><span>Зарезервувати столик</span>

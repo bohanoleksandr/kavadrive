@@ -292,6 +292,23 @@ function injection (title, id) {
     return title.substr(0, positionToInject) + menu[id]['name'] + title.substr(positionToInject);
 }
 
+function oalGeneration () {
+    $(".ordered_articles").remove();
+    var dummy = $("#ordered_articles_list-dummy");
+    for (var i = 1; i < 100; i++) {
+        if (order.content[i]) {
+            dummy.clone()
+                .removeAttr('id')
+                .attr('class', 'ordered_articles')
+                .appendTo($('#ordered_articles_list'))
+                .children('span.oal-amount').text(order.content[i])
+                .parent().children('span.oal-name').text(menu[i].name)
+            ;
+        }
+    }
+    $("#oa-total > span").text(order.sum);
+}
+
 function estimateSum(){
     order.emptiness = true;
     var tempSum = 0;
@@ -717,7 +734,7 @@ $(document).on('click', '#saveOrder', function submit(){
         $(".blocks").hide();
         $("#saveOrder").hide();
         $("#order_urgent").show();
-
+        oalGeneration();
 
     }
 });
@@ -1010,31 +1027,30 @@ $(document).on ('click', 'li#languages span', function(){
     }
 });
 
+$(document).on ('click', '.bookmark', function () {
+    $('.bookmark').removeClass('bookmarkSelected');
+    $(this).addClass('bookmarkSelected');
+    var index=$("#bookmarks").children().index(this);
+    switch (index){
+        case 0:
+            $('#action, #dishes').hide();
+            $("#menuList").show();
+            break;
+        case 1:
+            $('#action, #menuList').hide();
+            $("#dishes").show();
+            break;
+        case 2:
+            $('#menuList, #dishes').hide();
+            $("#action").show();
+            break;
+        default:
+            break;
+    }
+});
+
 $(window).resize(function(){
     footerResponsive();
     orderListResponsive ();
     selectedArticlesResponsive();
-});
-/* Функція для вертикального меню*/
-$(function(){
-    $("#verticalMenu > .positionsMenu").on('click', function () {
-        $("#verticalMenu > .positionsMenu").removeClass ("positionsMenuClick");
-        $(this). addClass("positionsMenuClick");
-        var index=$("#verticalMenu").children().index(this);
-        switch (index){
-            case 0:
-               $('#action, #dishes').hide();
-               $("#menuList").show();
-                break;
-            case 1:
-               $('#action, #menuList').hide();
-               $("#dishes").show();
-                break;
-            case 2:
-               $('#menuList, #dishes').hide();
-               $("#action").show();
-                break;
-        }
-});
-
 });

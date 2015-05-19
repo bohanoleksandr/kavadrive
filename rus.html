@@ -79,6 +79,11 @@
                 </div>
 
                 <div id="menu_page" class="pages">
+                    <div id="bookmarks">
+                        <div class="bookmark">Напитки</div>
+                        <div class="bookmark">Еда</div>
+                        <div class="bookmark">Акция</div>
+                    </div>
                     <div id="menuList">
                         <div id="article-dummy" class="menu_buttons not_pressed_button" title="Добавить «» в заказ">
                             <p class="name"></p>
@@ -86,6 +91,8 @@
                             <p class="price"> грн</p>
                         </div>
                     </div>
+                    <div id="dishes">Еда</div>
+                    <div id="action">Акция</div>
                     <div id="bottom_bar">
                         <div class="blocks" id="orderList">
                             Содержание заказа:
@@ -147,6 +154,26 @@
                             <span id="noPos">Выберите кафе</span>
                             <span id="namePos"></span>
                             <span id="changePos">(изменить)</span>
+                        </div>
+                        <div id="order_urgent" class="blocks">
+                            <div class="title">Ви замовили:</div>
+                            <div id="ordered_articles_list">
+                                <div id="ordered_articles_list-dummy">
+                                    <span class="oal-name"></span>
+                                    -
+                                    <span class="oal-amount"></span>
+                                </div>
+                            </div>
+                            <div id="oa-total">До оплати <span></span> грн</div>
+                            <form class="radio">
+                                <input type="radio" ><span>Замовлення з собою</span>
+                                <input type="radio" ><span>Зарезервувати столик</span>
+                            </form>
+                            <div class="buttons">
+                                <button id="order_confirm" class="button_list">Підтвердити</button>
+                                <button id="order_edit" class="button_list">Змінити</button>
+                                <button id="order_cancel" class="button_list">Скасувати</button>
+                            </div>
                         </div>
                         <div id="thanks" class="blocks">
                             Спасибо за заказ!<br/><br/>
