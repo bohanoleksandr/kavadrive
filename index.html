@@ -24,6 +24,9 @@
         <script type="text/javascript" src="js/time.js"></script>
         <script type="text/javascript" src="js/inputmask.js" ></script>
         <script type="text/javascript" src="js/map.js"></script>
+        <!-- Put this script tag to the <head> of your page -->
+        <script type="text/javascript" src="http://vk.com/js/api/share.js?91" charset="windows-1251"></script>
+
 
     </head>
     <body>
@@ -166,8 +169,8 @@
                             </div>
                             <div id="oa-total">До оплати <span></span> грн</div>
                                 <form class="radio">
-                                    <input type="radio" ><span>Замовлення з собою</span>
-                                    <input type="radio" ><span>Зарезервувати столик</span>
+                                    <input type="radio" checked="checked" ><span id="oa-total_text">Замовлення з собою</span>
+                                    <input type="radio" ><span id="oa-total_text"> Зарезервувати столик </span>
                                 </form>
                             <div class="buttons">
                                 <button id="order_confirm" class="button_list">Підтвердити</button>
@@ -340,9 +343,12 @@
 
         <div id="footer" class="hideFromMap">
             <div id="networksLine" class="footerLines">
+
                 <img src="images/facebook.png">
                 <img src="images/googlePlus.png">
-                <img src="images/vkontakte.png">
+                <script type="text/javascript">
+                    document.write(VK.Share.button(false,{type: "custom", text: "<img src='images/vkontakte.png' "}));
+                </script>
                 <img src="images/twitter.png">
             </div>
             <div id="navLine" class="footerLines">
