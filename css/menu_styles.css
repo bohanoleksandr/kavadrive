@@ -274,7 +274,6 @@ height: 40px;
     padding-bottom: 5px;
     width: 125px;
     text-align: center;
-    /*border: 1px solid #ccc;*/
     -webkit-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgb(0, 0, 0) 0 1px 0;
     -moz-box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgb(0, 0, 0) 0 1px 0;
     box-shadow: rgba(000,000,000,0.9) 0 1px 2px, inset rgb(0, 0, 0) 0 1px 0;
@@ -290,7 +289,7 @@ height: 40px;
     -moz-box-shadow: rgba(000,000,000,0.6) 0 -2px 2px, inset rgba(0, 0, 0, 0.42) 0 1px 0;
     box-shadow: rgba(000,000,000,0.6) 0 -2px 2px, inset rgba(0, 0, 0, 0.42) 0 1px 0;
 }
-#action, #dishes{
+#offers, #dishes{
     height: 105px;
     text-align: center;
     display: none;

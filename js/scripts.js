@@ -30,13 +30,13 @@ var pointer_title_array = {
     5: "Перейти до анкети для партнерів",
     6: "Перейти до інформації про мережу KavaDrive",
     7: "Перейти до меню",
-    8: "Click to read the information about Kavadrive",
+    8: "Find out more about us",
     9: "Go to menu",
     10: "Click here to authorize",
     11: "Click here to see the cafes",
     12: "Go to the map",
     13: "Go to partner's form",
-    14: "Click to read the information about Kavadrive",
+    14: "Find out more about us",
     15: "Go to menu",
     16: "Перейти к информации о сети Kavadrive",
     17: "Перейти к меню",
@@ -1033,16 +1033,16 @@ $(document).on ('click', '.bookmark', function () {
     var index=$("#bookmarks").children().index(this);
     switch (index){
         case 0:
-            $('#action, #dishes').hide();
+            $('#offers, #dishes').hide();
             $("#menuList").show();
             break;
         case 1:
-            $('#action, #menuList').hide();
+            $('#offers, #menuList').hide();
             $("#dishes").show();
             break;
         case 2:
             $('#menuList, #dishes').hide();
-            $("#action").show();
+            $("#offers").show();
             break;
         default:
             break;
