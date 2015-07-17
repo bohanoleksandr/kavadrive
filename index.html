@@ -6,7 +6,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
         <link href="css/stylesheet.css" rel="stylesheet" type="text/css"/>
         <link href="css/time.css" rel="stylesheet" type="text/css"/>
         <link href="css/menu_styles.css" rel="stylesheet" type="text/css"/>
@@ -20,13 +19,10 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
-        <!--<script type="text/javascript" src="js/bootstrap.js"></script>-->
         <script type="text/javascript" src="js/time.js"></script>
         <script type="text/javascript" src="js/inputmask.js" ></script>
         <script type="text/javascript" src="js/map.js"></script>
-        <!-- Put this script tag to the <head> of your page -->
         <script type="text/javascript" src="http://vk.com/js/api/share.js?91" charset="windows-1251"></script>
-
 
     </head>
     <body>
@@ -46,8 +42,6 @@
             </ul>
         </div>
 
-        <input type="checkbox" id="nav-trigger"/>
-
         <div id="site-wrap">
             <div id="main">
                 <div id="header">
@@ -58,12 +52,8 @@
                     </div>
 
                     <div id="firstHeaderLine" class="headerLines">
-                        <!--<span id="authenticationLink" class="headerLinks" title="Перейти до авторизації">Авторизація</span>-->
-                        <!--<span id="contactsLink" class="headerLinks" title="Переглянути контактні дані усіх кав’ярень">Контакти</span>-->
-                        <!--<span id="mapLink" class="headerLinks" title="Подивитись карту із відміченими кав’ярнями">Обрати кав’ярню на карті</span>-->
-
                         <div id="trigger">
-                            <label for="nav-trigger" class="textLink">МЕНЮ <img id="menu" src="images/navMenu.png"/></label>
+                            МЕНЮ <img id="menu" src="images/navMenu.png"/>
                         </div>
                     </div>
 
@@ -159,7 +149,7 @@
                             <span id="changePos">(змінити)</span>
                         </div>
                         <div id="order_urgent" class="blocks">
-                            <div class="title">Ви замовили:</div>
+                            <div>Ваше замовлення:</div>
                             <div id="ordered_articles_list">
                                 <div id="ordered_articles_list-dummy">
                                     <span class="oal-name"></span>
@@ -168,14 +158,20 @@
                                 </div>
                             </div>
                             <div id="oa-total">До оплати <span></span> грн</div>
-                                <form class="radio" name="test" method="post">
-                                    <input type="radio" name="raz" checked="checked" ><span id="oa-total_text">Замовлення з собою</span>
-                                    <input type="radio" name="raz" ><span id="oa-total_text1"> Зарезервувати столик </span>
-                                </form>
+                            <form id="reserve" name="test" method="post">
+                                <label>
+                                    <input type="radio" name="reserve" checked="checked" value="noReserve">
+                                    Замовлення з собою
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="reserve" value="yesReserve">
+                                    Зарезервувати столик
+                                </label>
+                            </form>
                             <div class="buttons">
-                                <button id="order_confirm" class="button_list">Підтвердити</button>
-                                <button id="order_edit" class="button_list">Змінити</button>
-                                <button id="order_cancel" class="button_list">Скасувати</button>
+                                <button id="order_confirm" class="greenButton">Підтвердити</button>
+                                <button id="order_edit" class="greenButton">Змінити</button>
+                                <button id="order_cancel" class="greenButton">Скасувати</button>
                             </div>
                         </div>
                         <div id="thanks" class="blocks">
@@ -200,8 +196,10 @@
                 <form id="authentication_page" class="pages">
                     <div id="auth-title">Авторизація</div>
                     <div class="auth-text">
-                        <input name="auth" type="radio" value="phone" checked>
-                        <span>Телефон</span>
+                        <label>
+                            <input name="auth" type="radio" value="phone" checked>
+                            Телефон
+                        </label>
                     </div>
                     <div id="inputPhoneBlock" class="inputBlock">
                         <input id ="phoneNumber" class="inputData" name="number">
@@ -216,16 +214,20 @@
                         </div>
                     </div>
                     <div class="auth-text">
-                        <input name="auth" type="radio" value="mail">
-                        <span>Електронна пошта</span>
+                        <label>
+                            <input name="auth" type="radio" value="mail">
+                            Електронна пошта
+                        </label>
                     </div>
                     <div id="inputMailBlock" class="inputBlock" hidden>
                         <input id="mail" name="mail" class="inputData">
                         <button id="saveMail" class="savePhoneMail greenButton" type="button">Увійти</button>
                     </div>
                     <div class="auth-text">
-                        <input name="auth" type="radio" value="socNetwork">
-                        <span>Соціальна мережа</span>
+                        <label>
+                            <input name="auth" type="radio" value="socNetwork">
+                            Соціальна мережа
+                        </label>
                     </div>
 
                     <div id="uLogin" x-ulogin-params="display=buttons;fields=first_name,last_name;
@@ -309,27 +311,31 @@
                     </div>
                     <ul type="circle">
                         <li>
-                            <span class="white">ЯКІСТЬ</span> - кожен заклад харчування обов'язково нами перевіряється перед тим, як включити його в
-                            мережу КАВАДРАЙВ. І надалі постійно наші інспектори перевіряють якість напоїв та їжі, які
-                            входять до меню КАВАДРАЙВ. Кожен замовник знає напевно, що буде смачно.
+                            <span class="white">ЯКІСТЬ</span> - кожен заклад харчування обов’язково нами перевіряється
+                            перед тим, як включити його в мережу КАВАДРАЙВ. І надалі постійно наші інспектори
+                            перевіряють якість напоїв та їжі, які входять до меню КАВАДРАЙВ. Кожен замовник знає
+                            напевно, що буде смачно.
                         </li>
                         <li>
-                            <span class="white">ВЧАСНІСТЬ та ШВИДКІСТЬ</span> - кожен користувач сервісу впевнений, що завітавши на вказаний час до
-                            кав'ярні, ресторану, фастфуду, він не чекатиме в черзі, а відразу протягом кількох хвилин
-                            отримає своє замовлення, яке зможе забрати із собою чи пригоститись безпосередньо там (якщо
-                            зарезервує столик).
+                            <span class="white">ВЧАСНІСТЬ та ШВИДКІСТЬ</span> - кожен користувач сервісу впевнений,
+                            що завітавши на вказаний час до кав’ярні, ресторану, фастфуду, він не чекатиме в черзі,
+                            а відразу протягом кількох хвилин отримає своє замовлення, яке зможе забрати із собою чи
+                            пригоститись безпосередньо там (якщо зарезервує столик).
                         </li>
                         <li>
-                            <span class="white">ПРОГНОЗОВАНІСТЬ</span> - крім того, що Ви очікувано отримаєте якісні напої та їжу, швидке
-                            обслуговування, Ви точно знатимете скільки коштів потратите на замовлення.
+                            <span class="white">ПРОГНОЗОВАНІСТЬ</span> - крім того, що Ви очікувано отримаєте якісні
+                            напої та їжу, швидке обслуговування, Ви точно знатимете скільки коштів потратите на
+                            замовлення.
                         </li>
                         <li>
-                            <span class="white">ЄДИНА ЦІНА</span> - якщо якість напоїв і їжі та рівень обслуговування в закладах-учасниках КАВАДРАЙВу
-                            високі і контролюються нами, то і ціни в усіх закладах теж однакові.
+                            <span class="white">ЄДИНА ЦІНА</span> - якщо якість напоїв і їжі та рівень обслуговування
+                            в закладах-учасниках КАВАДРАЙВу високі і контролюються нами, то і ціни в усіх закладах теж
+                            однакові.
                         </li>
                         <li>
-                            <span class="white">ЗРУЧНІСТЬ</span> - здійснити замовлення Ви зможете будь-де, в будь-який час, в будь-якому закладі,
-                            який входить до мережі КАВАДРАЙВ і з будь-якого пристрою - смартфона, планшета, комп'ютера.
+                            <span class="white">ЗРУЧНІСТЬ</span> - здійснити замовлення Ви зможете будь-де, в будь-який
+                            час, в будь-якому закладі,який входить до мережі КАВАДРАЙВ і з будь-якого пристрою -
+                            смартфона, планшета, комп’ютера.
                         </li>
                     </ul>
                     <div class="center">
@@ -343,7 +349,6 @@
 
         <div id="footer" class="hideFromMap">
             <div id="networksLine" class="footerLines">
-
                 <img src="images/facebook.png">
                 <img src="images/googlePlus.png">
                 <script type="text/javascript">

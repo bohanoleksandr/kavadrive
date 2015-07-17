@@ -106,6 +106,7 @@ input[type='radio'] {
     font-family: Calibri, Arial, sans-serif;
     vertical-align: top;
     cursor: pointer;
+    margin: 2px 0;
 }
 
 .savePhoneMail:active {

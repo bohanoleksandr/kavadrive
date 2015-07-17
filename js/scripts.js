@@ -71,6 +71,8 @@ var map = null;
 
 var currentLang = 'ukr';
 
+var menuFlag = 0;
+
 function Item(name, amount, price) {
     this.name = name;
     this.amount = amount;
@@ -258,21 +260,21 @@ function receiptData () {
 //    return el;
 //}
 
-function addDivSelectArticle (productId) {
-    var bigDiv = '<div class="selected_articles" id="menu_content_article-' + productId + '">';
-    var name = '<div class="selected_names">' + menu[productId].name + '</div>';
-    var counter = '<input class="counter" id="counterOfProduct' + productId + '" title="Кількість замовлених «' +
-        menu[productId].name + '»" value="1">';
-    var plus = '<div class="plus" id="plusProduct' + productId + '" title="Додати ще один «' + menu[productId].name +
-        '» до замовлення"><strong> + </strong></div>';
-    var minus = '<div class="minus" id="minusProduct' + productId + '" title="Зменшити на один «' + menu[productId].name +
-        '»"><strong> - </strong></div>';
-    var eliminator = '<div class="delete" id="deleteProduct'+productId+'" title="Прибрати «' + menu[productId].name +
-        '» із замовлення"><strong> × </strong></div>';
-    var divButtons = counter + '<div class="orderList_buttons">' +  plus + minus + eliminator + '</div></div>';
-    $('#selected_articles_list').append (bigDiv + name + divButtons);
-    setTimeout(selectedArticlesResponsive, 10);
-}
+//function addDivSelectArticle (productId) {
+//    var bigDiv = '<div class="selected_articles" id="menu_content_article-' + productId + '">';
+//    var name = '<div class="selected_names">' + menu[productId].name + '</div>';
+//    var counter = '<input class="counter" id="counterOfProduct' + productId + '" title="Кількість замовлених «' +
+//        menu[productId].name + '»" value="1">';
+//    var plus = '<div class="plus" id="plusProduct' + productId + '" title="Додати ще один «' + menu[productId].name +
+//        '» до замовлення"><strong> + </strong></div>';
+//    var minus = '<div class="minus" id="minusProduct' + productId + '" title="Зменшити на один «' + menu[productId].name +
+//        '»"><strong> - </strong></div>';
+//    var eliminator = '<div class="delete" id="deleteProduct'+productId+'" title="Прибрати «' + menu[productId].name +
+//        '» із замовлення"><strong> × </strong></div>';
+//    var divButtons = counter + '<div class="orderList_buttons">' +  plus + minus + eliminator + '</div></div>';
+//    $('#selected_articles_list').append (bigDiv + name + divButtons);
+//    setTimeout(selectedArticlesResponsive, 10);
+//}
 
 function titleGeneration(id) {
     var dummy =  $("#menu_content_article-dummy");
@@ -484,7 +486,6 @@ function preview (token){
                         } else {
                             if (order.pos) {
                                 rebuildPage(1);
-                                //$("#saveOrder").trigger('click');
                             } else {
                                 rebuildPage(3);
                             }
@@ -591,13 +592,17 @@ function sendPartnersForm () {
 }
 
 function slip () {
-    var right = null;
-    if ($("#nav-trigger")[0].checked) {
-        right = '165px';
+    menuFlag ^= 1;
+    var rightImg, rightWrap = null;
+    if (menuFlag) {
+        rightImg = '165px';
+        rightWrap = '160px'
     } else {
-        right = '5px';
+        rightImg = '5px';
+        rightWrap = '0'
     }
-    $("img#menu").css('right', right);
+    $("img#menu").css('right', rightImg);
+    $("#site-wrap").css ('right', rightWrap);
 }
 
 $(document).on('click', '#savePhone', function phone(){
@@ -629,7 +634,6 @@ $(document).on('click', '#savePhone', function phone(){
                 } else {
                     if (order.pos) {
                         rebuildPage(1);
-                        //$("#saveOrder").trigger('click');
                     } else {
                         rebuildPage(3);
                     }
@@ -668,7 +672,6 @@ $(document).on('click', '#saveMail', function mail(){
                 } else {
                     if (order.pos) {
                         rebuildPage(1);
-                        //$("#saveOrder").trigger('click');
                     } else {
                         rebuildPage(3);
                     }
@@ -881,45 +884,33 @@ $(document).on ('click', 'span.linkSelect', function() {
     } else {
         if (customer['id']) {
             rebuildPage(1);
-            //$("#saveOrder").trigger('click');
         } else {
             rebuildPage(2);
         }
     }
 });
 
-$(document).on ('change', 'input:radio', function() {
-    switch ($('input:radio:checked').prop('value')) {
+$(document).on ('change', 'input[name="auth"]', function() {
+    $('form#authentication_page > div').hide();
+    $('#auth-title').show();
+    $('.auth-text').show();
+    var inputNameBlock = $('#inputNameBlock');
+    switch (this.value) {
         case 'phone':
-            $('#inputPhoneBlock').fadeIn();
-            $('#inputMailBlock').hide();
-            $('#uLogin').hide();
-            $('#inputNameBlock').hide();
-            $('#inputPhoneBlock').after($('#inputNameBlock').fadeIn());
+            $('#inputPhoneBlock').show().after(inputNameBlock);
             $('#phoneNumber').focus();
             break;
         case 'mail':
-            $('#inputPhoneBlock').hide();
-            $('#inputMailBlock').fadeIn();
-            $('#uLogin').hide();
-            $('#inputNameBlock').hide();
-            $('#inputMailBlock').after($('#inputNameBlock').fadeIn());
+            $('#inputMailBlock').show().after(inputNameBlock);
             $('#mail').focus();
             break;
         case 'socNetwork':
-            $('#inputPhoneBlock').hide();
-            $('#inputMailBlock').hide();
-            $('#inputNameBlock').hide();
-            $('#uLogin').fadeIn();
+            $('#uLogin').show();
+            inputNameBlock.hide();
             break;
         default:
             break;
     }
-});
-
-$(document).on ('click', 'div.auth-text span', function(){
-    console.log (this.parentNode.children[0]);
-    $(this).parent().children("input").attr("checked", true);
 });
 
 $(document).on ('change', '#phoneNumber', function() {
@@ -956,8 +947,6 @@ $(document).ready (function(){
     receiptData();
     preventSelection(document);
     $("#authentication_page").trigger('reset');
-    $("#nav-trigger")[0].checked = false;
-    $(document).on ('change', "#nav-trigger", slip);
     footerResponsive();
 });
 
@@ -975,13 +964,9 @@ $(document).on ('keyup', 'input.counter', function(e) {
     }
 });
 
-//$(document).on ('click', '#site-wrap', function() {
-//    $("#nav-trigger")[0].checked = false;
-//});
+$(document).on ('click', '#trigger', slip);
 
 $(document).on ('click', '.clickNav', function() {
-    $("#nav-trigger")[0].checked = false;
-    slip();
     var new_page = null;
     if (this.parentNode.id == "navigationMenu") {
         new_page = parseInt(this.id.substr(2));
@@ -989,6 +974,7 @@ $(document).on ('click', '.clickNav', function() {
         new_page = parseInt(this.id.substr(3));
     }
     rebuildPage (new_page);
+    slip();
 });
 
 $(document).on ('click', 'li.mapLinkShop', function(){

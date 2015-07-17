@@ -57,4 +57,5 @@ input.input:focus {
 
 button#partnersButton {
     margin: 25px 0 15px 0;
+    width: 150px;
 }

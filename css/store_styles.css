@@ -84,18 +84,8 @@ a {
     margin-left: 7px;
 }
 
-#left_modal {
-    width: 240px;
-    float: left;
-    padding-right: 10px;
-    text-align: justify;
-}
-
-#right_modal {
-    width: 240px;
-    float: right;
-    padding-right: 10px;
-    text-align: justify;
+div#instruction li {
+    margin-bottom: 8px;
 }
 
 #help {

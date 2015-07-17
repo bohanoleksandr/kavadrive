@@ -72,21 +72,10 @@ p {
 #trigger {
     display: inline-block;
     margin-left: 30px;
-    /*margin-right: 25px;*/
+    margin-right: 25px;
+    cursor: pointer;
+    font-size: 20px;
 }
-
-/*#contactsLink {*/
-    /*margin: 0 20px;*/
-/*}*/
-
-/*.headerLinks {*/
-    /*cursor: pointer;*/
-    /*vertical-align: middle;*/
-/*}*/
-
-/*.headerLinks:hover {*/
-    /*text-decoration: underline;*/
-/*}*/
 
 #customerExit{
     cursor: pointer;
@@ -191,33 +180,7 @@ img#menu {
     text-decoration: underline;
 }
 
-/*#navigationMenu li:hover {*/
-    /*text-decoration: underline;*/
-/*}*/
-
-label[for="nav-trigger"] {
-    z-index: 2;
-    cursor: pointer;
-    font-size: 20px;
-    height: 40px;
-    padding-right: 25px;
-}
-
-label span {
-    /*font-size: 24px;*/
-    margin-left: 10px;
-}
-
-#nav-trigger {
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
-}
-
-#nav-trigger:checked ~ #site-wrap {
-    right: 160px;
-}
-
-#nav-trigger + label, #site-wrap, img#menu {
+#site-wrap, img#menu {
     transition: right 0.2s;
 }
 

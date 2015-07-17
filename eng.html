@@ -6,7 +6,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
         <link href="css/stylesheet.css" rel="stylesheet" type="text/css"/>
         <link href="css/time.css" rel="stylesheet" type="text/css"/>
         <link href="css/menu_styles.css" rel="stylesheet" type="text/css"/>
@@ -20,10 +19,10 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
-        <!--<script type="text/javascript" src="js/bootstrap.js"></script>-->
         <script type="text/javascript" src="js/time.js"></script>
         <script type="text/javascript" src="js/inputmask.js" ></script>
         <script type="text/javascript" src="js/map.js"></script>
+        <script type="text/javascript" src="http://vk.com/js/api/share.js?91" charset="windows-1251"></script>
 
     </head>
     <body>
@@ -43,8 +42,6 @@
             </ul>
         </div>
 
-        <input type="checkbox" id="nav-trigger"/>
-
         <div id="site-wrap">
             <div id="main">
                 <div id="header">
@@ -55,12 +52,8 @@
                     </div>
 
                     <div id="firstHeaderLine" class="headerLines">
-                        <!--<span id="authenticationLink" class="headerLinks" title="Перейти до авторизації">Авторизація</span>-->
-                        <!--<span id="contactsLink" class="headerLinks" title="Переглянути контактні дані усіх кав’ярень">Контакти</span>-->
-                        <!--<span id="mapLink" class="headerLinks" title="Подивитись карту із відміченими кав’ярнями">Обрати кав’ярню на карті</span>-->
-
                         <div id="trigger">
-                            <label for="nav-trigger" class="textLink">MENU <img id="menu" src="images/navMenu.png"/></label>
+                            MENU <img id="menu" src="images/navMenu.png"/>
                         </div>
                     </div>
 
@@ -156,7 +149,7 @@
                             <span id="changePos">(change)</span>
                         </div>
                         <div id="order_urgent" class="blocks">
-                            <div class="title">Ви замовили:</div>
+                            <div class="title">Your order:</div>
                             <div id="ordered_articles_list">
                                 <div id="ordered_articles_list-dummy">
                                     <span class="oal-name"></span>
@@ -164,15 +157,21 @@
                                     <span class="oal-amount"></span>
                                 </div>
                             </div>
-                            <div id="oa-total">До оплати <span></span> грн</div>
-                            <form class="radio">
-                                <input type="radio" ><span>Замовлення з собою</span>
-                                <input type="radio" ><span>Зарезервувати столик</span>
+                            <div id="oa-total">To be paid: <span></span> UAH</div>
+                            <form id="reserve" name="test" method="post">
+                                <label>
+                                    <input type="radio" name="reserve" checked="checked" value="noReserve">
+                                    Замовлення з собою
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="reserve" value="yesReserve">
+                                    Зарезервувати столик
+                                </label>
                             </form>
                             <div class="buttons">
-                                <button id="order_confirm" class="button_list">Підтвердити</button>
-                                <button id="order_edit" class="button_list">Змінити</button>
-                                <button id="order_cancel" class="button_list">Скасувати</button>
+                                <button id="order_confirm" class="greenButton">Confirm</button>
+                                <button id="order_edit" class="greenButton">Change</button>
+                                <button id="order_cancel" class="greenButton">Cancel</button>
                             </div>
                         </div>
                         <div id="thanks" class="blocks">
@@ -197,8 +196,10 @@
                 <form id="authentication_page" class="pages">
                     <div id="auth-title">Authorization</div>
                     <div class="auth-text">
-                        <input name="auth" type="radio" value="phone" checked>
-                        <span>Cell phone</span>
+                        <label>
+                            <input name="auth" type="radio" value="phone" checked>
+                            Cell phone
+                        </label>
                     </div>
                     <div id="inputPhoneBlock" class="inputBlock">
                         <input id ="phoneNumber" class="inputData" name="number">
@@ -213,17 +214,22 @@
                         </div>
                     </div>
                     <div class="auth-text">
-                        <input name="auth" type="radio" value="mail">
-                        <span>E-mail</span>
+                        <label>
+                            <input name="auth" type="radio" value="mail">
+                            E-mail
+                        </label>
                     </div>
                     <div id="inputMailBlock" class="inputBlock" hidden>
                         <input id="mail" name="mail" class="inputData">
                         <button id="saveMail" class="savePhoneMail greenButton" type="button">Sign in</button>
                     </div>
                     <div class="auth-text">
-                        <input name="auth" type="radio" value="socNetwork">
-                        <span>Social network</span>
+                        <label>
+                            <input name="auth" type="radio" value="socNetwork">
+                            Social network
+                        </label>
                     </div>
+
                     <div id="uLogin" x-ulogin-params="display=buttons;fields=first_name,last_name;
                                 callback=preview;redirect_uri=" hidden>
                         <img src="images/vkontakte.png" x-ulogin-button = "vkontakte"/>
@@ -257,9 +263,11 @@
                             Welcome to KAVADRIVE site!
                         </div>
                         <div class="justify">
-                            <span class="white">KAVADRIVE</span> is online pre-order service of eating places approved
-                            by us. Join KAVADRIVE network and increase the number of visitors, service quality and speed
-                            and improve (automatize) your stuff work.
+                            <span class="white">KAVADRIVE</span> is online pre-order service of eating
+                            places approved by us.
+                            Join KAVADRIVE network and increase the number of visitors, service quality
+                            and speed and improve (automatize) your stuff work.
+
                         </div>
                     </div>
                     <div id="addCafe">
@@ -305,7 +313,7 @@
                         <li>
                             <span class="white">QUALITY</span> - every restaurant is obligatorily inspected by us
                             before adding it into KAVADRIVE network. And further permanently our inspectors check the
-                            quality of drinks and food that are included t KAVADRIVE menu. Every customer knows for sure
+                            quality of drinks and food that are included to KAVADRIVE menu. Every customer knows for sure
                             that it will be tasty.
                         </li>
                         <li>
