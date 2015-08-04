@@ -579,8 +579,10 @@ function sendPartnersForm () {
             url: "php/partners.php",
             type: "POST",
             dataType: "html",
-            data: $("#partners").serialize(),
-            success: function (msg) {alert ("Дані збережено. Ми розглянемо Вашу заявку")},
+            data: $("#addCafe").serialize(),
+            success: function (msg) {
+                alert ("Дані збережено. Ми розглянемо Вашу заявку");
+            },
             error: function (msg) {alert ("Cервіс тимчасово недоступний")}
         });
         $(':input','#partners')
@@ -843,17 +845,17 @@ document.onkeydown = function(e) {
     }
 };
 
-$(document).on ('click', '#authenticationLink', function() {
-    rebuildPage(2);
-});
-
-$(document).on ('click', '#contactsLink', function() {
-    rebuildPage(3);
-});
-
-$(document).on ('click', '#mapLink', function () {
-    rebuildPage(4);
-});
+//$(document).on ('click', '#authenticationLink', function() {
+//    rebuildPage(2);
+//});
+//
+//$(document).on ('click', '#contactsLink', function() {
+//    rebuildPage(3);
+//});
+//
+//$(document).on ('click', '#mapLink', function () {
+//    rebuildPage(4);
+//});
 
 $(document).on ('click', '#right_pointer', function() {
     page += 1;
@@ -862,7 +864,6 @@ $(document).on ('click', '#right_pointer', function() {
 });
 
 $(document).on ('click', '#left_pointer', function() {
-    page -= 1;
     page -= 1;
     if (page < 1) page = 6;
     rebuildPage(page);
@@ -974,7 +975,7 @@ $(document).on ('click', '.clickNav', function() {
         new_page = parseInt(this.id.substr(3));
     }
     rebuildPage (new_page);
-    slip();
+    if (menuFlag!=0) slip();
 });
 
 $(document).on ('click', 'li.mapLinkShop', function(){
