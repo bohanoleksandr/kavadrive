@@ -18,7 +18,7 @@ if ($row1 && $needed_password===$pass) {
         $aaa = "admin";
 
         if ($role == 1) {
-            setcookie("workerId", $row1[0]);
+            setcookie("workerId", $row1[0], 0, "/");
             echo "В розробці";
 //            header ('Location: ../admin/admin.html');
         } else {

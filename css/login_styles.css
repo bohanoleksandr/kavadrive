@@ -1,8 +1,20 @@
-.authentication {
+#authentication {
     display:block;
-    margin: 10% auto 0 auto;
-    width:30%;
-    background-color:#DEDCDC;
+    margin: 10% auto 0;
+    padding: 0 30px 20px;
+    width: 30%;
+    background-color: #DEDCDC;
+    border-radius: 5px;
+    border: 1px solid #E5E5E5;
+}
+
+#authentication div {
+    display: none;
+    color: #C72929;
+}
+
+#authentication input {
+    box-shadow: none;
 }
 
 #banner {

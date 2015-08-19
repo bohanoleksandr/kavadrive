@@ -9,28 +9,24 @@
 		<script src="../js/loginScripts.js" type="text/javascript"></script>
     </head>
     <body>
-	<form class="authentication" action = "../php/authenticationPos.php" method = "POST">
+	<div id="authentication">
         <h2 id="banner">Авторизація</h2>
-		<!--<label class="radio">-->
-			 <!--<input type="radio" name="role" value="1" checked/>-->
-			  <!--Продавець-->
-		<!--</label>-->
-		<!--<label class="radio">-->
-			 <!--<input type="radio" name="role" value="2"/>-->
-			  <!--Адміністратор складу-->
-		<!--</label>-->
+        Kав’ярня:
+        <span></span>
+        <span>(змінити)</span>
 		<select id = "shopList" class="auth_input" name="selectedShop">
             <option>--</option>
         </select>
         <input type="text" class="auth_input" placeholder="username" name ="login">
+        <div>Ви не заповнили поле!</div>
         <input type="password" class="auth_input" placeholder="password" name ="password">
-        <label class="checkbox">
-            <input type="checkbox" value="remember-me"/> Запам’ятати мене
-        </label>
-        <p>
+        <div>Ви не заповнили поле!</div>
+        <div id="wrongAuth">Неправильний логін або пароль</div>
+        <div id="noRights">У Вас немає прав адміністратора</div>
+        <!--<p>-->
             <input class="btn btn-large btn-primary" type="submit" value="Вхід"/>
-            <input class="btn btn-large btn-primary" type="reset" value="Очистити"/>
-        </p>
-      </form>	
+            <!--<input class="btn btn-large btn-primary" type="reset" value="Очистити"/>-->
+        <!--</p>-->
+      </div>
 	</body>
 </html>
