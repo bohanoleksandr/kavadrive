@@ -2,15 +2,31 @@
 
 <html>
     <head>
-        <title>Workspace</title>
+        <title>Сторінка продавця Kavadrive</title>
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="../css/store_styles.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/login_styles.css" rel="stylesheet" type="text/css"/>
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script src="../js/bootstrap.js" type="text/javascript"></script>
-		<script src="../js/storeScripts.js" type="text/javascript"></script>
+        <script src="../js/jquery.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.js" type="text/javascript"></script>
+        <script src="../js/jquery.cookie.js" type="text/javascript"></script>
+        <script src="../js/loginScripts.js" type="text/javascript"></script>
     </head>
+
     <body>
+        <div id="authentication">
+            <h2 id="banner">Авторизація</h2>
+            <div id="shopName"></div>
+            <select id = "shopList" name="selectedShop" title="Обрати кав’ярню"></select>
+            <input type="text" placeholder="логін" name ="login">
+            <div class="red-alert">Ви не заповнили поле!</div>
+            <input type="password" placeholder="пароль" name ="password">
+            <div class="red-alert">Ви не заповнили поле!</div>
+            <div id="wrongAuth" class="red-alert">Неправильний логін або пароль</div>
+            <div id="noRights" class="red-alert">У Вас немає прав адміністратора</div>
+            <p><button class="btn-large btn-primary" type="button">Вхід</button></p>
+        </div>
+
         <div class="navbar">
 		    <div class="navbar-inner">
                 <ul class ="nav">
@@ -67,7 +83,7 @@
 		    </div>
 		</div>
 
-		<table class="table table-bordered table-hover">
+		<table id="ordersList" class="table table-bordered table-hover">
 			<thead>
                 <tr>
                     <th id="th_id">№</th>
@@ -83,7 +99,7 @@
 					<th>Змінено</th>
                 </tr>
             </thead>
-            <tbody class="tabRow">
+            <tbody>
                 <tr>
                     <td><input id='td_id' class='search'/></td>
 					<td></td>
@@ -105,10 +121,10 @@
 		<div id="modalWindow" class="modal hide fade">
 			<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
-				<h3>Замовлення №<span id="orderNum"></span></h3>
+				<h3>Замовлення №<span id="orderId"></span></h3>
 			</div>
 			<div class="modal-body">
-				<table class="table table-bordered table-condensed"> 
+				<table id="orderContent" class="table table-bordered table-condensed">
 					<thead>
 						<tr>
 						  <th>Назва</th>
@@ -117,9 +133,7 @@
 						  <th>Ціна</th>
 						</tr>
 					</thead>
-					<tbody class="list" id="forPrint">
-					
-					</tbody>
+					<tbody></tbody>
 				</table>
 			</div>
 
@@ -188,6 +202,5 @@
 
 		<audio id="notifyAudio"><source src="notify.mp3" type="audio/mpeg"></audio>
         <audio id="alarm"><source src="alarm.mp3" type="audio/mpeg"></audio>
-
-	</body>	
+	</body>
 </html>

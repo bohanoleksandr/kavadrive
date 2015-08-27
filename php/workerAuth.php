@@ -14,7 +14,7 @@ if(mysql_num_rows($result) == 0){
         echo 0;
     } else {
         if ($page == "store" || $worker_data[2] == 1) {
-            setcookie("workerId", $worker_data[0], 0, "/");
+            setcookie("worker", $worker_data[0], 0, "/");
             echo 1;
         } else {
             echo -1;

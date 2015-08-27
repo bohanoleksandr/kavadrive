@@ -176,7 +176,7 @@ function receiptData () {
         success: function (msg) {
             var response = JSON.parse(msg);
 
-            for (var r in response) {
+            for (var r = 0; r < response.length; r++) {
                 var row = response[r];
                 switch (currentLang) {
                     case "ukr":
@@ -455,13 +455,6 @@ function rebuildPage (new_page) {
     }
 }
 
-function delete_cookie ( cookie_name )
-{
-    var cookie_date = new Date();
-    cookie_date.setTime ( cookie_date.getTime() - 1 );
-    document.cookie = cookie_name += "=; expires=" + cookie_date.toGMTString();
-}
-
 function preview (token){
     $.getJSON("//ulogin.ru/token.php?host=" +
         encodeURIComponent(location.toString()) + "&token=" + token + "&callback=?",
@@ -478,7 +471,7 @@ function preview (token){
                     },
                     function(result){
                         customer = JSON.parse(result);
-                        document.cookie = "userId=" + customer['id'];
+                        $.cookie("userId", customer['id']);
                         $('#customerId').text (customer['firstName'] + ' ' + customer['lastName']);
                         $("#customerExit").css ('display', 'inline');
                         if (order.emptiness) {
@@ -624,7 +617,7 @@ $(document).on('click', '#savePhone', function phone(){
             },
             function(result){
                 customer = JSON.parse(result);
-                document.cookie = "userId=" + customer['id'];
+                $.cookie("userId", customer['id']);
                 if (customer.firstName) {
                     $("#customerId").text(customer.firstName + " " + customer.lastName);
                 } else {
@@ -662,7 +655,7 @@ $(document).on('click', '#saveMail', function mail(){
             },
             function(result){
                 customer = JSON.parse(result);
-                document.cookie = "userId=" + customer['id'];
+                $.cookie("userId", customer['id']);
                 if (customer.firstName) {
                     $("#customerId").text (customer.firstName + " " + customer.lastName);
                 } else {
@@ -823,7 +816,7 @@ $(document).on ('click', '#POS', function (){
 });
 
 $(document).on ('click', '#customerExit', function() {
-    delete_cookie('userId');
+    $.cookie('userId', null, {'expire': -1});
     customer ['id'] = null;
     customer ['phoneNumber'] = null;
     customer ['firstName'] = null;

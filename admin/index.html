@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    В розробці
-</body>
+
+<html>
+    <head>
+        <title>Сторінка адміністратора Kavadrive</title>
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/login_styles.css" rel="stylesheet" type="text/css"/>
+
+        <script src="../js/jquery.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.js" type="text/javascript"></script>
+        <script src="../js/jquery.cookie.js" type="text/javascript"></script>
+        <script src="../js/loginScripts.js" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <div id="authentication">
+            <h2 id="banner">Авторизація</h2>
+            <div id="shopName"></div>
+            <select id = "shopList" name="selectedShop" title="Обрати кав’ярню"></select>
+            <input type="text" placeholder="логін" name ="login">
+            <div class="red-alert">Ви не заповнили поле!</div>
+            <input type="password" placeholder="пароль" name ="password">
+            <div class="red-alert">Ви не заповнили поле!</div>
+            <div id="wrongAuth" class="red-alert">Неправильний логін або пароль</div>
+            <div id="noRights" class="red-alert">У Вас немає прав адміністратора</div>
+            <p><button class="btn-large btn-primary" type="button">Вхід</button></p>
+        </div>
+
+        <div>В розробці</div>
+    </body>
 </html>

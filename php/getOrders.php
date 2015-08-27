@@ -1,8 +1,8 @@
 <?php
 include_once('connectdb.php');
 
-$shopNumber = $_COOKIE ['shopId'];
-$workerId = $_COOKIE ['workerId'];
+$shopNumber = $_COOKIE ['shop'];
+$workerId = $_COOKIE ['worker'];
 
 $result1 = mysql_query ("   SELECT
 								`orders`.*,
@@ -77,22 +77,21 @@ while($row_with_order = mysql_fetch_assoc($result1)){
         "visitTime"=>$row_with_order['visit_time'],
         "sum"=>$row_with_order['sum'],
         "status"=>$row_with_order['order_status'],
-        "pos"=>$shopNumber,
         "changeMaker"=>$changeMaker,
         "content"=>$orderContent
     );
 }
 
-$result4 = mysql_query("SELECT `name` FROM `stores` WHERE `stores`.`id` =".$shopNumber.";");
-$row4 = mysql_fetch_array ($result4);
-$shopName = $row4['name'];
+//$result4 = mysql_query("SELECT `name` FROM `stores` WHERE `stores`.`id` =".$shopNumber.";");
+//$row4 = mysql_fetch_array ($result4);
+//$shopName = $row4['name'];
 
 $result5 = mysql_query("SELECT `name` FROM `workers` WHERE `id` =".$workerId.";");
 $row5 = mysql_fetch_array ($result5);
 $workerName = $row5['name'];
 
 $dataToSend = array (
-    'shop' => $shopName,
+//    'shop' => $shopName,
     'worker' => $workerName,
     'orders' => $orders
 );

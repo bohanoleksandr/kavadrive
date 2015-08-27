@@ -1,31 +1,44 @@
 #authentication {
-    display:block;
+    display: none;
     margin: 10% auto 0;
     padding: 0 30px 20px;
-    width: 30%;
+    width: 300px;
     background-color: #DEDCDC;
     border-radius: 5px;
     border: 1px solid #E5E5E5;
-}
-
-#authentication div {
-    display: none;
-    color: #C72929;
-}
-
-#authentication input {
-    box-shadow: none;
+    text-align: center;
+    position: relative;
 }
 
 #banner {
     text-align: center;
-    margin: 20px 0;
+    margin: 20px 0 0;
 }
 
-.auth_input {
-    width: 100%;
+#shopName {
+    cursor: pointer;
+    margin-bottom: 10px;
+    height: 20px;
 }
 
-.btn{
-    margin: 0;
+#authentication select {
+    position: absolute;
+    top: 60px;
+    left: 70px;
+    opacity: 0;
+}
+
+#authentication input {
+    box-shadow: none;
+    margin: 15px auto 0;
+    width: 250px;
+}
+
+div.red-alert {
+    display: none;
+    color: #C72929;
+}
+
+#authentication p {
+    margin: 20px auto 0;
 }

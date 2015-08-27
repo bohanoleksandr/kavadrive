@@ -3,7 +3,7 @@ include_once('connectdb.php');
 
 $order_id = $_POST['order_id'];
 $new_status = $_POST['new_status'];
-$worker = $_COOKIE['workerId'];
+$worker = $_COOKIE['worker'];
 
 if ($new_status == 5) {
     $jquery_result_1 = mysql_query ("SELECT `order_status`, `pos` FROM `orders` WHERE `id` = '".$order_id."';");

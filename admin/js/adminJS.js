@@ -59,7 +59,7 @@ $(document).ready(function(){
 	}
 	//кнопка "Вихід"
 	$('.exit').click(function(){
-		 window.location.href = "../store/login.html";
+	//TODO
 	});
 	//заполнение модального окна
 	$('.btn-block').click(function(){
